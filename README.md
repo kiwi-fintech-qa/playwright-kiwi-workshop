@@ -17,11 +17,11 @@
 
 
 3. Install the [Pycharm Community version](https://www.jetbrains.com/pycharm/download/)  
-    Go to the [workshop GitHub repository](https://github.com/ukk0/playwright-kiwi-workshop) and click on the ‘Code’ 
+    Go to the [workshop GitHub repository](https://github.com/ukk0/playwright-kiwi-workshop) and click on the **Code** 
     dropdown button, copy the https-address.  
-    Open your Pycharm and in the popup-window click on 'Get from VCS'.  
+    Open your Pycharm and in the popup-window click on **Get from VCS**.  
     Set version control to: Git
-    Set the copied address as the URL in Pycharm and hit 'Clone'.
+    Set the copied address as the URL in Pycharm and hit **Clone**.
 
 
 4. Create virtual environment 
