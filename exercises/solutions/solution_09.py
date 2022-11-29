@@ -83,7 +83,7 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
     carry_on_baggage_price_value = float(carry_on_baggage_price_with_currency_code.split()[0])
 
     # 7. In the Checked baggage section select the 1× checked bag option and store its price value
-    checked_baggage_price_value = None
+    checked_baggage_price_value = 0
     if page.is_hidden("[data-test=Baggage-EmptyOption]"):
         page.click("[data-test=Baggage-holdBag] [data-test=Baggage-Option-1]")
         checked_baggage_price_with_currency_code = page.locator(
@@ -113,6 +113,7 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
     assert carry_on_baggage_price_value == total_carry_on_baggage_price_value
 
     # 10.2. Checked baggage: value stored at step 7
+    total_checked_baggage_price_value = 0
     if checked_baggage_price_value:
         total_checked_baggage_price_with_currency_code = page.locator(
             "[data-test=bookingBillCheckedBaggage] [class*=Price]"
