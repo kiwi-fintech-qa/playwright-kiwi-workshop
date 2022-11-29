@@ -1,30 +1,17 @@
-# Searching with additional transportation options shows results cheaper than 1 000 CZK
-def test_searching_with_additional_transportation_options_shows_results_cheaper_than_1k_czk(page):
-    # 1. Steps 1-9. from the previous scenario
+# Popular flights - hitting the Show more button leads to an increment of currently displayed popular flight
+# tiles/cards to be displayed
+def test_show_more_button_of_popular_flights_displays_increment_of_currently_shown_popular_flight_cards(page):
+    # 1. On the Kiwi.com website get the count of tiles/cards in the Popular flights section
+    # and store it into a variable
     # 1.1. Open the kiwi.com website (wait for page to load)
     pass
 
-    # 1.2. Clear the `from` location
+    # 1.2. Get count of tiles/cards in the Popular flights section and store it into a variable
 
-    # 1.3. Type in `Vienna` to the `from` field
+    # 2. Hit the Show more button
 
-    # 1.4. Select the 1st result from the dropdown
+    # 3. Verify twice the count of tiles/cards from step 1. is displayed
 
-    # 1.5. Type in `Brno` to the `to` field
+    # 4. Hit the Show more button again
 
-    # 1.6. Select the 1st result from the dropdown
-
-    # 1.7. Uncheck the `Booking` checkbox
-
-    # 1.8. Hit the `Search` button
-
-    # 1.9. Available connections should be displayed
-
-    # 2. Check the `Bus` checkbox in the `Transport` left-hand section of the results
-
-    # 3. Verify the first result is cheaper than 1 000 CZK
-
-    # (4. variation: on step 2. check the `Train` checkbox in the `Transport` left-hand section as well; on step 3. verify the results are cheaper than 350 CZK)
-    # 4.1 Check the `Train` checkbox in the `Transport` left-hand section as well
-
-    # 4.2 Verify the results are cheaper than 350 CZK
+    # 5. Verify thrice the count of tiles/cards from step 1. is displayed
