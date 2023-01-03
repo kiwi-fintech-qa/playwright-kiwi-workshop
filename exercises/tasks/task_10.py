@@ -71,9 +71,9 @@ def test_not_filling_out_required_fields_on_passenger_details_prevents_proceedin
 
     # (9. variation: fill out and select the Primary passenger fields, clear the Contact details fields, hit Continue,
     # and expect Required for your tickets error under the Email field and Required field error under the Phone field)
-    # 9.1. Email: play@wrig.ht
+    # 9.1. Email: empty
 
-    # 9.2. Phone: 123123123
+    # 9.2. Phone: empty
 
     # 9.3. Given names: Play
 

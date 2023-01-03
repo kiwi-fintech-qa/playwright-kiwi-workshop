@@ -1,16 +1,18 @@
+from exercises.solutions.resource_03 import open_kiwi_website
+
+
 # Sidebar actions (expanding options, verifying visibility of items)
 def test_sidebar_actions_work_as_expected(page):
     # 1. On the Kiwi.com website hit the right sidebar hamburger button
-    # 1.1. Open the kiwi.com website (wait for page to load)
-    page.goto("https://www.kiwi.com/en/")
-    page.click("[data-test='CookiesPopup-Accept']")
-    assert page.is_visible("text=Book cheap flights other sites simply can’t find.")
+    # 1.1. Open the kiwi.com website
+    open_kiwi_website(page)
 
     # 1.2. Hit the right sidebar hamburger button
     page.click("[data-test=NavBar-SideNav-Open]")
     page.wait_for_selector("[data-test=NavBar-SideNav][aria-hidden=false]", state="visible")
 
-    # 2. Verify a sidebar with the Manage your trips, set up price alerts, use Kiwi.com Credit, and get personalized support. text appears
+    # 2. Verify a sidebar with the "Manage your trips, set up price alerts, use Kiwi.com Credit, and get personalized
+    # support." text appears
     expected_sidebar_text = "Manage your trips, set up price alerts, use Kiwi.com Credit, and get personalized support."
     current_sidebar_text = page.locator("[data-test=NavBar-SideNav] [class*=Text]").first.inner_text()
     assert expected_sidebar_text == current_sidebar_text
@@ -35,7 +37,7 @@ def test_sidebar_actions_work_as_expected(page):
     # 8. Verify the sidebar disappears
     page.wait_for_selector("[data-test=NavBar-SideNav][aria-hidden=false]", state="hidden")
 
-    # 9. Verify a modal with the Subscribe to the Kiwi.com newsletter heading is displayed
+    # 9. Verify a modal with the "Subscribe to the Kiwi.com newsletter" heading is displayed
     page.wait_for_selector("[class*=Modal__ModalBody]", state="visible")
     assert page.is_visible(
         "[class*=Modal__ModalBody] [class*=Heading]:has-text('Subscribe to the Kiwi.com newsletter')"

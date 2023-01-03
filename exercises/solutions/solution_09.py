@@ -1,3 +1,4 @@
+from exercises.solutions.resource_06_12 import KiwiPage, SearchResultPage, PassengerDetailsPage, TicketFarePage
 import math
 
 
@@ -6,132 +7,101 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
     # 1. Search for connections between any two cities (while un-checking the Booking.com checkbox,
     # as in previous scenarios)
     # 1.1. Open the kiwi.com website (wait for page to load)
-    page.goto("https://www.kiwi.com/en/")
-    page.click("[data-test='CookiesPopup-Accept']")
-    assert page.is_visible("text=Book cheap flights other sites simply can’t find.")
+    kiwi_page = KiwiPage(page)
+    kiwi_page.open_kiwi_website()
 
     # 1.2. Clear the `from` location
-    page.click("[data-test=PlacePickerInputPlace-close]")
-    page.wait_for_selector("[data-test=PlacePickerInputPlace-close]", state="hidden")
+    kiwi_page.clear_the_from_field()
 
     # 1.3. Type in `Brno` to the `from` field
-    page.fill("[data-test=PlacePickerInput-origin] [data-test=SearchField-input]", "Brno")
+    kiwi_page.type_origin_location_into_input_field("Brno")
 
-    # 1.4. Select the 1st result from the dropdown
-    page.click("[data-test=PlacePickerRow-wrapper]")
+    # 1.4. Select the `Brno, Czechia` result from the dropdown
+    kiwi_page.select_location_from_dropdown("Brno, Czechia")
 
     # 1.5. Type in `Bucharest` to the `to` field
-    page.fill("[data-test=PlacePickerInput-destination] [data-test=SearchField-input]", "Bucharest")
+    kiwi_page.type_destination_location_into_input_field("Bucharest")
 
-    # 1.6. Select the 1st result from the dropdown
-    page.click("[data-test=PlacePickerRow-wrapper]")
+    # 1.6. Select the `Bucharest, Romania` result from the dropdown
+    kiwi_page.select_location_from_dropdown("Bucharest, Romania")
 
     # 1.7. Uncheck the `Booking` checkbox
-    page.click("[class*=BookingcomSwitchstyled] [class*=Checkbox]")
+    kiwi_page.uncheck_booking_checkbox()
 
     # 1.8. Hit the `Search` button
-    page.click("[data-test=LandingSearchButton]")
+    kiwi_page.hit_search_button()
 
     # 1.9. Available connections should be displayed
-    page.wait_for_selector("[class*=ResultListstyled__ResultListWrapper]", timeout=10000)
-    page.wait_for_selector("[data-test=ResultCardWrapper]", state="visible")
+    search_result_page = SearchResultPage(page)
+    search_result_page.wait_for_available_connections_to_be_displayed()
 
     # 2. Hit the Select button of the first result
-    page.click("[data-test=BookingButton]")
-    page.wait_for_selector("[data-test=MagicLogin]", state="visible")
+    search_result_page.hit_select_button_of_first_result()
 
-    # 3. In the Want to sign first? modal hit the Continue as a guest link
-    page.click("[data-test=MagicLogin-GuestTextLink]")
-    page.wait_for_selector("[data-test=ResultCardWrapper]", state="hidden")
-    page.wait_for_selector("[data-test=Reservation-content]", state="visible")
-    page.wait_for_selector("[data-test=Breadcrumbs-step-PASSENGER] [aria-current=step]", state="visible")
+    # 3. In the `Want to sign first?` modal hit the `Continue as a guest link`
+    search_result_page.hit_continue_as_guest_link()
 
     # 4. Fill out the Email, Phone, Given names, Surnames and the DD and YYYY fields of Date of birth as follows:
     # 4.1. Email: play@wrig.ht
-    page.fill("[name=email]", "play@wrig.ht")
+    passenger_details_page = PassengerDetailsPage(page)
+    passenger_details_page.fill_out_passenger_email("play@wrig.ht")
 
     # 4.2. Phone: 123123123
-    page.fill("[name=phone]", "123123123")
+    passenger_details_page.fill_out_passenger_phone("123123123")
 
     # 4.3. Given names: Play
-    page.fill("[name=firstname]", "Play")
+    passenger_details_page.fill_out_passenger_firstname("Play")
 
     # 4.4. Surnames: Wright
-    page.fill("[name=lastname]", "Wright")
+    passenger_details_page.fill_out_passenger_lastname("Wright")
 
     # 4.5. DD: 1
-    page.fill("[name=birthDay]", "1")
+    passenger_details_page.fill_out_passenger_birthday("1")
 
     # 4.6. YYYY: 1901
-    page.fill("[name=birthYear]", "1901")
+    passenger_details_page.fill_out_passenger_birthyear("1901")
 
     # 5. In the following dropdowns select the following values:
     # 5.1. Nationality: United Kingdom
-    page.select_option("[name=nationality]", value="gb")
+    passenger_details_page.select_passenger_nationality("gb")
 
     # 5.2. Gender: Female
-    page.select_option("[name=title]", value="ms")
+    passenger_details_page.select_passenger_title("ms")
 
     # 5.3. Month: January
-    page.select_option("[name=birthMonth]", value="01")
+    passenger_details_page.select_passenger_birthmonth("01")
 
     # 6. In the Cabin or carry-on baggage section select the Carry-on bundle option and store its price value
-    page.click("[data-test=Baggage-handBag] [data-test=Baggage-Option-1]")
-    carry_on_baggage_price_with_currency_code = page.locator(
-        "[data-test=Baggage-handBag] [data-test=Baggage-Option-1] [data-test=Baggage-OptionItem-Price]"
-    ).inner_text()
-    carry_on_baggage_price_value = float(carry_on_baggage_price_with_currency_code.split()[0])
+    passenger_details_page.select_cabin_baggage_bundle()
+    carry_on_baggage_price_value = passenger_details_page.get_carry_on_baggage_price_value()
 
     # 7. In the Checked baggage section select the 1× checked bag option and store its price value
     checked_baggage_price_value = 0
-    if page.is_hidden("[data-test=Baggage-EmptyOption]"):
-        page.click("[data-test=Baggage-holdBag] [data-test=Baggage-Option-1]")
-        checked_baggage_price_with_currency_code = page.locator(
-            "[data-test=Baggage-holdBag] [data-test=Baggage-Option-1] [data-test=Baggage-OptionItem-Price]"
-        ).inner_text()
-        checked_baggage_price_value = float(checked_baggage_price_with_currency_code.split()[0])
+    if passenger_details_page.baggage_empty_option.is_hidden():
+        passenger_details_page.select_checked_baggage_once()
+        checked_baggage_price_value = passenger_details_page.get_checked_baggage_price_value()
 
     # 8. In the Travel insurance section select the No insurance option
-    page.click("[data-test=ReservationPassengerInsurance-content] [type=none]")
+    passenger_details_page.select_no_isnurance()
 
     # 9. Hit the Continue button and verify the Ticker fare screen is displayed
-    page.click("[data-test=StepControls-passengers-next]")
-    page.wait_for_selector(
-        "[aria-current=false] [class*=WizardStep__StyledLabel]:has-text('Passenger details')", state="visible"
-    )
-    page.wait_for_selector("[data-test=Breadcrumbs-step-PASSENGER] [aria-current=false]", state="visible")
-    page.wait_for_selector("[data-test=Breadcrumbs-step-TICKET_FARE] [aria-current=step]", state="visible")
+    passenger_details_page.proceed_to_ticket_fare_page()
 
     # 10. Verify the following items are displayed in the reservation bill:
     # 10.1. Cabin baggage: value stored at step 6
-    total_carry_on_baggage_price_with_currency_code = page.locator(
-        "[data-test=bookingBillCabinBaggage] [class*=Price]"
-    ).inner_text()
-    total_carry_on_baggage_price_value = float(
-        total_carry_on_baggage_price_with_currency_code.split()[0].replace(",", "")
-    )
+    ticket_fare_page = TicketFarePage(page)
+    total_carry_on_baggage_price_value = ticket_fare_page.get_carry_on_baggage_price_value()
     assert carry_on_baggage_price_value == total_carry_on_baggage_price_value
 
     # 10.2. Checked baggage: value stored at step 7
     total_checked_baggage_price_value = 0
     if checked_baggage_price_value:
-        total_checked_baggage_price_with_currency_code = page.locator(
-            "[data-test=bookingBillCheckedBaggage] [class*=Price]"
-        ).inner_text()
-        total_checked_baggage_price_value = float(
-            total_checked_baggage_price_with_currency_code.split()[0].replace(",", "")
-        )
+        total_checked_baggage_price_value = ticket_fare_page.get_checked_baggage_price_value()
         assert checked_baggage_price_value == total_checked_baggage_price_value
 
     # (11. variation: verify the total price corresponds with the sum of all items in the reservation bill)
-    total_passenger_price_with_currency_code = page.locator(
-        "[data-test=ReservationBill-item-passenger] [class*=Price]"
-    ).inner_text()
-    total_passenger_price_value = float(total_passenger_price_with_currency_code.split()[0].replace(",", ""))
-
-    total_price_with_currency_code = page.locator("[class*=ReservationBillTotal] [class*=Price]").inner_text()
-    total_price_value = float(total_price_with_currency_code.split()[0].replace(",", ""))
-
+    total_passenger_price_value = ticket_fare_page.get_passenger_price_value()
+    total_price_value = ticket_fare_page.get_total_price_value()
     total_of_items = (
         total_carry_on_baggage_price_value + total_checked_baggage_price_value + total_passenger_price_value
     )

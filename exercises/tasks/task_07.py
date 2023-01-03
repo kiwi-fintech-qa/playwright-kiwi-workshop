@@ -8,11 +8,11 @@ def test_sorting_panel_actions_can_be_used_for_sorting_the_search_results(page):
 
     # 1.3. Type in `Brno` to the `from` field
 
-    # 1.4. Select the 1st result from the dropdown
+    # 1.4. Select the `Brno, Czechia` result from the dropdown
 
     # 1.5. Type in `Bucharest` to the `to` field
 
-    # 1.6. Select the 1st result from the dropdown
+    # 1.6. Select the `Bucharest, Romania` result from the dropdown
 
     # 1.7. Uncheck the `Booking` checkbox
 

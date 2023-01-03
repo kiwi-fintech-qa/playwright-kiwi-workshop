@@ -1,9 +1,11 @@
+from exercises.solutions.resource_05 import KiwiPage
+
+
 # Searching for a connection displays results
 def test_searching_for_connection_displays_results(page):
     # 1. Open the kiwi.com website (wait for page to load)
-    page.goto("https://www.kiwi.com/en/")
-    page.click("[data-test='CookiesPopup-Accept']")
-    assert page.is_visible("text=Book cheap flights other sites simply can’t find.")
+    kiwi_page = KiwiPage(page)
+    kiwi_page.open_kiwi_website()
 
     # 2. Clear the `from` location
     page.click("[data-test=PlacePickerInputPlace-close]")
@@ -12,14 +14,14 @@ def test_searching_for_connection_displays_results(page):
     # 3. Type in `Vienna` to the `from` field
     page.fill("[data-test=PlacePickerInput-origin] [data-test=SearchField-input]", "Vienna")
 
-    # 4. Select the 1st result from the dropdown
+    # 4. Select the `Vienna, Austria` result from the dropdown
     page.click("[data-test=PlacePickerRow-wrapper]:has-text('Vienna, Austria')")
 
     # 5. Type in `Brno` to the `to` field
     page.fill("[data-test=PlacePickerInput-destination] [data-test=SearchField-input]", "Brno")
 
-    # 6. Select the 1st result from the dropdown
-    page.click("[data-test=PlacePickerRow-wrapper]")
+    # 6. Select the `Brno, Czechia` result from the dropdown
+    page.click("[data-test=PlacePickerRow-wrapper]:has-text('Brno, Czechia')")
 
     # 7. Uncheck the `Booking` checkbox
     page.click("[class*=BookingcomSwitchstyled] [class*=Checkbox]")

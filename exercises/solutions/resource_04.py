@@ -1,5 +1,4 @@
-# Navigate to the Kiwi.com website and verify the "Book cheap flights other sites simply can’t find." text is displayed.
-def test_navigate_to_kiwi(page):
+def open_kiwi_website(page):
     # 1. Open the kiwi.com website (https://www.kiwi.com/en/)
     page.goto("https://www.kiwi.com/en/")
 
