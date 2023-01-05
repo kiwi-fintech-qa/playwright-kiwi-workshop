@@ -1,6 +1,3 @@
-from exercises.tasks.resource_04 import open_kiwi_website
-
-
 # Travel mode interactions are respected by the UI
 def test_travel_mode_interactions_are_respected_by_the_ui(page):
     # 1. On the Kiwi.com website hit the travel mode button (which has the Return value selected by default)

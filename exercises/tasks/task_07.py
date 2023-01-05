@@ -4,19 +4,19 @@ def test_sorting_panel_actions_can_be_used_for_sorting_the_search_results(page):
     # set to Brno and the To location set to Bucharest
     # 1.1. Open the kiwi.com website (wait for page to load)
     pass
-    # 1.2. Clear the `from` location
+    # 1.2. Clear the "from" location
 
-    # 1.3. Type in `Brno` to the `from` field
+    # 1.3. Type in "Brno" to the "from" field
 
-    # 1.4. Select the `Brno, Czechia` result from the dropdown
+    # 1.4. Select the "Brno, Czechia" result from the dropdown
 
-    # 1.5. Type in `Bucharest` to the `to` field
+    # 1.5. Type in "Bucharest" to the "to" field
 
-    # 1.6. Select the `Bucharest, Romania` result from the dropdown
+    # 1.6. Select the "Bucharest, Romania" result from the dropdown
 
-    # 1.7. Uncheck the `Booking` checkbox
+    # 1.7. Uncheck the "Booking" checkbox
 
-    # 1.8. Hit the `Search` button
+    # 1.8. Hit the "Search" button
 
     # 1.9. Available connections should be displayed
 

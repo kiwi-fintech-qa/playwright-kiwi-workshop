@@ -8,19 +8,19 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
     # 1.1. Open the kiwi.com website (wait for page to load)
     pass
 
-    # 1.2. Clear the `from` location
+    # 1.2. Clear the "from" location
 
-    # 1.3. Type in `Brno` to the `from` field
+    # 1.3. Type in "Brno" to the "from" field
 
     # 1.4. Select the 1st result from the dropdown
 
-    # 1.5. Type in `Bucharest` to the `to` field
+    # 1.5. Type in "Bucharest" to the "to" field
 
     # 1.6. Select the 1st result from the dropdown
 
-    # 1.7. Uncheck the `Booking` checkbox
+    # 1.7. Uncheck the "Booking" checkbox
 
-    # 1.8. Hit the `Search` button
+    # 1.8. Hit the "Search" button
 
     # 1.9. Available connections should be displayed
 
@@ -72,7 +72,7 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
     )
     # Proper comparison of floats has to be used here:
     # https://docs.python.org/3/library/math.html#math.isclose
-    # The basic assertion `assert total_of_items == total_price_value` would fail because of the way floats are stored.
+    # The basic assertion "assert total_of_items == total_price_value" would fail because of the way floats are stored.
     # Instead, we can check the absolute difference between the two values is very low, e.g., a bit over 0.01 CZK.
 
     # Also we can check how relatively distinct the values are:

@@ -1,4 +1,4 @@
-from exercises.solutions.resource_06_12 import KiwiPage, SearchResultPage, PassengerDetailsPage, TicketFarePage
+from exercises.solutions.resources.resource_06_12 import KiwiPage, SearchResultPage, PassengerDetailsPage, TicketFarePage
 import math
 
 
@@ -10,25 +10,25 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
     kiwi_page = KiwiPage(page)
     kiwi_page.open_kiwi_website()
 
-    # 1.2. Clear the `from` location
+    # 1.2. Clear the "from" location
     kiwi_page.clear_the_from_field()
 
-    # 1.3. Type in `Brno` to the `from` field
+    # 1.3. Type in "Brno" to the "from" field
     kiwi_page.type_origin_location_into_input_field("Brno")
 
-    # 1.4. Select the `Brno, Czechia` result from the dropdown
+    # 1.4. Select the "Brno, Czechia" result from the dropdown
     kiwi_page.select_location_from_dropdown("Brno, Czechia")
 
-    # 1.5. Type in `Bucharest` to the `to` field
+    # 1.5. Type in "Bucharest" to the "to" field
     kiwi_page.type_destination_location_into_input_field("Bucharest")
 
-    # 1.6. Select the `Bucharest, Romania` result from the dropdown
+    # 1.6. Select the "Bucharest, Romania" result from the dropdown
     kiwi_page.select_location_from_dropdown("Bucharest, Romania")
 
-    # 1.7. Uncheck the `Booking` checkbox
+    # 1.7. Uncheck the "Booking" checkbox
     kiwi_page.uncheck_booking_checkbox()
 
-    # 1.8. Hit the `Search` button
+    # 1.8. Hit the "Search" button
     kiwi_page.hit_search_button()
 
     # 1.9. Available connections should be displayed
@@ -38,7 +38,7 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
     # 2. Hit the Select button of the first result
     search_result_page.hit_select_button_of_first_result()
 
-    # 3. In the `Want to sign first?` modal hit the `Continue as a guest link`
+    # 3. In the "Want to sign first?" modal hit the "Continue as a guest link"
     search_result_page.hit_continue_as_guest_link()
 
     # 4. Fill out the Email, Phone, Given names, Surnames and the DD and YYYY fields of Date of birth as follows:
@@ -82,7 +82,7 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
         checked_baggage_price_value = passenger_details_page.get_checked_baggage_price_value()
 
     # 8. In the Travel insurance section select the No insurance option
-    passenger_details_page.select_no_isnurance()
+    passenger_details_page.select_no_insurance()
 
     # 9. Hit the Continue button and verify the Ticker fare screen is displayed
     passenger_details_page.proceed_to_ticket_fare_page()
@@ -108,7 +108,7 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
 
     # Proper comparison of floats has to be used here:
     # https://docs.python.org/3/library/math.html#math.isclose
-    # The basic assertion `assert total_of_items == total_price_value` would fail because of the way floats are stored.
+    # The basic assertion "assert total_of_items == total_price_value" would fail because of the way floats are stored.
     # Instead, we can check the absolute difference between the two values is very low, e.g., a bit over 0.01 CZK.
 
     # Also we can check how relatively distinct the values are:

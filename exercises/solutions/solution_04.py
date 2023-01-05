@@ -1,4 +1,4 @@
-from exercises.solutions.resource_04 import open_kiwi_website
+from exercises.solutions.resources.resource_03_04 import open_kiwi_website
 
 
 # Travel mode interactions are respected by the UI

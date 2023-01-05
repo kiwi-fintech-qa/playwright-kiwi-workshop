@@ -1,4 +1,4 @@
-from exercises.solutions.resource_03 import open_kiwi_website
+from exercises.solutions.resources.resource_03_04 import open_kiwi_website
 
 
 # Sidebar actions (expanding options, verifying visibility of items)
@@ -8,6 +8,7 @@ def test_sidebar_actions_work_as_expected(page):
     open_kiwi_website(page)
 
     # 1.2. Hit the right sidebar hamburger button
+    # TODO: rewrite into page.locator form instead of just the obsolete page form
     page.click("[data-test=NavBar-SideNav-Open]")
     page.wait_for_selector("[data-test=NavBar-SideNav][aria-hidden=false]", state="visible")
 

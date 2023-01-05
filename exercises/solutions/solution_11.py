@@ -1,4 +1,4 @@
-from exercises.solutions.resource_06_12 import KiwiPage
+from exercises.solutions.resources.resource_06_12 import KiwiPage
 
 
 # Total count of passengers is reflected by counter next to the passengers icon

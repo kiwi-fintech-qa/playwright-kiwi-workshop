@@ -1,4 +1,4 @@
-from exercises.solutions.resource_06_12 import KiwiPage, SearchResultPage
+from exercises.solutions.resources.resource_06_12 import KiwiPage, SearchResultPage
 
 
 # Sorting panel actions can be used for sorting the search results
@@ -10,25 +10,25 @@ def test_sorting_panel_actions_can_be_used_for_sorting_the_search_results(page):
     kiwi_page = KiwiPage(page)
     kiwi_page.open_kiwi_website()
 
-    # 1.2. Clear the `from` location
+    # 1.2. Clear the "from" location
     kiwi_page.clear_the_from_field()
 
-    # 1.3. Type in `Brno` to the `from` field
+    # 1.3. Type in "Brno" to the "from" field
     kiwi_page.type_origin_location_into_input_field("Brno")
 
-    # 1.4. Select the `Brno, Czechia` result from the dropdown
+    # 1.4. Select the "Brno, Czechia" result from the dropdown
     kiwi_page.select_location_from_dropdown("Brno, Czechia")
 
-    # 1.5. Type in `Bucharest` to the `to` field
+    # 1.5. Type in "Bucharest" to the "to" field
     kiwi_page.type_destination_location_into_input_field("Bucharest")
 
-    # 1.6. Select the `Bucharest, Romania` result from the dropdown
+    # 1.6. Select the "Bucharest, Romania" result from the dropdown
     kiwi_page.select_location_from_dropdown("Bucharest, Romania")
 
-    # 1.7. Uncheck the `Booking` checkbox
+    # 1.7. Uncheck the "Booking" checkbox
     kiwi_page.uncheck_booking_checkbox()
 
-    # 1.8. Hit the `Search` button
+    # 1.8. Hit the "Search" button
     kiwi_page.hit_search_button()
 
     # 1.9. Available connections should be displayed

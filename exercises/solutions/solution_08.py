@@ -1,4 +1,4 @@
-from exercises.solutions.resource_06_12 import KiwiPage, SearchResultPage, PassengerDetailsPage
+from exercises.solutions.resources.resource_06_12 import KiwiPage, SearchResultPage, PassengerDetailsPage
 
 
 # Localized currency is retained in Passenger details
@@ -19,25 +19,25 @@ def test_localized_currency_is_retained_in_passenger_details(page):
     kiwi_page.save_regional_settings()
 
     # 4. Search for connections between any two cities (while un-checking the Booking.com checkbox, as in previous scenarios)
-    # 4.1. Clear the `from` location (here with a stabilization to ensure the place-chip is always removed)
+    # 4.1. Clear the "from" location (here with a stabilization to ensure the place-chip is always removed)
     kiwi_page.clear_the_from_field(stabilized=True)
 
-    # 4.2. Type in `Brno` to the `from` field
+    # 4.2. Type in "Brno" to the "from" field
     kiwi_page.type_origin_location_into_input_field("Brno")
 
-    # 4.3. Select the `Brno, Czechia` result from the dropdown
+    # 4.3. Select the "Brno, Czechia" result from the dropdown
     kiwi_page.select_location_from_dropdown("Brno, Czechia")
 
-    # 4.4. Type in `Bucharest` to the `to` field
+    # 4.4. Type in "Bucharest" to the "to" field
     kiwi_page.type_destination_location_into_input_field("Bucharest")
 
-    # 4.5. Select the `Bucharest, Romania` result from the dropdown
+    # 4.5. Select the "Bucharest, Romania" result from the dropdown
     kiwi_page.select_location_from_dropdown("Bucharest, Romania")
 
-    # 4.6. Uncheck the `Booking` checkbox
+    # 4.6. Uncheck the "Booking" checkbox
     kiwi_page.uncheck_booking_checkbox()
 
-    # 4.7. Hit the `Search` button
+    # 4.7. Hit the "Search" button
     kiwi_page.hit_search_button()
 
     # 4.8. Available connections should be displayed
@@ -51,7 +51,7 @@ def test_localized_currency_is_retained_in_passenger_details(page):
     # 6. Hit the Select button of the first result
     search_result_page.hit_select_button_of_first_result()
 
-    # 7. In the `Want to sign first?` modal hit the `Continue as a guest link`
+    # 7. In the "Want to sign first?" modal hit the "Continue as a guest link"
     search_result_page.hit_continue_as_guest_link()
 
     # 8. Verify the Total (EUR) price value corresponds with the one stored on step 5.

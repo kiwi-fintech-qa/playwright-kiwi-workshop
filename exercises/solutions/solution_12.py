@@ -1,4 +1,4 @@
-from exercises.solutions.resource_06_12 import KiwiPage
+from exercises.solutions.resources.resource_06_12 import KiwiPage
 
 
 # Calendar buttons (hit month and expect it in the date field)

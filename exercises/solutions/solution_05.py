@@ -1,4 +1,4 @@
-from exercises.solutions.resource_05 import KiwiPage
+from exercises.solutions.resources.resource_05 import KiwiPage
 
 
 # Searching for a connection displays results
@@ -7,26 +7,26 @@ def test_searching_for_connection_displays_results(page):
     kiwi_page = KiwiPage(page)
     kiwi_page.open_kiwi_website()
 
-    # 2. Clear the `from` location
+    # 2. Clear the "from" location
     page.click("[data-test=PlacePickerInputPlace-close]")
     page.wait_for_selector("[data-test=PlacePickerInputPlace-close]", state="hidden")
 
-    # 3. Type in `Vienna` to the `from` field
+    # 3. Type in "Vienna" to the "from" field
     page.fill("[data-test=PlacePickerInput-origin] [data-test=SearchField-input]", "Vienna")
 
-    # 4. Select the `Vienna, Austria` result from the dropdown
+    # 4. Select the "Vienna, Austria" result from the dropdown
     page.click("[data-test=PlacePickerRow-wrapper]:has-text('Vienna, Austria')")
 
-    # 5. Type in `Brno` to the `to` field
+    # 5. Type in "Brno" to the "to" field
     page.fill("[data-test=PlacePickerInput-destination] [data-test=SearchField-input]", "Brno")
 
-    # 6. Select the `Brno, Czechia` result from the dropdown
+    # 6. Select the "Brno, Czechia" result from the dropdown
     page.click("[data-test=PlacePickerRow-wrapper]:has-text('Brno, Czechia')")
 
-    # 7. Uncheck the `Booking` checkbox
+    # 7. Uncheck the "Booking" checkbox
     page.click("[class*=BookingcomSwitchstyled] [class*=Checkbox]")
 
-    # 8. Hit the `Search` button
+    # 8. Hit the "Search" button
     page.click("[data-test=LandingSearchButton]")
 
     # 9. Available connections should be displayed

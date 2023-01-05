@@ -1,4 +1,4 @@
-from exercises.solutions.resource_06_12 import KiwiPage, SearchResultPage, PassengerDetailsPage
+from exercises.solutions.resources.resource_06_12 import KiwiPage, SearchResultPage, PassengerDetailsPage
 
 
 # Not filling out the required fields on Passenger details doesn't allow to proceed to the Ticket fare screen
@@ -9,25 +9,25 @@ def test_not_filling_out_required_fields_on_passenger_details_prevents_proceedin
     kiwi_page = KiwiPage(page)
     kiwi_page.open_kiwi_website()
 
-    # 1.2. Clear the `from` location
+    # 1.2. Clear the "from" location
     kiwi_page.clear_the_from_field()
 
-    # 1.3. Type in `Brno` to the `from` field
+    # 1.3. Type in "Brno" to the "from" field
     kiwi_page.type_origin_location_into_input_field("Brno")
 
-    # 1.4. Select the `Brno, Czechia` result from the dropdown
+    # 1.4. Select the "Brno, Czechia" result from the dropdown
     kiwi_page.select_location_from_dropdown("Brno, Czechia")
 
-    # 1.5. Type in `Bucharest` to the `to` field
+    # 1.5. Type in "Bucharest" to the "to" field
     kiwi_page.type_destination_location_into_input_field("Bucharest")
 
-    # 1.6. Select the `Bucharest, Romania` result from the dropdown
+    # 1.6. Select the "Bucharest, Romania" result from the dropdown
     kiwi_page.select_location_from_dropdown("Bucharest, Romania")
 
-    # 1.7. Uncheck the `Booking` checkbox
+    # 1.7. Uncheck the "Booking" checkbox
     kiwi_page.uncheck_booking_checkbox()
 
-    # 1.8. Hit the `Search` button
+    # 1.8. Hit the "Search" button
     kiwi_page.hit_search_button()
 
     # 1.9. Available connections should be displayed
@@ -37,7 +37,7 @@ def test_not_filling_out_required_fields_on_passenger_details_prevents_proceedin
     # 2. Hit the Select button of the first result
     search_result_page.hit_select_button_of_first_result()
 
-    # 3. In the `Want to sign first?` modal hit the `Continue as a guest` link
+    # 3. In the "Want to sign first?" modal hit the "Continue as a guest" link
     search_result_page.hit_continue_as_guest_link()
 
     # 4. In the Cabin or carry-on baggage section select the 1× personal item option
@@ -49,7 +49,7 @@ def test_not_filling_out_required_fields_on_passenger_details_prevents_proceedin
         passenger_details_page.select_no_checked_baggage_checkbox()
 
     # 6. In the Travel insurance section select the No insurance option
-    passenger_details_page.select_no_isnurance()
+    passenger_details_page.select_no_insurance()
 
     # 7. Hit the Continue button and verify that under the following fields the following errors are displayed:
     passenger_details_page.hit_continue_button_and_expect_to_stay_on_passenger_details_due_to_error()

@@ -1,4 +1,4 @@
-from exercises.tasks.resource_03 import open_kiwi_website
+from exercises.tasks.resources.resource_03_04 import open_kiwi_website
 
 
 # Sidebar actions (expanding options, verifying visibility of items)
