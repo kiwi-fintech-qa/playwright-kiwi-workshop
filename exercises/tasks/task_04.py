@@ -5,21 +5,21 @@ def test_travel_mode_interactions_are_respected_by_the_ui(page):
     pass
 
     # 1.2. Hit the travel mode button
-    page.click("")
+    page.locator("").click()
 
     # 2. Verify a popup with the following options is displayed: Return, One-way, Multi-city, and Nomad
     page.wait_for_selector("", state="")
-    assert page.is_visible("")  # the Return option is visible
-    assert page.is_visible("")  # the One-way option is visible
-    assert page.is_visible("")  # the Multi-city option is visible
-    assert page.is_visible("")  # the Nomad option is visible
+    assert page.locator("").is_visible()  # the Return option is visible
+    assert page.locator("").is_visible()  # the One-way option is visible
+    assert page.locator("").is_visible()  # the Multi-city option is visible
+    assert page.locator("").is_visible()  # the Nomad option is visible
 
     # 3. Select the One-way options
-    page.click("")
+    page.locator("").click()
 
     # 4. Verify the One-way option is selected
     page.wait_for_selector("", state="")
-    assert page.is_visible("")
+    assert page.locator("").is_visible()
 
     # 5. Verify the Return date field is no longer displayed
-    assert page.is_hidden("")
+    assert page.locator("").is_hidden()

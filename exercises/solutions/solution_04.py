@@ -8,21 +8,21 @@ def test_travel_mode_interactions_are_respected_by_the_ui(page):
     open_kiwi_website(page)
 
     # 1.2. Hit the travel mode button
-    page.click("[data-test=SearchFormModesPicker-active-return]")
+    page.locator("[data-test=SearchFormModesPicker-active-return]").click()
 
     # 2. Verify a popup with the following options is displayed: Return, One-way, Multi-city, and Nomad
     page.wait_for_selector("[data-test=ModesPopup]", state="visible")
-    assert page.is_visible("[data-test=ModePopupOption-return]")  # the Return option is visible
-    assert page.is_visible("[data-test=ModePopupOption-oneWay]")  # the One-way option is visible
-    assert page.is_visible("[data-test=ModePopupOption-multicity]")  # the Multi-city option is visible
-    assert page.is_visible("[data-test=ModePopupOption-nomad]")  # the Nomad option is visible
+    assert page.locator("[data-test=ModePopupOption-return]").is_visible()  # the Return option is visible
+    assert page.locator("[data-test=ModePopupOption-oneWay]").is_visible()  # the One-way option is visible
+    assert page.locator("[data-test=ModePopupOption-multicity]").is_visible()  # the Multi-city option is visible
+    assert page.locator("[data-test=ModePopupOption-nomad]").is_visible()  # the Nomad option is visible
 
     # 3. Select the One-way options
-    page.click("[data-test=ModePopupOption-oneWay]")
+    page.locator("[data-test=ModePopupOption-oneWay]").click()
 
     # 4. Verify the One-way option is selected
     page.wait_for_selector("[data-test=ModesPopup]", state="hidden")
-    assert page.is_visible("[data-test=SearchFormModesPicker-active-oneWay]")
+    assert page.locator("[data-test=SearchFormModesPicker-active-oneWay]").is_visible()
 
     # 5. Verify the Return date field is no longer displayed
-    assert page.is_hidden("[data-test=SearchFormModesPicker-active-return]")
+    assert page.locator("[data-test=SearchFormModesPicker-active-return]").is_hidden()

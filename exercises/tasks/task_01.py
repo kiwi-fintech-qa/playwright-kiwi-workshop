@@ -4,7 +4,7 @@ def test_navigate_to_kiwi(page):
     page.goto("")
 
     # 2. Accept cookies by clicking the appropriate button
-    page.click("")
+    page.locator("").click()
 
     # 3. Assert the expected text is displayed
-    assert page.is_visible("text=")
+    assert page.locator("text=").is_visible()

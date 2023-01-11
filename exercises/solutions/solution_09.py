@@ -1,4 +1,9 @@
-from exercises.solutions.resources.resource_06_12 import KiwiPage, SearchResultPage, PassengerDetailsPage, TicketFarePage
+from exercises.solutions.resources.resource_06_12 import (
+    KiwiPage,
+    SearchResultPage,
+    PassengerDetailsPage,
+    TicketFarePage,
+)
 import math
 
 
@@ -14,16 +19,16 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
     kiwi_page.clear_the_from_field()
 
     # 1.3. Type in "Brno" to the "from" field
-    kiwi_page.type_origin_location_into_input_field("Brno")
+    kiwi_page.type_origin_location_into_input_field(location="Brno")
 
     # 1.4. Select the "Brno, Czechia" result from the dropdown
-    kiwi_page.select_location_from_dropdown("Brno, Czechia")
+    kiwi_page.select_location_from_dropdown(location="Brno, Czechia")
 
-    # 1.5. Type in "Bucharest" to the "to" field
-    kiwi_page.type_destination_location_into_input_field("Bucharest")
+    # 1.5. Type in "Vienna" to the "to" field
+    kiwi_page.type_destination_location_into_input_field(location="Vienna")
 
-    # 1.6. Select the "Bucharest, Romania" result from the dropdown
-    kiwi_page.select_location_from_dropdown("Bucharest, Romania")
+    # 1.6. Select the "Vienna, Austria" result from the dropdown
+    kiwi_page.select_location_from_dropdown(location="Vienna, Austria")
 
     # 1.7. Uncheck the "Booking" checkbox
     kiwi_page.uncheck_booking_checkbox()
@@ -44,32 +49,32 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
     # 4. Fill out the Email, Phone, Given names, Surnames and the DD and YYYY fields of Date of birth as follows:
     # 4.1. Email: play@wrig.ht
     passenger_details_page = PassengerDetailsPage(page)
-    passenger_details_page.fill_out_passenger_email("play@wrig.ht")
+    passenger_details_page.fill_out_passenger_email(email="play@wrig.ht")
 
     # 4.2. Phone: 123123123
-    passenger_details_page.fill_out_passenger_phone("123123123")
+    passenger_details_page.fill_out_passenger_phone(phone="123123123")
 
     # 4.3. Given names: Play
-    passenger_details_page.fill_out_passenger_firstname("Play")
+    passenger_details_page.fill_out_passenger_firstname(firstname="Play")
 
     # 4.4. Surnames: Wright
-    passenger_details_page.fill_out_passenger_lastname("Wright")
+    passenger_details_page.fill_out_passenger_lastname(lastname="Wright")
 
     # 4.5. DD: 1
-    passenger_details_page.fill_out_passenger_birthday("1")
+    passenger_details_page.fill_out_passenger_birthday(birthday="1")
 
     # 4.6. YYYY: 1901
-    passenger_details_page.fill_out_passenger_birthyear("1901")
+    passenger_details_page.fill_out_passenger_birthyear(birthyear="1901")
 
     # 5. In the following dropdowns select the following values:
     # 5.1. Nationality: United Kingdom
-    passenger_details_page.select_passenger_nationality("gb")
+    passenger_details_page.select_passenger_nationality(nationality="gb")
 
     # 5.2. Gender: Female
-    passenger_details_page.select_passenger_title("ms")
+    passenger_details_page.select_passenger_title(title="ms")
 
     # 5.3. Month: January
-    passenger_details_page.select_passenger_birthmonth("01")
+    passenger_details_page.select_passenger_birthmonth(birthmonth="01")
 
     # 6. In the Cabin or carry-on baggage section select the Carry-on bundle option and store its price value
     passenger_details_page.select_cabin_baggage_bundle()

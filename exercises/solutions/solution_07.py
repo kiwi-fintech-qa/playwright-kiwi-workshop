@@ -5,7 +5,7 @@ from exercises.solutions.resources.resource_06_12 import KiwiPage, SearchResultP
 # TODO: run without any --slowmo (slow execution leads to some weird loading on steps 2 and 3; or fix it)
 def test_sorting_panel_actions_can_be_used_for_sorting_the_search_results(page):
     # 1. Steps 1-9. from the Searching for a connection displays results scenario, but with the From location
-    # set to Brno and the To location set to Bucharest
+    # set to Brno and the To location set to Vienna
     # 1.1. Open the kiwi.com website (wait for page to load)
     kiwi_page = KiwiPage(page)
     kiwi_page.open_kiwi_website()
@@ -14,16 +14,16 @@ def test_sorting_panel_actions_can_be_used_for_sorting_the_search_results(page):
     kiwi_page.clear_the_from_field()
 
     # 1.3. Type in "Brno" to the "from" field
-    kiwi_page.type_origin_location_into_input_field("Brno")
+    kiwi_page.type_origin_location_into_input_field(location="Brno")
 
     # 1.4. Select the "Brno, Czechia" result from the dropdown
-    kiwi_page.select_location_from_dropdown("Brno, Czechia")
+    kiwi_page.select_location_from_dropdown(location="Brno, Czechia")
 
-    # 1.5. Type in "Bucharest" to the "to" field
-    kiwi_page.type_destination_location_into_input_field("Bucharest")
+    # 1.5. Type in "Vienna" to the "to" field
+    kiwi_page.type_destination_location_into_input_field(location="Vienna")
 
-    # 1.6. Select the "Bucharest, Romania" result from the dropdown
-    kiwi_page.select_location_from_dropdown("Bucharest, Romania")
+    # 1.6. Select the "Vienna, Austria" result from the dropdown
+    kiwi_page.select_location_from_dropdown(location="Vienna, Austria")
 
     # 1.7. Uncheck the "Booking" checkbox
     kiwi_page.uncheck_booking_checkbox()
@@ -36,7 +36,7 @@ def test_sorting_panel_actions_can_be_used_for_sorting_the_search_results(page):
     search_result_page.wait_for_available_connections_to_be_displayed()
 
     # 2. Check the Train checkbox in the Transport left-hand section of the results
-    search_result_page.check_a_transport_option_checkbox("Train")
+    search_result_page.check_a_transport_option_checkbox(option="Train")
 
     # 3. Select the Cheapest sorting option from the sorting panel
     search_result_page.sort_results_by_price()

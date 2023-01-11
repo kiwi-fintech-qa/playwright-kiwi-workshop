@@ -23,16 +23,16 @@ def test_localized_currency_is_retained_in_passenger_details(page):
     kiwi_page.clear_the_from_field(stabilized=True)
 
     # 4.2. Type in "Brno" to the "from" field
-    kiwi_page.type_origin_location_into_input_field("Brno")
+    kiwi_page.type_origin_location_into_input_field(location="Brno")
 
     # 4.3. Select the "Brno, Czechia" result from the dropdown
-    kiwi_page.select_location_from_dropdown("Brno, Czechia")
+    kiwi_page.select_location_from_dropdown(location="Brno, Czechia")
 
-    # 4.4. Type in "Bucharest" to the "to" field
-    kiwi_page.type_destination_location_into_input_field("Bucharest")
+    # 4.4. Type in "Vienna" to the "to" field
+    kiwi_page.type_destination_location_into_input_field(location="Vienna")
 
-    # 4.5. Select the "Bucharest, Romania" result from the dropdown
-    kiwi_page.select_location_from_dropdown("Bucharest, Romania")
+    # 4.5. Select the "Vienna, Austria" result from the dropdown
+    kiwi_page.select_location_from_dropdown(location="Vienna, Austria")
 
     # 4.6. Uncheck the "Booking" checkbox
     kiwi_page.uncheck_booking_checkbox()

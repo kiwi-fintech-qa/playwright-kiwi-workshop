@@ -17,9 +17,9 @@ def test_localized_currency_is_retained_in_passenger_details(page):
 
     # 4.3. Select the "Brno, Czechia" result from the dropdown
 
-    # 4.4. Type in "Bucharest" to the "to" field
+    # 4.4. Type in "Vienna" to the "to" field
 
-    # 4.5. Select the "Bucharest, Romania" result from the dropdown
+    # 4.5. Select the "Vienna, Austria" result from the dropdown
 
     # 4.6. Uncheck the "Booking" checkbox
 

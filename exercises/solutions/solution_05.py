@@ -8,26 +8,26 @@ def test_searching_for_connection_displays_results(page):
     kiwi_page.open_kiwi_website()
 
     # 2. Clear the "from" location
-    page.click("[data-test=PlacePickerInputPlace-close]")
+    page.locator("[data-test=PlacePickerInputPlace-close]").click()
     page.wait_for_selector("[data-test=PlacePickerInputPlace-close]", state="hidden")
 
     # 3. Type in "Vienna" to the "from" field
-    page.fill("[data-test=PlacePickerInput-origin] [data-test=SearchField-input]", "Vienna")
+    page.locator("[data-test=PlacePickerInput-origin] [data-test=SearchField-input]").fill("Vienna")
 
     # 4. Select the "Vienna, Austria" result from the dropdown
-    page.click("[data-test=PlacePickerRow-wrapper]:has-text('Vienna, Austria')")
+    page.locator("[data-test=PlacePickerRow-wrapper]:has-text('Vienna, Austria')").click()
 
     # 5. Type in "Brno" to the "to" field
-    page.fill("[data-test=PlacePickerInput-destination] [data-test=SearchField-input]", "Brno")
+    page.locator("[data-test=PlacePickerInput-destination] [data-test=SearchField-input]").fill("Brno")
 
     # 6. Select the "Brno, Czechia" result from the dropdown
-    page.click("[data-test=PlacePickerRow-wrapper]:has-text('Brno, Czechia')")
+    page.locator("[data-test=PlacePickerRow-wrapper]:has-text('Brno, Czechia')").click()
 
     # 7. Uncheck the "Booking" checkbox
-    page.click("[class*=BookingcomSwitchstyled] [class*=Checkbox]")
+    page.locator("[class*=BookingcomSwitchstyled] [class*=Checkbox]").first.click()
 
     # 8. Hit the "Search" button
-    page.click("[data-test=LandingSearchButton]")
+    page.locator("[data-test=LandingSearchButton]").click()
 
     # 9. Available connections should be displayed
     page.wait_for_selector("[class*=ResultListstyled__ResultListWrapper]", timeout=10000)

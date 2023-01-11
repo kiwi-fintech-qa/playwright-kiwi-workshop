@@ -13,16 +13,16 @@ def test_not_filling_out_required_fields_on_passenger_details_prevents_proceedin
     kiwi_page.clear_the_from_field()
 
     # 1.3. Type in "Brno" to the "from" field
-    kiwi_page.type_origin_location_into_input_field("Brno")
+    kiwi_page.type_origin_location_into_input_field(location="Brno")
 
     # 1.4. Select the "Brno, Czechia" result from the dropdown
-    kiwi_page.select_location_from_dropdown("Brno, Czechia")
+    kiwi_page.select_location_from_dropdown(location="Brno, Czechia")
 
-    # 1.5. Type in "Bucharest" to the "to" field
-    kiwi_page.type_destination_location_into_input_field("Bucharest")
+    # 1.5. Type in "Vienna" to the "to" field
+    kiwi_page.type_destination_location_into_input_field(location="Vienna")
 
-    # 1.6. Select the "Bucharest, Romania" result from the dropdown
-    kiwi_page.select_location_from_dropdown("Bucharest, Romania")
+    # 1.6. Select the "Vienna, Austria" result from the dropdown
+    kiwi_page.select_location_from_dropdown(location="Vienna, Austria")
 
     # 1.7. Uncheck the "Booking" checkbox
     kiwi_page.uncheck_booking_checkbox()
@@ -78,10 +78,10 @@ def test_not_filling_out_required_fields_on_passenger_details_prevents_proceedin
     # (8. variation: fill out Email and Phone, hit Continue, and expect Required filed error to be displayed
     # under the Primary passenger fields)
     # 8.1. Email: play@wrig.ht
-    passenger_details_page.fill_out_passenger_email("play@wrig.ht")
+    passenger_details_page.fill_out_passenger_email(email="play@wrig.ht")
 
     # 8.2. Phone: 123123123
-    passenger_details_page.fill_out_passenger_phone("123123123")
+    passenger_details_page.fill_out_passenger_phone(phone="123123123")
 
     # 8.3. Hit the Continue button and verify that under the following fields the following errors are displayed:
     passenger_details_page.hit_continue_button_and_expect_to_stay_on_passenger_details_due_to_error()
@@ -110,31 +110,31 @@ def test_not_filling_out_required_fields_on_passenger_details_prevents_proceedin
     # (9. variation: fill out and select the Primary passenger fields, clear the Contact details fields, hit Continue,
     # and expect Required for your tickets error under the Email field and Required field error under the Phone field)
     # 9.1. Email: empty
-    passenger_details_page.fill_out_passenger_email("")
+    passenger_details_page.fill_out_passenger_email(email="")
 
     # 9.2. Phone: empty
-    passenger_details_page.fill_out_passenger_phone("")
+    passenger_details_page.fill_out_passenger_phone(phone="")
 
     # 9.3. Given names: Play
-    passenger_details_page.fill_out_passenger_firstname("Play")
+    passenger_details_page.fill_out_passenger_firstname(firstname="Play")
 
     # 9.4. Surnames: Wright
-    passenger_details_page.fill_out_passenger_lastname("Wright")
+    passenger_details_page.fill_out_passenger_lastname(lastname="Wright")
 
     # 9.5. DD: 1
-    passenger_details_page.fill_out_passenger_birthday("1")
+    passenger_details_page.fill_out_passenger_birthday(birthday="1")
 
     # 9.6. YYYY: 1901
-    passenger_details_page.fill_out_passenger_birthyear("1901")
+    passenger_details_page.fill_out_passenger_birthyear(birthyear="1901")
 
     # 9.7. Nationality: United Kingdom
-    passenger_details_page.select_passenger_nationality("gb")
+    passenger_details_page.select_passenger_nationality(nationality="gb")
 
     # 9.8. Gender: Female
-    passenger_details_page.select_passenger_title("ms")
+    passenger_details_page.select_passenger_title(title="ms")
 
     # 9.9. Month: January
-    passenger_details_page.select_passenger_birthmonth("01")
+    passenger_details_page.select_passenger_birthmonth(birthmonth="01")
 
     # 9.10. Hit the Continue button and verify that under the following fields the following errors are displayed:
     passenger_details_page.hit_continue_button_and_expect_to_stay_on_passenger_details_due_to_error()

@@ -87,7 +87,7 @@ class KiwiPage:
         self.input_field_destination.fill(location)
 
     def select_location_from_dropdown(self, location: str = None):
-        self.page.click(f"[data-test=PlacePickerRow-wrapper]:has-text('{location}')")
+        self.page.locator(f"[data-test=PlacePickerRow-wrapper]:has-text('{location}')").click()
 
     def uncheck_booking_checkbox(self):
         self.booking_checkbox.click()
@@ -214,7 +214,7 @@ class SearchResultPage:
         self.result_card_wrapper.wait_for()
 
     def check_a_transport_option_checkbox(self, option: str = None):
-        self.page.click(f"[class*=FilterWrapper]:has([data-test=TransportOptionCheckbox-{option.lower()}])")
+        self.page.locator(f"[class*=FilterWrapper]:has([data-test=TransportOptionCheckbox-{option.lower()}])").click()
         self.wait_for_search_result_page_to_be_reloaded()
 
     def wait_for_search_result_page_to_be_reloaded(self):
@@ -236,8 +236,8 @@ class SearchResultPage:
     def hit_continue_as_guest_link(self):
         self.continue_as_guest_link.click()
         self.result_card_wrapper.wait_for(state="hidden")
-        self.reservation_content.wait_for()
-        self.breadcrumbs_current_step_passenger.wait_for()
+        self.reservation_content.wait_for(state="visible")
+        self.breadcrumbs_current_step_passenger.wait_for(state="visible")
 
 
 class PassengerDetailsPage:
@@ -413,11 +413,15 @@ class TicketFarePage:
     def __init__(self, page):
         self.page = page
 
-        self.reservation_bill_carry_on_baggage_price = page.locator("[data-test=bookingBillCabinBaggage] [class*=Price]")
+        self.reservation_bill_carry_on_baggage_price = page.locator(
+            "[data-test=bookingBillCabinBaggage] [class*=Price]"
+        )
         self.reservation_bill_checked_baggage_price = page.locator(
             "[data-test=bookingBillCheckedBaggage] [class*=Price]"
         )
-        self.reservation_bill_passenger_price = page.locator("[data-test=ReservationBill-item-passenger] [class*=Price]")
+        self.reservation_bill_passenger_price = page.locator(
+            "[data-test=ReservationBill-item-passenger] [class*=Price]"
+        )
         self.reservation_bill_total_price = page.locator("[class*=ReservationBillTotal] [class*=Price]")
 
     def get_carry_on_baggage_price_value(self) -> float:

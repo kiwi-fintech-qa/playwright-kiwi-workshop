@@ -11,7 +11,7 @@ def test_not_filling_out_required_fields_on_passenger_details_prevents_proceedin
 
     # 1.4. Select the 1st result from the dropdown
 
-    # 1.5. Type in "Bucharest" to the "to" field
+    # 1.5. Type in "Vienna" to the "to" field
 
     # 1.6. Select the 1st result from the dropdown
 

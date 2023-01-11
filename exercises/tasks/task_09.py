@@ -14,7 +14,7 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
 
     # 1.4. Select the 1st result from the dropdown
 
-    # 1.5. Type in "Bucharest" to the "to" field
+    # 1.5. Type in "Vienna" to the "to" field
 
     # 1.6. Select the 1st result from the dropdown
 
