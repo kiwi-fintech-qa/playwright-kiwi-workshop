@@ -18,12 +18,14 @@ def test_sidebar_actions_work_as_expected(page):
     assert expected_sidebar_text == current_sidebar_text
 
     # 3. Hit the Discover button
-    page.locator("[data-test=NavBar-SideNav][aria-hidden=false] [role=button]:has-text('Discover') ["
-                 "aria-expanded=false]").click()
+    page.locator(
+        "[data-test=NavBar-SideNav][aria-hidden=false] [role=button]:has-text('Discover') [aria-expanded=false]"
+    ).click()
 
     # 4. Verify the Discover button expands into a dropdown/slide of items
-    assert page.locator("[data-test=NavBar-SideNav][aria-hidden=false] [role=button]:has-text('Discover') ["
-                        "aria-expanded=true]").is_visible()
+    assert page.locator(
+        "[data-test=NavBar-SideNav][aria-hidden=false] [role=button]:has-text('Discover') [aria-expanded=true]"
+    ).is_visible()
 
     # 5. Verify the Subscribe to newsletter button is displayed
     assert page.locator("[aria-hidden=false] [class*=TextLink]:has-text('Subscribe to newsletter')").is_visible()
