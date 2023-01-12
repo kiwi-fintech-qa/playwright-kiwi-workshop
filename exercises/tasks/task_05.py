@@ -1,21 +1,36 @@
+from exercises.tasks.resources.resource_05 import KiwiPage
+
+
 # Searching for a connection displays results
 def test_searching_for_connection_displays_results(page):
     # 1. Open the kiwi.com website (wait for page to load)
-    pass
-    # 2. Clear the `from` location
+    kiwi_page = KiwiPage(page)
+    kiwi_page.open_kiwi_website()
 
-    # 3. Type in `Vienna` to the `from` field
+    # 2. Clear the "from" location
+    page.locator("").click()
+    page.locator("").wait_for(state="")
 
-    # 4. Select the 1st result from the dropdown
+    # 3. Type in "Vienna" to the "from" field
+    page.locator("").fill("")
 
-    # 5. Type in `Brno` to the `to` field
+    # 4. Select the "Vienna, Austria" result from the dropdown
+    page.locator("").click()
 
-    # 6. Select the 1st result from the dropdown
+    # 5. Type in "Brno" to the "to" field
+    page.locator("").fill("")
 
-    # 7. Uncheck the `Booking` checkbox
+    # 6. Select the "Brno, Czechia" result from the dropdown
+    page.locator("").fill("")
 
-    # 8. Hit the `Search` button
+    # 7. Uncheck the "Booking" checkbox
+    page.locator("").click()
+
+    # 8. Hit the "Search" button
+    page.locator("").click()
 
     # 9. Available connections should be displayed
+    page.locator("").wait_for(timeout=10000)
+    page.locator("").first.wait_for(state="")
 
     # (10. variation: among the results, this first one is cheaper than 10 000 CZK)

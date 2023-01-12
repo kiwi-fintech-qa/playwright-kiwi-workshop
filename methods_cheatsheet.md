@@ -3,21 +3,21 @@
 Here you can find a brief overview of some basic methods and commands useful for developing tests with Playwright.
 
 ## Methods of the [Page](https://playwright.dev/python/docs/api/class-page) class:
-- [page.click(selector, **kwargs)](https://playwright.dev/python/docs/api/class-page#page-click) for clicking objects on the page
-- [page.fill(selector, value, **kwargs)](https://playwright.dev/python/docs/api/class-page#page-fill) for filling out input fields (e.g., login forms or search fields)
 - [page.goto(url, **kwargs)](https://playwright.dev/python/docs/api/class-page#page-goto) for navigating to a specific `url`
-- [page.is_hidden(selector, **kwargs)](https://playwright.dev/python/docs/api/class-page#page-is-hidden) for checking whether an object is not visible on the page
-- [page.is_visible(selector, **kwargs)](https://playwright.dev/python/docs/api/class-page#page-is-visible) for checking whether an object is visible on the page
 - [page.locator(selector, **kwargs)](https://playwright.dev/python/docs/api/class-page#page-locator) for returning a locator to be further used (can be stored into a variable, e.g., for identifying the textual value of the given object)
-- [page.select_option(selector, **kwargs)](https://playwright.dev/python/docs/api/class-page#page-select-option) for selecting an option from a dropdown list
-- [page.wait_for_selector(selector, **kwargs)](https://playwright.dev/python/docs/api/class-page#page-wait-for-selector) for waiting until an object is visible or hidden (visibility is expected based on the keyword argument `state="visible"` or `state="hidden"`)
 
 ## Methods of the [Locator](https://playwright.dev/python/docs/api/class-locator) class:
+- [locator.click(**kwargs)](https://playwright.dev/python/docs/api/class-locator#locator-click) for clicking objects on the page
 - [locator.count()](https://playwright.dev/python/docs/api/class-locator#locator-count) for getting the count of occurrences of the given object
+- [locator.fill(value, **kwargs)](https://playwright.dev/python/docs/api/class-locator#locator-fill) for filling out input fields (e.g., login forms or search fields)
 - [locator.first](https://playwright.dev/python/docs/api/class-locator#locator-first) for identifying the first matching object
 - [locator.get_attribute(name, **kwargs)](https://playwright.dev/python/docs/api/class-locator#locator-get-attribute) for getting the value of the attribute specified by `name` from the given object
 - [locator.inner_text(**kwargs)](https://playwright.dev/python/docs/api/class-locator#locator-inner-text) for capturing the textual content of the matching object
+- [locator.is_hidden(**kwargs)](https://playwright.dev/python/docs/api/class-locator#locator-is-hidden) for checking whether an object is not visible on the page
+- [locator.is_visible(**kwargs)](https://playwright.dev/python/docs/api/class-locator#locator-is-visible) for checking whether an object is visible on the page
 - [locator.nth(index)](https://playwright.dev/python/docs/api/class-locator#locator-nth) for returning the nth matching object
+- [locator.select_option(**kwargs)](https://playwright.dev/python/docs/api/class-locator#locator-select-option) for selecting an option from a dropdown list
+- [locator.wait_for(**kwargs)](https://playwright.dev/python/docs/api/class-locator#locator-wait-for) for waiting until an object is visible or hidden (visibility is expected based on the keyword argument `state="visible"` or `state="hidden"`)
 
 ## Useful Python statements, functions, constructors etc.:
 - [assert statement](https://docs.python.org/3/reference/simple_stmts.html#the-assert-statement) for evaluating expressions (e.g., `assert 1 < 2`; raises `AssertionError` if the expression evaluates as `False`)

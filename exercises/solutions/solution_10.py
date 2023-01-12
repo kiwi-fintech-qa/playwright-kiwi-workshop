@@ -1,163 +1,161 @@
+from exercises.solutions.resources.resource_06_12 import KiwiPage, SearchResultPage, PassengerDetailsPage
+
+
 # Not filling out the required fields on Passenger details doesn't allow to proceed to the Ticket fare screen
 def test_not_filling_out_required_fields_on_passenger_details_prevents_proceeding_to_ticket_fare_screen(page):
     # 1. Search for connections between any two cities (while un-checking the Booking.com checkbox,
     # as in previous scenarios)
     # 1.1. Open the kiwi.com website (wait for page to load)
-    page.goto("https://www.kiwi.com/en/")
-    page.click("[data-test='CookiesPopup-Accept']")
-    assert page.is_visible("text=Book cheap flights other sites simply can’t find.")
+    kiwi_page = KiwiPage(page)
+    kiwi_page.open_kiwi_website()
 
-    # 1.2. Clear the `from` location
-    page.click("[data-test=PlacePickerInputPlace-close]")
-    page.wait_for_selector("[data-test=PlacePickerInputPlace-close]", state="hidden")
+    # 1.2. Clear the "from" location
+    kiwi_page.clear_the_from_field()
 
-    # 1.3. Type in `Brno` to the `from` field
-    page.fill("[data-test=PlacePickerInput-origin] [data-test=SearchField-input]", "Brno")
+    # 1.3. Type in "Brno" to the "from" field
+    kiwi_page.type_origin_location_into_input_field(location="Brno")
 
-    # 1.4. Select the 1st result from the dropdown
-    page.click("[data-test=PlacePickerRow-wrapper]")
+    # 1.4. Select the "Brno, Czechia" result from the dropdown
+    kiwi_page.select_location_from_dropdown(location="Brno, Czechia")
 
-    # 1.5. Type in `Bucharest` to the `to` field
-    page.fill("[data-test=PlacePickerInput-destination] [data-test=SearchField-input]", "Bucharest")
+    # 1.5. Type in "Vienna" to the "to" field
+    kiwi_page.type_destination_location_into_input_field(location="Vienna")
 
-    # 1.6. Select the 1st result from the dropdown
-    page.click("[data-test=PlacePickerRow-wrapper]")
+    # 1.6. Select the "Vienna, Austria" result from the dropdown
+    kiwi_page.select_location_from_dropdown(location="Vienna, Austria")
 
-    # 1.7. Uncheck the `Booking` checkbox
-    page.click("[class*=BookingcomSwitchstyled] [class*=Checkbox]")
+    # 1.7. Uncheck the "Booking" checkbox
+    kiwi_page.uncheck_booking_checkbox()
 
-    # 1.8. Hit the `Search` button
-    page.click("[data-test=LandingSearchButton]")
+    # 1.8. Hit the "Search" button
+    kiwi_page.hit_search_button()
 
     # 1.9. Available connections should be displayed
-    page.wait_for_selector("[class*=ResultListstyled__ResultListWrapper]", timeout=10000)
-    page.wait_for_selector("[data-test=ResultCardWrapper]", state="visible")
+    search_result_page = SearchResultPage(page)
+    search_result_page.wait_for_available_connections_to_be_displayed()
 
     # 2. Hit the Select button of the first result
-    page.click("[data-test=BookingButton]")
-    page.wait_for_selector("[data-test=MagicLogin]", state="visible")
+    search_result_page.hit_select_button_of_first_result()
 
-    # 3. In the Want to sign first? modal hit the Continue as a guest link
-    page.click("[data-test=MagicLogin-GuestTextLink]")
-    page.wait_for_selector("[data-test=ResultCardWrapper]", state="hidden")
-    page.wait_for_selector("[data-test=Reservation-content]", state="visible")
-    page.wait_for_selector("[data-test=Breadcrumbs-step-PASSENGER] [aria-current=step]", state="visible")
+    # 3. In the "Want to sign first?" modal hit the "Continue as a guest" link
+    search_result_page.hit_continue_as_guest_link()
 
     # 4. In the Cabin or carry-on baggage section select the 1× personal item option
-    page.click("[data-test=Baggage-handBag] [data-test=Baggage-Option-0]")
+    passenger_details_page = PassengerDetailsPage(page)
+    passenger_details_page.select_cabin_baggage_single_item()
 
     # 5. If visible, in the Checked baggage section select the No checked baggage checkbox
-    if page.is_hidden("[data-test=Baggage-EmptyOption]"):
-        page.click("[class*=Checkbox]:has([data-test=Baggage-NoBagsToCheckIn])")
+    if passenger_details_page.baggage_empty_option.is_hidden():
+        passenger_details_page.select_no_checked_baggage_checkbox()
 
     # 6. In the Travel insurance section select the No insurance option
-    page.click("[data-test=ReservationPassengerInsurance-content] [type=none]")
+    passenger_details_page.select_no_insurance()
 
     # 7. Hit the Continue button and verify that under the following fields the following errors are displayed:
-    page.click("[data-test=StepControls-passengers-next]")
+    passenger_details_page.hit_continue_button_and_expect_to_stay_on_passenger_details_due_to_error()
 
     # 7.1. Email: Required for your tickets
-    page.wait_for_selector("[data-test=ContactEmail] [aria-live=polite]:has-text('Required for your tickets')", state="visible")
+    passenger_details_page.wait_for_email_error_to_be_displayed()
 
     # 7.2. Phone: Required field
-    page.is_visible("[data-test=ContactPhone] [aria-live=polite]:has-text('Required field')")
+    passenger_details_page.phone_field_error_should_be_displayed()
 
     # 7.3. Given names: Required field
-    page.is_visible("[data-test=ReservationPassenger-FirstName] [aria-live=polite]:has-text('Required field')")
+    passenger_details_page.first_name_error_should_be_displayed()
 
     # 7.4. Surnames: Required field
-    page.is_visible("[data-test=ReservationPassenger-LastName] [aria-live=polite]:has-text('Required field')")
+    passenger_details_page.last_name_error_should_be_displayed()
 
     # 7.5. Nationality: Required field
-    page.is_visible("[class*=Select]:has([name=nationality]) [aria-live=polite]:has-text('Required field')")
+    passenger_details_page.nationality_error_should_be_displayed()
 
     # 7.6. Gender: Required field
-    page.is_visible("[class*=Select]:has([name=title]) [aria-live=polite]:has-text('Required field')")
+    passenger_details_page.gender_error_should_be_displayed()
 
     # 7.7. Date of birth: Required field
-    page.wait_for_selector("[class*=InputGroup]:has([name=birthDay]) [aria-live=polite]:has-text('Required field')")
+    passenger_details_page.birthdate_error_should_be_displayed()
 
     # (8. variation: fill out Email and Phone, hit Continue, and expect Required filed error to be displayed
     # under the Primary passenger fields)
     # 8.1. Email: play@wrig.ht
-    page.fill("[name=email]", "play@wrig.ht")
+    passenger_details_page.fill_out_passenger_email(email="play@wrig.ht")
 
     # 8.2. Phone: 123123123
-    page.fill("[name=phone]", "123123123")
+    passenger_details_page.fill_out_passenger_phone(phone="123123123")
 
     # 8.3. Hit the Continue button and verify that under the following fields the following errors are displayed:
-    page.click("[data-test=StepControls-passengers-next]")
+    passenger_details_page.hit_continue_button_and_expect_to_stay_on_passenger_details_due_to_error()
 
     # 8.4. Email: No error message
-    page.wait_for_selector("[data-test=ContactEmail] [aria-live=polite]:has-text('Required for your tickets')", state="hidden")
+    passenger_details_page.wait_for_email_error_to_not_be_displayed()
 
     # 8.5. Phone: No error message
-    page.is_hidden("[data-test=ContactPhone] [aria-live=polite]:has-text('Required field')")
+    passenger_details_page.phone_field_error_should_not_be_displayed()
 
     # 8.6. Given names: Required field
-    page.is_visible("[data-test=ReservationPassenger-FirstName] [aria-live=polite]:has-text('Required field')")
+    passenger_details_page.first_name_error_should_be_displayed()
 
     # 8.7. Surnames: Required field
-    page.is_visible("[data-test=ReservationPassenger-LastName] [aria-live=polite]:has-text('Required field')")
+    passenger_details_page.last_name_error_should_be_displayed()
 
     # 8.8. Nationality: Required field
-    page.is_visible("[class*=Select]:has([name=nationality]) [aria-live=polite]:has-text('Required field')")
+    passenger_details_page.nationality_error_should_be_displayed()
 
     # 8.9. Gender: Required field
-    page.is_visible("[class*=Select]:has([name=title]) [aria-live=polite]:has-text('Required field')")
+    passenger_details_page.gender_error_should_be_displayed()
 
     # 8.10. Date of birth: Required field
-    page.is_visible("[class*=InputGroup]:has([name=birthDay]) [aria-live=polite]:has-text('Required field')")
+    passenger_details_page.birthdate_error_should_be_displayed()
 
     # (9. variation: fill out and select the Primary passenger fields, clear the Contact details fields, hit Continue,
     # and expect Required for your tickets error under the Email field and Required field error under the Phone field)
-    # 9.1. Email: play@wrig.ht
-    page.fill("[name=email]", "")
+    # 9.1. Email: empty
+    passenger_details_page.fill_out_passenger_email(email="")
 
-    # 9.2. Phone: 123123123
-    page.fill("[name=phone]", "")
+    # 9.2. Phone: empty
+    passenger_details_page.fill_out_passenger_phone(phone="")
 
     # 9.3. Given names: Play
-    page.fill("[name=firstname]", "Play")
+    passenger_details_page.fill_out_passenger_firstname(firstname="Play")
 
     # 9.4. Surnames: Wright
-    page.fill("[name=lastname]", "Wright")
+    passenger_details_page.fill_out_passenger_lastname(lastname="Wright")
 
     # 9.5. DD: 1
-    page.fill("[name=birthDay]", "1")
+    passenger_details_page.fill_out_passenger_birthday(birthday="1")
 
     # 9.6. YYYY: 1901
-    page.fill("[name=birthYear]", "1901")
+    passenger_details_page.fill_out_passenger_birthyear(birthyear="1901")
 
     # 9.7. Nationality: United Kingdom
-    page.select_option("[name=nationality]", value="gb")
+    passenger_details_page.select_passenger_nationality(nationality="gb")
 
     # 9.8. Gender: Female
-    page.select_option("[name=title]", value="ms")
+    passenger_details_page.select_passenger_title(title="ms")
 
     # 9.9. Month: January
-    page.select_option("[name=birthMonth]", value="01")
+    passenger_details_page.select_passenger_birthmonth(birthmonth="01")
 
     # 9.10. Hit the Continue button and verify that under the following fields the following errors are displayed:
-    page.click("[data-test=StepControls-passengers-next]")
+    passenger_details_page.hit_continue_button_and_expect_to_stay_on_passenger_details_due_to_error()
 
     # 9.11. Email: Required for your tickets
-    page.wait_for_selector("[data-test=ContactEmail] [aria-live=polite]:has-text('Required for your tickets')", state="visible")
+    passenger_details_page.wait_for_email_error_to_be_displayed()
 
     # 9.12. Phone: Required field
-    page.is_visible("[data-test=ContactPhone] [aria-live=polite]:has-text('Required field')")
+    passenger_details_page.phone_field_error_should_be_displayed()
 
     # 9.13. Given names: No error
-    page.is_hidden("[data-test=ReservationPassenger-FirstName] [aria-live=polite]:has-text('Required field')")
+    passenger_details_page.first_name_error_should_not_be_displayed()
 
     # 9.14. Surnames: No error
-    page.is_hidden("[data-test=ReservationPassenger-LastName] [aria-live=polite]:has-text('Required field')")
+    passenger_details_page.last_name_error_should_not_be_displayed()
 
     # 9.15. Nationality: No error
-    page.is_hidden("[class*=Select]:has([name=nationality]) [aria-live=polite]:has-text('Required field')")
+    passenger_details_page.nationality_error_should_not_be_displayed()
 
     # 9.16. Gender: No error
-    page.is_hidden("[class*=Select]:has([name=title]) [aria-live=polite]:has-text('Required field')")
+    passenger_details_page.gender_error_should_not_be_displayed()
 
     # 9.17. Date of birth: No error
-    page.is_hidden("[class*=InputGroup]:has([name=birthDay]) [aria-live=polite]:has-text('Required field')")
+    passenger_details_page.birthdate_error_should_not_be_displayed()

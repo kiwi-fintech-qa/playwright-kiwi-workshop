@@ -45,5 +45,5 @@ def test_total_count_of_passengers_is_reflected_by_counter_next_to_the_passenger
 
     # 13.7. Hit the Done button
 
-    # 13.8. Verify the count of passengers next to the passengers icon corresponds with the sum of values from steps
+    # 13.8. Verify the count of bags next to the baggage icon corresponds with the sum of values from steps
     # 13.4. and 13.6.
