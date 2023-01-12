@@ -336,7 +336,7 @@ class PassengerDetailsPage:
     def select_cabin_baggage_single_item(self):
         self.cabin_baggage_single_item_option.click()
 
-    def get_carry_on_baggage_price_value(self) -> float:
+    def get_carry_on_baggage_price_value_from_baggage_section(self) -> float:
         carry_on_baggage_price_with_currency_code = self.cabin_baggage_bundle_price.inner_text()
         carry_on_baggage_price_value = float(carry_on_baggage_price_with_currency_code.split()[0])
         return carry_on_baggage_price_value
@@ -347,7 +347,7 @@ class PassengerDetailsPage:
     def select_no_checked_baggage_checkbox(self):
         self.checked_baggage_no_bags_checkbox.click()
 
-    def get_checked_baggage_price_value(self) -> float:
+    def get_checked_baggage_price_value_from_baggage_section(self) -> float:
         checked_baggage_price_with_currency_code = self.checked_baggage_once_price.inner_text()
         checked_baggage_price_value = float(checked_baggage_price_with_currency_code.split()[0])
         return checked_baggage_price_value
@@ -424,26 +424,26 @@ class TicketFarePage:
         )
         self.reservation_bill_total_price = page.locator("[class*=ReservationBillTotal] [class*=Price]")
 
-    def get_carry_on_baggage_price_value(self) -> float:
+    def get_carry_on_baggage_price_value_from_reservation_bill(self) -> float:
         total_carry_on_baggage_price_with_currency_code = self.reservation_bill_carry_on_baggage_price.inner_text()
         total_carry_on_baggage_price_value = float(
             total_carry_on_baggage_price_with_currency_code.split()[0].replace(",", "")
         )
         return total_carry_on_baggage_price_value
 
-    def get_checked_baggage_price_value(self) -> float:
+    def get_checked_baggage_price_value_from_reservation_bill(self) -> float:
         total_checked_baggage_price_with_currency_code = self.reservation_bill_checked_baggage_price.inner_text()
         total_checked_baggage_price_value = float(
             total_checked_baggage_price_with_currency_code.split()[0].replace(",", "")
         )
         return total_checked_baggage_price_value
 
-    def get_passenger_price_value(self) -> float:
+    def get_passenger_price_value_from_reservation_bill(self) -> float:
         total_passenger_price_with_currency_code = self.reservation_bill_passenger_price.inner_text()
         total_passenger_price_value = float(total_passenger_price_with_currency_code.split()[0].replace(",", ""))
         return total_passenger_price_value
 
-    def get_total_price_value(self) -> float:
+    def get_total_price_value_from_reservation_bill(self) -> float:
         total_price_with_currency_code = self.reservation_bill_total_price.inner_text()
         total_price_value = float(total_price_with_currency_code.split()[0].replace(",", ""))
         return total_price_value

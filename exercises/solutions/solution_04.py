@@ -11,7 +11,7 @@ def test_travel_mode_interactions_are_respected_by_the_ui(page):
     page.locator("[data-test=SearchFormModesPicker-active-return]").click()
 
     # 2. Verify a popup with the following options is displayed: Return, One-way, Multi-city, and Nomad
-    page.wait_for_selector("[data-test=ModesPopup]", state="visible")
+    page.locator("[data-test=ModesPopup]").wait_for(state="visible")
     assert page.locator("[data-test=ModePopupOption-return]").is_visible()  # the Return option is visible
     assert page.locator("[data-test=ModePopupOption-oneWay]").is_visible()  # the One-way option is visible
     assert page.locator("[data-test=ModePopupOption-multicity]").is_visible()  # the Multi-city option is visible
@@ -21,7 +21,7 @@ def test_travel_mode_interactions_are_respected_by_the_ui(page):
     page.locator("[data-test=ModePopupOption-oneWay]").click()
 
     # 4. Verify the One-way option is selected
-    page.wait_for_selector("[data-test=ModesPopup]", state="hidden")
+    page.locator("[data-test=ModesPopup]").wait_for(state="hidden")
     assert page.locator("[data-test=SearchFormModesPicker-active-oneWay]").is_visible()
 
     # 5. Verify the Return date field is no longer displayed

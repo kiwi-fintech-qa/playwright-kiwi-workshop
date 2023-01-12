@@ -9,7 +9,7 @@ def test_searching_for_connection_displays_results(page):
 
     # 2. Clear the "from" location
     page.locator("[data-test=PlacePickerInputPlace-close]").click()
-    page.wait_for_selector("[data-test=PlacePickerInputPlace-close]", state="hidden")
+    page.locator("[data-test=PlacePickerInputPlace-close]").wait_for(state="hidden")
 
     # 3. Type in "Vienna" to the "from" field
     page.locator("[data-test=PlacePickerInput-origin] [data-test=SearchField-input]").fill("Vienna")
@@ -30,8 +30,8 @@ def test_searching_for_connection_displays_results(page):
     page.locator("[data-test=LandingSearchButton]").click()
 
     # 9. Available connections should be displayed
-    page.wait_for_selector("[class*=ResultListstyled__ResultListWrapper]", timeout=10000)
-    page.wait_for_selector("[data-test=ResultCardWrapper]", state="visible")
+    page.locator("[class*=ResultListstyled__ResultListWrapper]").wait_for(timeout=10000)
+    page.locator("[data-test=ResultCardWrapper]").first.wait_for(state="visible")
 
     # (10. variation: among the results, this first one is cheaper than 10 000 CZK)
     first_result_with_currency_code = page.locator("[data-test=ResultCardPrice]").first.inner_text().split()[0]

@@ -9,7 +9,7 @@ def test_sidebar_actions_work_as_expected(page):
 
     # 1.2. Hit the right sidebar hamburger button
     page.locator("[data-test=NavBar-SideNav-Open]").click()
-    page.wait_for_selector("[data-test=NavBar-SideNav][aria-hidden=false]", state="visible")
+    page.locator("[data-test=NavBar-SideNav][aria-hidden=false]").wait_for(state="visible")
 
     # 2. Verify a sidebar with the "Manage your trips, set up price alerts, use Kiwi.com Credit, and get personalized
     # support." text appears
@@ -35,14 +35,14 @@ def test_sidebar_actions_work_as_expected(page):
     page.locator("[aria-hidden=false] [class*=TextLink]:has-text('Subscribe to newsletter')").click()
 
     # 8. Verify the sidebar disappears
-    page.wait_for_selector("[data-test=NavBar-SideNav][aria-hidden=false]", state="hidden")
+    page.locator("[data-test=NavBar-SideNav][aria-hidden=false]").wait_for(state="hidden")
 
     # 9. Verify a modal with the "Subscribe to the Kiwi.com newsletter" heading is displayed
-    page.wait_for_selector("[class*=Modal__ModalBody]", state="visible")
+    page.locator("[class*=Modal__ModalBody]").wait_for(state="visible")
     assert page.locator(
         "[class*=Modal__ModalBody] [class*=Heading]:has-text('Subscribe to the Kiwi.com newsletter')"
     ).is_visible()
 
     # 10. Verify the modal can be closed by hitting the cross button in its top right corner
     page.locator("[data-test=ModalCloseButton]").click()
-    page.wait_for_selector("[class*=Modal__ModalBody]", state="hidden")
+    page.locator("[class*=Modal__ModalBody]").wait_for(state="hidden")

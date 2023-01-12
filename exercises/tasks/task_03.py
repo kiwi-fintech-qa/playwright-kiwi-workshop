@@ -9,7 +9,7 @@ def test_sidebar_actions_work_as_expected(page):
 
     # 1.2. Hit the right sidebar hamburger button
     page.locator("[data-test=]").click()
-    page.wait_for_selector("[data-test=][aria-hidden=]", state="")
+    page.locator("[data-test=][aria-hidden=]").wait_for(state="")
 
     # 2. Verify a sidebar with the "Manage your trips, set up price alerts, use Kiwi.com Credit, and get personalized
     # support." text appears
@@ -33,12 +33,12 @@ def test_sidebar_actions_work_as_expected(page):
     page.locator("").click()
 
     # 8. Verify the sidebar disappears
-    page.wait_for_selector("[data-test=][aria-hidden=]", state="")
+    page.locator("[data-test=][aria-hidden=]").wait_for(state="")
 
     # 9. Verify a modal with the "Subscribe to the Kiwi.com newsletter" heading is displayed
-    page.wait_for_selector("[class*=]", state="")
+    page.locator("[class*=]").wait_for(state="")
     assert page.locator("").is_visible()
 
     # 10. Verify the modal can be closed by hitting the cross button in its top right corner
     page.locator("").click()
-    page.wait_for_selector("[class*=]", state="")
+    page.locator("[class*=]").wait_for(state="")

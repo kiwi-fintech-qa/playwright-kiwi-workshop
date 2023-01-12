@@ -9,7 +9,7 @@ def test_searching_for_connection_displays_results(page):
 
     # 2. Clear the "from" location
     page.locator("").click()
-    page.wait_for_selector("", state="")
+    page.locator("").wait_for(state="")
 
     # 3. Type in "Vienna" to the "from" field
     page.locator("").fill("")
@@ -30,8 +30,7 @@ def test_searching_for_connection_displays_results(page):
     page.locator("").click()
 
     # 9. Available connections should be displayed
-    page.wait_for_selector("", timeout=10000)
-    page.wait_for_selector("", state="")
+    page.locator("").wait_for(timeout=10000)
+    page.locator("").first.wait_for(state="")
 
     # (10. variation: among the results, this first one is cheaper than 10 000 CZK)
-    # TODO: add here some tips?
