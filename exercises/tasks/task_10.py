@@ -5,19 +5,19 @@ def test_not_filling_out_required_fields_on_passenger_details_prevents_proceedin
     # 1.1. Open the kiwi.com website (wait for page to load)
     pass
 
-    # 1.2. Clear the `from` location
+    # 1.2. Clear the "from" location
 
-    # 1.3. Type in `Brno` to the `from` field
+    # 1.3. Type in "Brno" to the "from" field
 
     # 1.4. Select the 1st result from the dropdown
 
-    # 1.5. Type in `Bucharest` to the `to` field
+    # 1.5. Type in "Vienna" to the "to" field
 
     # 1.6. Select the 1st result from the dropdown
 
-    # 1.7. Uncheck the `Booking` checkbox
+    # 1.7. Uncheck the "Booking" checkbox
 
-    # 1.8. Hit the `Search` button
+    # 1.8. Hit the "Search" button
 
     # 1.9. Available connections should be displayed
 
@@ -71,9 +71,9 @@ def test_not_filling_out_required_fields_on_passenger_details_prevents_proceedin
 
     # (9. variation: fill out and select the Primary passenger fields, clear the Contact details fields, hit Continue,
     # and expect Required for your tickets error under the Email field and Required field error under the Phone field)
-    # 9.1. Email: play@wrig.ht
+    # 9.1. Email: empty
 
-    # 9.2. Phone: 123123123
+    # 9.2. Phone: empty
 
     # 9.3. Given names: Play
 

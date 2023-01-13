@@ -11,19 +11,19 @@ def test_localized_currency_is_retained_in_passenger_details(page):
     # 3. Hit the Save & continue button
 
     # 4. Search for connections between any two cities (while un-checking the Booking.com checkbox, as in previous scenarios)
-    # 4.1. Clear the `from` location (here with a stabilization to ensure the place-chip is always removed)
+    # 4.1. Clear the "from" location (here with a stabilization to ensure the place-chip is always removed)
 
-    # 4.2. Type in `Brno` to the `from` field
+    # 4.2. Type in "Brno" to the "from" field
 
-    # 4.3. Select the 1st result from the dropdown
+    # 4.3. Select the "Brno, Czechia" result from the dropdown
 
-    # 4.4. Type in `Bucharest` to the `to` field
+    # 4.4. Type in "Vienna" to the "to" field
 
-    # 4.5. Select the 1st result from the dropdown
+    # 4.5. Select the "Vienna, Austria" result from the dropdown
 
-    # 4.6. Uncheck the `Booking` checkbox
+    # 4.6. Uncheck the "Booking" checkbox
 
-    # 4.7. Hit the `Search` button
+    # 4.7. Hit the "Search" button
 
     # 4.8. Available connections should be displayed
 
@@ -31,7 +31,7 @@ def test_localized_currency_is_retained_in_passenger_details(page):
 
     # 6. Hit the Select button of the first result
 
-    # 7. In the Want to sign first? modal hit the Continue as a guest link
+    # 7. In the Want to sign first? modal hit the "Continue as a guest link"
 
     # 8. Verify the Total (EUR) price value corresponds with the one stored on step 5.
 
