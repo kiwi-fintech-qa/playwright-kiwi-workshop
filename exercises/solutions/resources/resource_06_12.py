@@ -15,7 +15,7 @@ class KiwiPage:
         self.currency_picker = page.locator("[data-test=CurrencySelect]")
         self.submit_regional_settings_button = page.locator("[data-test=SubmitRegionalSettingsButton]")
         self.search_button = page.locator("[data-test=LandingSearchButton]")
-        self.result_list_wrapper = page.locator("[class*=ResultListstyled__ResultListWrapper]")
+        self.result_list_wrapper = page.locator("[data-test=ResultList-results]")
         self.passengers_and_bags_button = page.locator("[data-test=PassengersField]")
         self.passengers_and_bags_popup = page.locator("[data-test=PassengersPopover]")
         self.passengers_and_bags_done_button = page.locator("[data-test=PassengersFieldFooter-done]")
@@ -104,6 +104,7 @@ class KiwiPage:
 
     def hit_search_button(self):
         self.search_button.click()
+
         self.result_list_wrapper.wait_for()
 
     def hit_passengers_and_bags_button(self):

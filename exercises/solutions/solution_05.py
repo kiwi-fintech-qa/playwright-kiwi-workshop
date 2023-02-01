@@ -30,7 +30,7 @@ def test_searching_for_connection_displays_results(page):
     page.locator("[data-test=LandingSearchButton]").click()
 
     # 9. Available connections should be displayed
-    page.locator("[class*=ResultListstyled__ResultListWrapper]").wait_for(timeout=10000)
+    page.locator("[data-test=ResultList-results]").wait_for(timeout=10000)
     page.locator("[data-test=ResultCardWrapper]").first.wait_for(state="visible")
 
     # (10. variation: among the results, this first one is cheaper than 10 000 CZK)
