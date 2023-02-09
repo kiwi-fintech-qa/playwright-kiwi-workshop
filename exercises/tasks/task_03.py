@@ -1,11 +1,11 @@
-from exercises.tasks.resources.resource_03_04 import open_kiwi_website
+from exercises.tasks.resources.resource_03_04 import open_kiwi_website_and_accept_cookies
 
 
 # Sidebar actions (expanding options, verifying visibility of items)
 def test_sidebar_actions_work_as_expected(page):
     # 1. On the Kiwi.com website hit the right sidebar hamburger button
     # 1.1. Open the kiwi.com website
-    open_kiwi_website(page)
+    open_kiwi_website_and_accept_cookies(page)
 
     # 1.2. Hit the right sidebar hamburger button
     page.locator("[data-test=]").click()
@@ -13,9 +13,8 @@ def test_sidebar_actions_work_as_expected(page):
 
     # 2. Verify a sidebar with the "Manage your trips, set up price alerts, use Kiwi.com Credit, and get personalized
     # support." text appears
-    expected_sidebar_text = ""
     current_sidebar_text = page.locator("[data-test=] [class*=]").first.inner_text()
-    assert "???" == "???"
+    assert "???" == "Manage your trips, set up price alerts, use Kiwi.com Credit, and get personalized support."
 
     # 3. Hit the Discover button
     page.locator("").click()

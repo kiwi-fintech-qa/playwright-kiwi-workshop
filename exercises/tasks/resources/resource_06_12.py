@@ -42,13 +42,8 @@ class KiwiPage:
         self.date_picker_modal_return_field = page.locator("")
 
     def open_kiwi_website(self):
-        # 1. Open the kiwi.com website (https://www.kiwi.com/en/)
         self.page.goto("https://www.kiwi.com/en/")
-
-        # 2. Accept cookies by clicking the appropriate button
         self.cookies_popup_button_accept.click()
-
-        # 3. Assert the expected text is displayed
         assert self.kiwi_page_subtitle.is_visible()
 
     def clear_the_from_field(self):
@@ -182,9 +177,6 @@ class SearchResultPage:
         self.continue_as_guest_link = page.locator("")
         self.reservation_content = page.locator("")
         self.breadcrumbs_current_step_passenger = page.locator()
-
-    def wait_for_available_connections_to_be_displayed(self):
-        self.result_card_wrapper.wait_for()
 
     def check_a_transport_option_checkbox(self, option: str = None):
         self.page.locator(f"[class*=FilterWrapper]:has([data-test=TransportOptionCheckbox-{option.lower()}])").click()

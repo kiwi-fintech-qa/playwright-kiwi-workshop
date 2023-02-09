@@ -1,11 +1,11 @@
-from exercises.solutions.resources.resource_03_04 import open_kiwi_website
+from exercises.solutions.resources.resource_03_04 import open_kiwi_website_and_accept_cookies
 
 
 # Sidebar actions (expanding options, verifying visibility of items)
 def test_sidebar_actions_work_as_expected(page):
     # 1. On the Kiwi.com website hit the right sidebar hamburger button
     # 1.1. Open the kiwi.com website
-    open_kiwi_website(page)
+    open_kiwi_website_and_accept_cookies(page)
 
     # 1.2. Hit the right sidebar hamburger button
     page.locator("[data-test=NavBar-SideNav-Open]").click()

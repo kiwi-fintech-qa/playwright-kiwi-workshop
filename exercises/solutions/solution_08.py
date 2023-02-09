@@ -6,7 +6,7 @@ def test_localized_currency_is_retained_in_passenger_details(page):
     # 1. Hit the 🇬🇧 CZK button in the navigation bar at the top of the search page
     # 1.1. Open the kiwi.com website (wait for page to load)
     kiwi_page = KiwiPage(page)
-    kiwi_page.open_kiwi_website()
+    kiwi_page.open_kiwi_website_and_accept_cookies()
 
     # 1.2 Open the localization settings and wait for the localization modal to be displayed
     kiwi_page.open_regional_settings()
@@ -42,7 +42,6 @@ def test_localized_currency_is_retained_in_passenger_details(page):
 
     # 4.8. Available connections should be displayed
     search_result_page = SearchResultPage(page)
-    search_result_page.wait_for_available_connections_to_be_displayed()
 
     # 5. Store the price value of the first result
     first_result_without_currency_code = search_result_page.first_result_card.inner_text().split()[0]

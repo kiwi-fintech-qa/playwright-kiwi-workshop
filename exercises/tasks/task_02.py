@@ -3,10 +3,9 @@
 def test_show_more_button_of_popular_flights_displays_increment_of_currently_shown_popular_flight_cards(page):
     # 1. On the Kiwi.com website get the count of tiles/cards in the Popular flights section
     # and store it into a variable
-    # 1.1. Open the kiwi.com website (https://www.kiwi.com/en/)
+    # 1.1. Open the kiwi.com website (https://www.kiwi.com/en/) and accept cookies
     page.goto("")
     page.locator("").click()
-    assert page.locator("text=").is_visible()
 
     # 1.2. Get count of tiles/cards in the Popular flights section and store it into a variable
     initial_card_count = page.locator("[data-test=] [class*=]").count()
