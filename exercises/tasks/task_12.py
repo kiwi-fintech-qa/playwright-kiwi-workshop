@@ -1,5 +1,6 @@
 from exercises.tasks.resources.resource_06_12 import KiwiPage, SearchResultPage
 
+
 # Calendar buttons (hit month and expect it in the date field)
 def test_hitting_calendar_buttons_is_reflected_by_date_field(page):
     # 1. On the Kiwi.com website hit the Departure date field

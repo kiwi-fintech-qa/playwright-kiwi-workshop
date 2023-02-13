@@ -1,5 +1,6 @@
 from exercises.tasks.resources.resource_06_12 import KiwiPage, SearchResultPage
 
+
 # Not filling out the required fields on Passenger details doesn't allow to proceed to the Ticket fare screen
 def test_not_filling_out_required_fields_on_passenger_details_prevents_proceeding_to_ticket_fare_screen(page):
     # 1. Search for connections between any two cities (while un-checking the Booking.com checkbox,

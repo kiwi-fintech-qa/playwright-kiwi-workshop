@@ -192,7 +192,6 @@ class SearchResultPage:
         self.page = page
 
         self.result_card_wrapper = page.locator("[data-test=ResultCardWrapper]").first
-        self.result_page_loader = page.locator("[data-test=ResultList] [class*=LoadingProvidersstyled]")
         self.first_result_card = page.locator("[data-test=ResultCardPrice]").first
         self.sort_by_price_button = page.locator("[data-test=SortBy-price]")
         self.sort_by_duration_button = page.locator("[data-test=SortBy-duration]")

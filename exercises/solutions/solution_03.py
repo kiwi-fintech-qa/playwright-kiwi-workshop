@@ -17,6 +17,8 @@ def test_sidebar_actions_work_as_expected(page):
     current_sidebar_text = page.locator("[data-test=NavBar-SideNav] [class*=Text]").first.inner_text()
     assert expected_sidebar_text == current_sidebar_text
 
+    # 2.1 (Optional) Consider how you could make the above assertion fit the line length restriction of 120 characters?
+
     # 3. Hit the Discover button
     page.locator(
         "[data-test=NavBar-SideNav][aria-hidden=false] [role=button]:has-text('Discover') [aria-expanded=false]"

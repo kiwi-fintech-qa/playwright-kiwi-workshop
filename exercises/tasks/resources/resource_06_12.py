@@ -168,7 +168,6 @@ class SearchResultPage:
         self.page = page
 
         self.result_card_wrapper = page.locator("").first
-        self.result_page_loader = page.locator("")
         self.first_result_card = page.locator("").first
         self.sort_by_price_button = page.locator("")
         self.sort_by_duration_button = page.locator("")
@@ -180,19 +179,12 @@ class SearchResultPage:
 
     def check_a_transport_option_checkbox(self, option: str = None):
         self.page.locator(f"[class*=FilterWrapper]:has([data-test=TransportOptionCheckbox-{option.lower()}])").click()
-        self.wait_for_search_result_page_to_be_reloaded()
-
-    def wait_for_search_result_page_to_be_reloaded(self):
-        self.result_page_loader.wait_for(state="")
-        self.result_page_loader.wait_for(state="")
 
     def sort_results_by_price(self):
         self.sort_by_price_button.click()
-        self.wait_for_search_result_page_to_be_reloaded()
 
     def sort_results_by_duration(self):
         self.sort_by_duration_button.click()
-        self.wait_for_search_result_page_to_be_reloaded()
 
     def hit_select_button_of_first_result(self):
         self.first_select_card_button.click()

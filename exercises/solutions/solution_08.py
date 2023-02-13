@@ -18,7 +18,7 @@ def test_localized_currency_is_retained_in_passenger_details(page):
     # 3. Hit the Save & continue button
     kiwi_page.save_regional_settings()
 
-    # 4. Search for connections between any two cities (while un-checking the Booking.com checkbox, as in previous scenarios)
+    # 4. Search for connections between any two cities (while un-checking the Booking.com checkbox)
     # 4.1. Clear the "from" location (here with a stabilization to ensure the place-chip is always removed)
     kiwi_page.clear_the_from_field(stabilized=True)
 

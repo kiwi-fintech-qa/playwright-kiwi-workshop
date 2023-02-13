@@ -16,6 +16,8 @@ def test_sidebar_actions_work_as_expected(page):
     current_sidebar_text = page.locator("[data-test=] [class*=]").first.inner_text()
     assert "???" == "Manage your trips, set up price alerts, use Kiwi.com Credit, and get personalized support."
 
+    # 2.1 (Optional) Consider how you could make the above assertion fit the line length restriction of 120 characters?
+
     # 3. Hit the Discover button
     page.locator("").click()
 

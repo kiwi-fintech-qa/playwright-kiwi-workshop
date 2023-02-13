@@ -1,5 +1,6 @@
 from exercises.tasks.resources.resource_06_12 import KiwiPage, SearchResultPage
 
+
 # Sorting panel actions can be used for sorting the search results
 def test_sorting_panel_actions_can_be_used_for_sorting_the_search_results(page):
     # 1. Steps 1-9. from the Searching for a connection displays results scenario, but with the From location

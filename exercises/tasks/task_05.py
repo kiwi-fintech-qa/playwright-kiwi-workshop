@@ -5,6 +5,7 @@ from exercises.tasks.resources.resource_05 import KiwiPage
 def test_searching_for_connection_displays_results(page):
     # 1. Open the kiwi.com website (wait for page to load) and accept cookies
     kiwi_page = KiwiPage(page)
+    kiwi_page.open_kiwi_website_and_accept_cookies()
 
     # 2. Clear the "from" location
     page.locator("").click()

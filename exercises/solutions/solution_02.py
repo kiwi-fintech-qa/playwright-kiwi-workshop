@@ -6,6 +6,7 @@ def test_show_more_button_of_popular_flights_displays_increment_of_currently_sho
     # 1.1. Open the kiwi.com website (https://www.kiwi.com/en/) and accept cookies
     page.goto("https://www.kiwi.com/en/")
     page.locator("[data-test='CookiesPopup-Accept']").click()
+    assert page.locator("text=Book cheap flights other sites simply can’t find.").is_visible()
 
     # 1.2. Get count of tiles/cards in the Popular flights section and store it into a variable
     initial_card_count = page.locator("[data-test=PopularFlights] [class*=PopularFlightCardstyled__Card]").count()

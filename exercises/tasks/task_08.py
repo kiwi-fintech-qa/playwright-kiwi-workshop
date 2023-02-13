@@ -1,5 +1,6 @@
 from exercises.tasks.resources.resource_06_12 import KiwiPage, SearchResultPage
 
+
 # Localized currency is retained in Passenger details
 def test_localized_currency_is_retained_in_passenger_details(page):
     # 1. Hit the 🇬🇧 CZK button in the navigation bar at the top of the search page
