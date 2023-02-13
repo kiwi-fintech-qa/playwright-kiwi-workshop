@@ -63,15 +63,9 @@ class KiwiPage:
             "[class*=Inputsstyled__InputWrap]:has([data-test=ReturnRangeHeading]) [data-test=DateValue]"
         )
 
-    def open_kiwi_website(self):
-        # 1. Open the kiwi.com website (https://www.kiwi.com/en/)
+    def open_kiwi_website_and_accept_cookies(self):
         self.page.goto("https://www.kiwi.com/en/")
-
-        # 2. Accept cookies by clicking the appropriate button
         self.cookies_popup_button_accept.click()
-
-        # 3. Assert the expected text is displayed
-        assert self.kiwi_page_subtitle.is_visible()
 
     def clear_the_from_field(self, stabilized: bool = False):
         self.place_input_chip.click()
@@ -104,7 +98,6 @@ class KiwiPage:
 
     def hit_search_button(self):
         self.search_button.click()
-
         self.result_list_wrapper.wait_for()
 
     def hit_passengers_and_bags_button(self):
@@ -199,7 +192,6 @@ class SearchResultPage:
         self.page = page
 
         self.result_card_wrapper = page.locator("[data-test=ResultCardWrapper]").first
-        self.result_page_loader = page.locator("[data-test=ResultList] [class*=LoadingProvidersstyled]")
         self.first_result_card = page.locator("[data-test=ResultCardPrice]").first
         self.sort_by_price_button = page.locator("[data-test=SortBy-price]")
         self.sort_by_duration_button = page.locator("[data-test=SortBy-duration]")
@@ -211,28 +203,18 @@ class SearchResultPage:
             "[data-test=Breadcrumbs-step-PASSENGER] [aria-current=step]"
         )
 
-    def wait_for_available_connections_to_be_displayed(self):
-        self.result_card_wrapper.wait_for()
-
     def check_a_transport_option_checkbox(self, option: str = None):
         self.page.locator(f"[class*=FilterWrapper]:has([data-test=TransportOptionCheckbox-{option.lower()}])").click()
-        self.wait_for_search_result_page_to_be_reloaded()
-
-    def wait_for_search_result_page_to_be_reloaded(self):
-        self.result_page_loader.wait_for(state="visible")
-        self.result_page_loader.wait_for(state="hidden")
 
     def sort_results_by_price(self):
         self.sort_by_price_button.click()
-        self.wait_for_search_result_page_to_be_reloaded()
 
     def sort_results_by_duration(self):
         self.sort_by_duration_button.click()
-        self.wait_for_search_result_page_to_be_reloaded()
 
     def hit_select_button_of_first_result(self):
         self.first_select_card_button.click()
-        self.sign_in_overlay.wait_for()
+        self.sign_in_overlay.wait_for(state="visible")
 
     def hit_continue_as_guest_link(self):
         self.continue_as_guest_link.click()

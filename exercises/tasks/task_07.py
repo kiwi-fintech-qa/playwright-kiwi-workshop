@@ -1,9 +1,12 @@
+from exercises.tasks.resources.resource_06_12 import KiwiPage, SearchResultPage
+
+
 # Sorting panel actions can be used for sorting the search results
 def test_sorting_panel_actions_can_be_used_for_sorting_the_search_results(page):
     # 1. Steps 1-9. from the Searching for a connection displays results scenario, but with the From location
     # set to Brno and the To location set to Vienna
-    # 1.1. Open the kiwi.com website (wait for page to load)
-    pass
+    # 1.1. Open the kiwi.com website (wait for page to load) and accept cookies
+
     # 1.2. Clear the "from" location
 
     # 1.3. Type in "Brno" to the "from" field
@@ -25,6 +28,16 @@ def test_sorting_panel_actions_can_be_used_for_sorting_the_search_results(page):
     # 3. Select the Cheapest sorting option from the sorting panel
 
     # 4. Store the price value of the first few (e.g., 5) results into a (Python) list
+    result_values_list = []
+    for i in range(5):
+        nth_result_with_currency_code = (
+            page.locator("")
+            .nth(i)
+            .inner_text()
+            .split()[0]
+        )
+        nth_result_value = int(nth_result_with_currency_code.replace(",", ""))
+        result_values_list.append(nth_result_value)
 
     # 5. Verify the first result is either the cheapest of the stored values, or the same as the rest of them
 

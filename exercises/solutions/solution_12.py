@@ -6,7 +6,7 @@ def test_hitting_calendar_buttons_is_reflected_by_date_field(page):
     # 1. On the Kiwi.com website hit the Departure date field
     # 1.1. Open the kiwi.com website (wait for page to load)
     kiwi_page = KiwiPage(page)
-    kiwi_page.open_kiwi_website()
+    kiwi_page.open_kiwi_website_and_accept_cookies()
 
     # 1.2. Hit the Departure date field
     kiwi_page.hit_departure_field_in_the_search_component()

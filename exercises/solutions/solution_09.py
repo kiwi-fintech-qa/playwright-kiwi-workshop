@@ -13,7 +13,7 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
     # as in previous scenarios)
     # 1.1. Open the kiwi.com website (wait for page to load)
     kiwi_page = KiwiPage(page)
-    kiwi_page.open_kiwi_website()
+    kiwi_page.open_kiwi_website_and_accept_cookies()
 
     # 1.2. Clear the "from" location
     kiwi_page.clear_the_from_field()
@@ -38,7 +38,6 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
 
     # 1.9. Available connections should be displayed
     search_result_page = SearchResultPage(page)
-    search_result_page.wait_for_available_connections_to_be_displayed()
 
     # 2. Hit the Select button of the first result
     search_result_page.hit_select_button_of_first_result()

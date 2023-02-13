@@ -1,3 +1,6 @@
+from exercises.tasks.resources.resource_06_12 import KiwiPage, SearchResultPage
+
+
 # Total count of passengers is reflected by counter next to the passengers icon
 def test_total_count_of_passengers_is_reflected_by_counter_next_to_the_passengers_icon(page):
     # 1. On the Kiwi.com website hit the passengers and bags button

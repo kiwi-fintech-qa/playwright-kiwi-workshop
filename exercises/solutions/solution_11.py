@@ -6,7 +6,7 @@ def test_total_count_of_passengers_is_reflected_by_counter_next_to_the_passenger
     # 1. On the Kiwi.com website hit the passengers and bags button
     # 1.1. Open the kiwi.com website (wait for page to load)
     kiwi_page = KiwiPage(page)
-    kiwi_page.open_kiwi_website()
+    kiwi_page.open_kiwi_website_and_accept_cookies()
 
     # 1.2. Hit the passengers and bags button
     kiwi_page.hit_passengers_and_bags_button()

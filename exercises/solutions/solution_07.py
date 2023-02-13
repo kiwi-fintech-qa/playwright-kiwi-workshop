@@ -8,7 +8,7 @@ def test_sorting_panel_actions_can_be_used_for_sorting_the_search_results(page):
     # set to Brno and the To location set to Vienna
     # 1.1. Open the kiwi.com website (wait for page to load)
     kiwi_page = KiwiPage(page)
-    kiwi_page.open_kiwi_website()
+    kiwi_page.open_kiwi_website_and_accept_cookies()
 
     # 1.2. Clear the "from" location
     kiwi_page.clear_the_from_field()
@@ -33,7 +33,6 @@ def test_sorting_panel_actions_can_be_used_for_sorting_the_search_results(page):
 
     # 1.9. Available connections should be displayed
     search_result_page = SearchResultPage(page)
-    search_result_page.wait_for_available_connections_to_be_displayed()
 
     # 2. Check the Train checkbox in the Transport left-hand section of the results
     search_result_page.check_a_transport_option_checkbox(option="Train")

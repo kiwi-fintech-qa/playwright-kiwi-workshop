@@ -1,4 +1,5 @@
 import math
+from exercises.tasks.resources.resource_06_12 import KiwiPage, SearchResultPage
 
 
 # Filling out paid baggage options on Passenger details is reflected by the reservation bill
