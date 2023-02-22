@@ -3,7 +3,7 @@ from exercises.solutions.resources.resource_05 import KiwiPage
 
 # Searching for a connection displays results
 def test_searching_for_connection_displays_results(page):
-    # 1. Open the kiwi.com website (wait for page to load)
+    # 1. Open the kiwi.com website and accept cookies
     kiwi_page = KiwiPage(page)
     kiwi_page.open_kiwi_website_and_accept_cookies()
 
@@ -33,7 +33,7 @@ def test_searching_for_connection_displays_results(page):
     page.locator("[data-test=ResultList-results]").wait_for(timeout=10000)
     page.locator("[data-test=ResultCardWrapper]").first.wait_for(state="visible")
 
-    # (10. variation: among the results, this first one is cheaper than 10 000 CZK)
+    # (10. variation: among the results, verify that the first one is cheaper than 10 000 CZK)
     first_result_with_currency_code = page.locator("[data-test=ResultCardPrice]").first.inner_text().split()[0]
     first_result_value = int(first_result_with_currency_code.replace(",", ""))
     assert first_result_value <= 10000

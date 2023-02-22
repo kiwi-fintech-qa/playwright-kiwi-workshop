@@ -3,7 +3,7 @@ from exercises.tasks.resources.resource_05 import KiwiPage
 
 # Searching for a connection displays results
 def test_searching_for_connection_displays_results(page):
-    # 1. Open the kiwi.com website (wait for page to load) and accept cookies
+    # 1. Open the kiwi.com website and accept cookies
     kiwi_page = KiwiPage(page)
     kiwi_page.open_kiwi_website_and_accept_cookies()
 
@@ -21,7 +21,7 @@ def test_searching_for_connection_displays_results(page):
     page.locator("").fill("")
 
     # 6. Select the "Brno, Czechia" result from the dropdown
-    page.locator("").fill("")
+    page.locator("").click()
 
     # 7. Uncheck the "Booking" checkbox
     page.locator("").click()
@@ -33,4 +33,4 @@ def test_searching_for_connection_displays_results(page):
     page.locator("").wait_for(timeout=10000)
     page.locator("").first.wait_for(state="")
 
-    # (10. variation: among the results, this first one is cheaper than 10 000 CZK)
+    # (10. variation: among the results, verify that the first one is cheaper than 10 000 CZK)

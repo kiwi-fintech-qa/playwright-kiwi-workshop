@@ -7,11 +7,10 @@ from exercises.solutions.resources.resource_06_12 import (
 import math
 
 
-# Filling out paid baggage options on Passenger details is reflected by the reservation bill
+# Filling out paid baggage options on "Passenger details" is reflected by the reservation bill
 def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_the_reservation_bill(page):
-    # 1. Search for connections between any two cities (while un-checking the Booking.com checkbox,
-    # as in previous scenarios)
-    # 1.1. Open the kiwi.com website (wait for page to load)
+    # 1. Steps 1.1.-1.9. from the previous task
+    # 1.1. Open the kiwi.com website and accept cookies
     kiwi_page = KiwiPage(page)
     kiwi_page.open_kiwi_website_and_accept_cookies()
 
@@ -39,10 +38,10 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
     # 1.9. Available connections should be displayed
     search_result_page = SearchResultPage(page)
 
-    # 2. Hit the Select button of the first result
+    # 2. Hit the "Select" button of the first result
     search_result_page.hit_select_button_of_first_result()
 
-    # 3. In the "Want to sign first?" modal hit the "Continue as a guest link"
+    # 3. In the "Want to sign in first?" modal hit the "Continue as a guest link"
     search_result_page.hit_continue_as_guest_link()
 
     # 4. Fill out the Email, Phone, Given names, Surnames and the DD and YYYY fields of Date of birth as follows:
@@ -75,20 +74,20 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
     # 5.3. Month: January
     passenger_details_page.select_passenger_birthmonth(birthmonth="01")
 
-    # 6. In the Cabin or carry-on baggage section select the Carry-on bundle option and store its price value
+    # 6. In the "Cabin or carry-on baggage" section select the "Carry-on bundle" option and store its price value
     passenger_details_page.select_cabin_baggage_bundle()
     carry_on_baggage_price_value = passenger_details_page.get_carry_on_baggage_price_value_from_baggage_section()
 
-    # 7. In the Checked baggage section select the 1× checked bag option and store its price value
+    # 7. In the "Checked baggage" section select the 1× checked bag option and store its price value
     checked_baggage_price_value = 0
     if passenger_details_page.baggage_empty_option.is_hidden():
         passenger_details_page.select_checked_baggage_once()
         checked_baggage_price_value = passenger_details_page.get_checked_baggage_price_value_from_baggage_section()
 
-    # 8. In the Travel insurance section select the No insurance option
+    # 8. In the "Travel insurance" section select the "No insurance" option
     passenger_details_page.select_no_insurance()
 
-    # 9. Hit the Continue button and verify the Ticker fare screen is displayed
+    # 9. Hit the "Continue" button and verify the "Ticker fare" screen is displayed
     passenger_details_page.proceed_to_ticket_fare_page()
 
     # 10. Verify the following items are displayed in the reservation bill:

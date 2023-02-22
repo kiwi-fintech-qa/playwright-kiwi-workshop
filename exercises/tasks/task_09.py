@@ -4,9 +4,8 @@ from exercises.tasks.resources.resource_06_12 import KiwiPage, SearchResultPage
 
 # Filling out paid baggage options on Passenger details is reflected by the reservation bill
 def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_the_reservation_bill(page):
-    # 1. Search for connections between any two cities (while un-checking the Booking.com checkbox,
-    # as in previous scenarios)
-    # 1.1. Open the kiwi.com website (wait for page to load)
+    # 1. Steps 1.1.-1.9. from the previous task
+    # 1.1. Open the kiwi.com website and accept cookies
     pass
 
     # 1.2. Clear the "from" location
@@ -25,9 +24,9 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
 
     # 1.9. Available connections should be displayed
 
-    # 2. Hit the Select button of the first result
+    # 2. Hit the "Select" button of the first result
 
-    # 3. In the Want to sign first? modal hit the Continue as a guest link
+    # 3. In the Want to sign in first? modal hit the Continue as a guest link
 
     # 4. Fill out the Email, Phone, Given names, Surnames and the DD and YYYY fields of Date of birth as follows:
     # 4.1. Email: play@wrig.ht
@@ -49,13 +48,13 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
 
     # 5.3. Month: January
 
-    # 6. In the Cabin or carry-on baggage section select the Carry-on bundle option and store its price value
+    # 6. In the "Cabin or carry-on baggage" section select the "Carry-on bundle" option and store its price value
 
-    # 7. In the Checked baggage section select the 1× checked bag option and store its price value
+    # 7. In the "Checked baggage" section select the 1× checked bag option and store its price value
 
-    # 8. In the Travel insurance section select the No insurance option
+    # 8. In the "Travel insurance" section select the "No insurance" option
 
-    # 9. Hit the Continue button and verify the Ticker fare screen is displayed
+    # 9. Hit the "Continue" button and verify the "Ticker fare" screen is displayed
 
     # 10. Verify the following items are displayed in the reservation bill:
     # 10.1. Cabin baggage: value stored at step 6

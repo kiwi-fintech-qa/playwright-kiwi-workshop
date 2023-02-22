@@ -1,10 +1,10 @@
 from exercises.tasks.resources.resource_06_12 import KiwiPage, SearchResultPage
 
 
-# Searching with additional transportation options shows results cheaper than 2 000 CZK
-def test_searching_with_additional_transportation_options_shows_results_cheaper_than_1k_czk(page):
-    # 1. Steps 1-9. from the previous scenario
-    # 1.1. Open the kiwi.com website (wait for page to load) and accept cookies
+# Searching with additional transportation options shows results cheaper than 3 000 CZK
+def test_searching_with_additional_transportation_options_shows_results_cheaper_than_3k_czk(page):
+    # 1. Steps 1.1.-1.9. from the previous scenario, but using class methods instead
+    # 1.1. Open the kiwi.com website and accept cookies
     kiwi_page = KiwiPage(page)
 
     # 1.2. Clear the "from" location
@@ -26,9 +26,10 @@ def test_searching_with_additional_transportation_options_shows_results_cheaper_
 
     # 2. Check the "Bus" checkbox in the "Transport" left-hand section of the results
 
-    # 3. Verify the first result is cheaper than 2 000 CZK
+    # 3. Verify the first result is cheaper than 3 000 CZK
 
-    # (4. variation: on step 2. check the "Train" checkbox in the "Transport" left-hand section as well; on step 3. verify the results are cheaper than 400 CZK)
+    # (4. variation: on step 2. check the "Train" checkbox in the "Transport" left-hand section as well; on step 3.
+    # verify the results are cheaper than 1 000 CZK)
     # 4.1 Check the "Train" checkbox in the "Transport" left-hand section as well
 
-    # 4.2 Verify the results are cheaper than 500 CZK
+    # 4.2 Verify the results are cheaper than 1 000 CZK

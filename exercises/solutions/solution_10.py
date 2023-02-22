@@ -1,11 +1,11 @@
-from exercises.solutions.resources.resource_06_12 import KiwiPage, SearchResultPage, PassengerDetailsPage
+from exercises.solutions.resources.resource_06_12 import KiwiPage, SearchResultPage
 
 
-# Not filling out the required fields on Passenger details doesn't allow to proceed to the Ticket fare screen
-def test_not_filling_out_required_fields_on_passenger_details_prevents_proceeding_to_ticket_fare_screen(page):
-    # 1. Search for connections between any two cities (while un-checking the Booking.com checkbox,
-    # as in previous scenarios)
-    # 1.1. Open the kiwi.com website (wait for page to load)
+# Sorting panel actions can be used for sorting the search results
+# TODO: run without any --slowmo (slow execution leads to some weird loading on steps 2 and 3; or fix it)
+def test_sorting_panel_actions_can_be_used_for_sorting_the_search_results(page):
+    # 1. Steps 1.1.-1.9. from the previous task
+    # 1.1. Open the kiwi.com website and accept cookies
     kiwi_page = KiwiPage(page)
     kiwi_page.open_kiwi_website_and_accept_cookies()
 
@@ -33,128 +33,42 @@ def test_not_filling_out_required_fields_on_passenger_details_prevents_proceedin
     # 1.9. Available connections should be displayed
     search_result_page = SearchResultPage(page)
 
-    # 2. Hit the Select button of the first result
-    search_result_page.hit_select_button_of_first_result()
+    # 2. Check the "Train" checkbox in the "Transport" left-hand section of the results
+    search_result_page.check_a_transport_option_checkbox(option="Train")
 
-    # 3. In the "Want to sign first?" modal hit the "Continue as a guest" link
-    search_result_page.hit_continue_as_guest_link()
+    # 3. Select the "Cheapest" sorting option from the sorting panel
+    search_result_page.sort_results_by_price()
 
-    # 4. In the Cabin or carry-on baggage section select the 1× personal item option
-    passenger_details_page = PassengerDetailsPage(page)
-    passenger_details_page.select_cabin_baggage_single_item()
+    # 4. Store the price value of the first few (e.g., 5) results into a (Python) list
+    result_values_list = []
+    for i in range(5):
+        nth_result_with_currency_code = (
+            page.locator("[data-test=ResultCardPrice][class*=ResultCardstyled__PriceText]")
+            .nth(i)
+            .inner_text()
+            .split()[0]
+        )
+        nth_result_value = int(nth_result_with_currency_code.replace(",", ""))
+        result_values_list.append(nth_result_value)
 
-    # 5. If visible, in the Checked baggage section select the No checked baggage checkbox
-    if passenger_details_page.baggage_empty_option.is_hidden():
-        passenger_details_page.select_no_checked_baggage_checkbox()
+    # 5. Verify the first result is either the cheapest of the stored values, or the same as the rest of them
+    assert result_values_list[0] <= result_values_list[1]
 
-    # 6. In the Travel insurance section select the No insurance option
-    passenger_details_page.select_no_insurance()
+    # (6. variation: on step 3. select the "Fastest" sorting option; on step 5. identify the cheapest of the stored
+    # results [i.e., identify the cheapest of the several fastest connections)
+    # 6.1. Select the "Fastest" sorting option
+    search_result_page.sort_results_by_duration()
 
-    # 7. Hit the Continue button and verify that under the following fields the following errors are displayed:
-    passenger_details_page.hit_continue_button_and_expect_to_stay_on_passenger_details_due_to_error()
+    # 6.2. Identify the cheapest of the several fastest connections
+    result_values_list = []
+    for i in range(5):
+        nth_result_with_currency_code = (
+            page.locator("[data-test=ResultCardPrice][class*=ResultCardstyled__PriceText]")
+            .nth(i)
+            .inner_text()
+            .split()[0]
+        )
+        nth_result_value = int(nth_result_with_currency_code.replace(",", ""))
+        result_values_list.append(nth_result_value)
 
-    # 7.1. Email: Required for your tickets
-    passenger_details_page.wait_for_email_error_to_be_displayed()
-
-    # 7.2. Phone: Required field
-    passenger_details_page.phone_field_error_should_be_displayed()
-
-    # 7.3. Given names: Required field
-    passenger_details_page.first_name_error_should_be_displayed()
-
-    # 7.4. Surnames: Required field
-    passenger_details_page.last_name_error_should_be_displayed()
-
-    # 7.5. Nationality: Required field
-    passenger_details_page.nationality_error_should_be_displayed()
-
-    # 7.6. Gender: Required field
-    passenger_details_page.gender_error_should_be_displayed()
-
-    # 7.7. Date of birth: Required field
-    passenger_details_page.birthdate_error_should_be_displayed()
-
-    # (8. variation: fill out Email and Phone, hit Continue, and expect Required filed error to be displayed
-    # under the Primary passenger fields)
-    # 8.1. Email: play@wrig.ht
-    passenger_details_page.fill_out_passenger_email(email="play@wrig.ht")
-
-    # 8.2. Phone: 123123123
-    passenger_details_page.fill_out_passenger_phone(phone="123123123")
-
-    # 8.3. Hit the Continue button and verify that under the following fields the following errors are displayed:
-    passenger_details_page.hit_continue_button_and_expect_to_stay_on_passenger_details_due_to_error()
-
-    # 8.4. Email: No error message
-    passenger_details_page.wait_for_email_error_to_not_be_displayed()
-
-    # 8.5. Phone: No error message
-    passenger_details_page.phone_field_error_should_not_be_displayed()
-
-    # 8.6. Given names: Required field
-    passenger_details_page.first_name_error_should_be_displayed()
-
-    # 8.7. Surnames: Required field
-    passenger_details_page.last_name_error_should_be_displayed()
-
-    # 8.8. Nationality: Required field
-    passenger_details_page.nationality_error_should_be_displayed()
-
-    # 8.9. Gender: Required field
-    passenger_details_page.gender_error_should_be_displayed()
-
-    # 8.10. Date of birth: Required field
-    passenger_details_page.birthdate_error_should_be_displayed()
-
-    # (9. variation: fill out and select the Primary passenger fields, clear the Contact details fields, hit Continue,
-    # and expect Required for your tickets error under the Email field and Required field error under the Phone field)
-    # 9.1. Email: empty
-    passenger_details_page.fill_out_passenger_email(email="")
-
-    # 9.2. Phone: empty
-    passenger_details_page.fill_out_passenger_phone(phone="")
-
-    # 9.3. Given names: Play
-    passenger_details_page.fill_out_passenger_firstname(firstname="Play")
-
-    # 9.4. Surnames: Wright
-    passenger_details_page.fill_out_passenger_lastname(lastname="Wright")
-
-    # 9.5. DD: 1
-    passenger_details_page.fill_out_passenger_birthday(birthday="1")
-
-    # 9.6. YYYY: 1901
-    passenger_details_page.fill_out_passenger_birthyear(birthyear="1901")
-
-    # 9.7. Nationality: United Kingdom
-    passenger_details_page.select_passenger_nationality(nationality="gb")
-
-    # 9.8. Gender: Female
-    passenger_details_page.select_passenger_title(title="ms")
-
-    # 9.9. Month: January
-    passenger_details_page.select_passenger_birthmonth(birthmonth="01")
-
-    # 9.10. Hit the Continue button and verify that under the following fields the following errors are displayed:
-    passenger_details_page.hit_continue_button_and_expect_to_stay_on_passenger_details_due_to_error()
-
-    # 9.11. Email: Required for your tickets
-    passenger_details_page.wait_for_email_error_to_be_displayed()
-
-    # 9.12. Phone: Required field
-    passenger_details_page.phone_field_error_should_be_displayed()
-
-    # 9.13. Given names: No error
-    passenger_details_page.first_name_error_should_not_be_displayed()
-
-    # 9.14. Surnames: No error
-    passenger_details_page.last_name_error_should_not_be_displayed()
-
-    # 9.15. Nationality: No error
-    passenger_details_page.nationality_error_should_not_be_displayed()
-
-    # 9.16. Gender: No error
-    passenger_details_page.gender_error_should_not_be_displayed()
-
-    # 9.17. Date of birth: No error
-    passenger_details_page.birthdate_error_should_not_be_displayed()
+    print(f"The cheapest of the several fastest connections costs {min(result_values_list)} CZK")

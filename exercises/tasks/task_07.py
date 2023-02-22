@@ -1,48 +1,41 @@
 from exercises.tasks.resources.resource_06_12 import KiwiPage, SearchResultPage
 
 
-# Sorting panel actions can be used for sorting the search results
-def test_sorting_panel_actions_can_be_used_for_sorting_the_search_results(page):
-    # 1. Steps 1-9. from the Searching for a connection displays results scenario, but with the From location
-    # set to Brno and the To location set to Vienna
-    # 1.1. Open the kiwi.com website (wait for page to load) and accept cookies
+# Localized currency is retained in Passenger details
+def test_localized_currency_is_retained_in_passenger_details(page):
+    # 1. Hit the 🇬🇧 CZK button in the navigation bar at the top of the search page
+    # 1.1. Open the kiwi.com website and accept cookies
+    pass
 
-    # 1.2. Clear the "from" location
+    # 1.2 Open the localization settings and wait for the localization modal to be displayed
 
-    # 1.3. Type in "Brno" to the "from" field
+    # 2. Set the currency in the Language and currency modal to "EUR"
 
-    # 1.4. Select the "Brno, Czechia" result from the dropdown
+    # 3. Hit the Save & continue button
 
-    # 1.5. Type in "Vienna" to the "to" field
+    # 4. Search for connections between any two cities
+    # 4.1. Clear the "from" location (here with a stabilization to ensure the place-chip is always removed)
 
-    # 1.6. Select the "Vienna, Austria" result from the dropdown
+    # 4.2. Type in "Brno" to the "from" field
 
-    # 1.7. Uncheck the "Booking" checkbox
+    # 4.3. Select the "Brno, Czechia" result from the dropdown
 
-    # 1.8. Hit the "Search" button
+    # 4.4. Type in "Vienna" to the "to" field
 
-    # 1.9. Available connections should be displayed
+    # 4.5. Select the "Vienna, Austria" result from the dropdown
 
-    # 2. Check the Train checkbox in the Transport left-hand section of the results
+    # 4.6. Uncheck the "Booking" checkbox
 
-    # 3. Select the Cheapest sorting option from the sorting panel
+    # 4.7. Hit the "Search" button
 
-    # 4. Store the price value of the first few (e.g., 5) results into a (Python) list
-    result_values_list = []
-    for i in range(5):
-        nth_result_with_currency_code = (
-            page.locator("")
-            .nth(i)
-            .inner_text()
-            .split()[0]
-        )
-        nth_result_value = int(nth_result_with_currency_code.replace(",", ""))
-        result_values_list.append(nth_result_value)
+    # 4.8. Available connections should be displayed
 
-    # 5. Verify the first result is either the cheapest of the stored values, or the same as the rest of them
+    # 5. Store the price value of the first result
 
-    # (6. variation: on step 3. select the Fastest sorting option; on step 5. identify the cheapest of the stored
-    # results [i.e., identify the cheapest of the several fastest connections)
-    # 6.1. Select the Fastest sorting option
+    # 6. Hit the "Select" button of the first result
 
-    # 6.2. Identify the cheapest of the several fastest connections
+    # 7. In the "Want to sign first?" modal hit the "Continue as a guest link"
+
+    # 8. Verify the "Total" ("EUR") price value corresponds with the one stored on step 5.
+
+    # (9. variation: verify the currency code selected on step 1 is displayed next to "Total" in the reservation bill)
