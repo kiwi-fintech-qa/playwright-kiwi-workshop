@@ -12,7 +12,8 @@ def test_localized_currency_is_retained_in_passenger_details(page):
     kiwi_page.open_regional_settings()
 
     # 2. Set the currency in the Language and currency modal to "EUR"
-    kiwi_page.set_currency(currency_code="EUR")
+    currency_code = "EUR"
+    kiwi_page.set_currency(currency_code)
 
     # 3. Hit the "Save & continue" button
     kiwi_page.save_regional_settings()
@@ -52,7 +53,7 @@ def test_localized_currency_is_retained_in_passenger_details(page):
     # 7. In the "Want to sign first?" modal hit the "Continue as a guest link"
     search_result_page.hit_continue_as_guest_link()
 
-    # 8. Verify the "Total" ("EUR") price value corresponds with the one stored on step 5.
+    # 8. Verify the "Total (EUR)" price value corresponds with the one stored on step 5.
     passenger_details_page = PassengerDetailsPage(page)
     total_price_with_currency_code = passenger_details_page.reservation_bill_total.inner_text()
     total_price_value = int(total_price_with_currency_code.split()[0])
@@ -60,4 +61,4 @@ def test_localized_currency_is_retained_in_passenger_details(page):
 
     # (9. variation: verify the currency code selected on step 1 is displayed next to "Total" in the reservation bill)
     total_currency_code = passenger_details_page.total_currency_label.inner_text().split("(")[1].strip(")")
-    assert "EUR" == total_currency_code
+    assert currency_code == total_currency_code

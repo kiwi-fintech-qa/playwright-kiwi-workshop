@@ -36,6 +36,6 @@ def test_localized_currency_is_retained_in_passenger_details(page):
 
     # 7. In the "Want to sign first?" modal hit the "Continue as a guest link"
 
-    # 8. Verify the "Total" ("EUR") price value corresponds with the one stored on step 5.
+    # 8. Verify the "Total (EUR)" price value corresponds with the one stored on step 5.
 
     # (9. variation: verify the currency code selected on step 1 is displayed next to "Total" in the reservation bill)
