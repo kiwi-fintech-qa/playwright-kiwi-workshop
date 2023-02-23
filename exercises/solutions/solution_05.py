@@ -1,39 +1,55 @@
-from exercises.solutions.resources.resource_05 import KiwiPage
+from exercises.solutions.resources.resource_04_05 import open_kiwi_website_and_accept_cookies
 
 
-# Searching for a connection displays results
-def test_searching_for_connection_displays_results(page):
-    # 1. Open the kiwi.com website and accept cookies
-    kiwi_page = KiwiPage(page)
-    kiwi_page.open_kiwi_website_and_accept_cookies()
+# Interacting with the sidebar (expanding options, verifying visibility of items)
+def test_sidebar_actions_work_as_expected(page):
+    # 1. On the Kiwi.com website hit the right sidebar hamburger button
+    # Fill in the correct locator-methods where they are missing!
 
-    # 2. Clear the "from" location
-    page.locator("[data-test=PlacePickerInputPlace-close]").click()
-    page.locator("[data-test=PlacePickerInputPlace-close]").wait_for(state="hidden")
+    # 1.1. Open the kiwi.com website and accept cookies
+    open_kiwi_website_and_accept_cookies(page)
 
-    # 3. Type in "Vienna" to the "from" field
-    page.locator("[data-test=PlacePickerInput-origin] [data-test=SearchField-input]").fill("Vienna")
+    # 1.2. Click the right sidebar hamburger button and wait for the sidebar to be visible
+    page.locator("[data-test=NavBar-SideNav-Open]").click()
+    page.locator("[data-test=NavBar-SideNav][aria-hidden=false]").wait_for(state="visible")
 
-    # 4. Select the "Vienna, Austria" result from the dropdown
-    page.locator("[data-test=PlacePickerRow-wrapper]:has-text('Vienna, Austria')").click()
+    # 2. Verify that a sidebar with the "Manage your trips, set up price alerts, use Kiwi.com Credit, and get
+    # personalized support." text appears
+    expected_sidebar_text = "Manage your trips, set up price alerts, use Kiwi.com Credit, and get personalized support."
+    current_sidebar_text = page.locator("[data-test=NavBar-SideNav] [class*=Text]").first.inner_text()
+    assert expected_sidebar_text == current_sidebar_text
 
-    # 5. Type in "Brno" to the "to" field
-    page.locator("[data-test=PlacePickerInput-destination] [data-test=SearchField-input]").fill("Brno")
+    # 2.1 (Optional) Consider how you could make the above assertion fit the line length restriction of 120 characters?
+    page.pause()
 
-    # 6. Select the "Brno, Czechia" result from the dropdown
-    page.locator("[data-test=PlacePickerRow-wrapper]:has-text('Brno, Czechia')").click()
+    # 3. Click the "Discover" button
+    page.locator(
+        "[data-test=NavBar-SideNav][aria-hidden=false] [role=button]:has-text('Discover') [aria-expanded=false]"
+    ).click()
 
-    # 7. Uncheck the "Booking" checkbox
-    page.locator("[class*=BookingcomSwitchstyled] [class*=Checkbox]").first.click()
+    # 4. Verify the dropdown list of items becomes visible / expanded
+    assert page.locator(
+        "[data-test=NavBar-SideNav][aria-hidden=false] [role=button]:has-text('Discover') [aria-expanded=true]"
+    ).is_visible()
 
-    # 8. Hit the "Search" button
-    page.locator("[data-test=LandingSearchButton]").click()
+    # 5. Verify the "Subscribe to newsletter" button is visible
+    assert page.locator("[aria-hidden=false] [class*=TextLink]:has-text('Subscribe to newsletter')").is_visible()
 
-    # 9. Available connections should be displayed
-    page.locator("[data-test=ResultList-results]").wait_for(timeout=10000)
-    page.locator("[data-test=ResultCardWrapper]").first.wait_for(state="visible")
+    # 6. Verify the "Stories" button is visible
+    assert page.locator("[aria-hidden=false] [class*=TextLink]:has-text('Stories')").is_visible()
 
-    # (10. variation: among the results, verify that the first one is cheaper than 10 000 CZK)
-    first_result_with_currency_code = page.locator("[data-test=ResultCardPrice]").first.inner_text().split()[0]
-    first_result_value = int(first_result_with_currency_code.replace(",", ""))
-    assert first_result_value <= 10000
+    # 7. Click the "Subscribe to newsletter" button
+    page.locator("[aria-hidden=false] [class*=TextLink]:has-text('Subscribe to newsletter')").click()
+
+    # 8. Verify the sidebar disappears
+    page.locator("[data-test=NavBar-SideNav] [aria-hidden=false]").wait_for(state="hidden")
+
+    # 9. Verify a modal with the "Subscribe to the Kiwi.com newsletter" heading is visible
+    page.locator("[class*=Modal__ModalBody]").wait_for(state="visible")
+    assert page.locator(
+        "[class*=Modal__ModalBody] [class*=Heading]:has-text('Subscribe to the Kiwi.com newsletter')"
+    ).is_visible()
+
+    # 10. Verify the modal can be closed by clicking the cross button in its top right corner
+    page.locator("[data-test=ModalCloseButton]").click()
+    page.locator("[class*=Modal__ModalBody]").wait_for(state="hidden")

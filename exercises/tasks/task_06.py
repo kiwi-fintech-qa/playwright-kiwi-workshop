@@ -1,35 +1,37 @@
-from exercises.tasks.resources.resource_06_12 import KiwiPage, SearchResultPage
+from exercises.tasks.resources.resource_06 import KiwiPage
 
 
-# Searching with additional transportation options shows results cheaper than 3 000 CZK
-def test_searching_with_additional_transportation_options_shows_results_cheaper_than_3k_czk(page):
-    # 1. Steps 1.1.-1.9. from the previous scenario, but using class methods instead
-    # 1.1. Open the kiwi.com website and accept cookies
+# Searching for a connection displays results
+def test_searching_for_connection_displays_results(page):
+    # Fill in the correct locator-methods where they are missing!
+    # 1. Open the kiwi.com website and accept cookies
     kiwi_page = KiwiPage(page)
+    kiwi_page.open_kiwi_website_and_accept_cookies()
 
-    # 1.2. Clear the "from" location
+    # 2. Clear the "from" location
+    page.locator("")
+    page.locator("").wait_for(state="")
 
-    # 1.3. Type in "Vienna" to the "from" field
+    # 3. Type in "Vienna" to the "from" field
+    page.locator("").fill("")
 
-    # 1.4. Select the "Vienna, Austria" result from the dropdown
+    # 4. Select the "Vienna, Austria" result from the dropdown
+    page.locator("")
 
-    # 1.5. Type in "Brno" to the "to" field
+    # 5. Type in "Brno" to the "to" field
+    page.locator("")
 
-    # 1.6. Select the "Brno, Czechia" result from the dropdown
+    # 6. Select the "Brno, Czechia" result from the dropdown
+    page.locator("")
 
-    # 1.7. Uncheck the "Booking" checkbox
+    # 7. Uncheck the "Booking" checkbox by clicking it
+    page.locator("").first
 
-    # 1.8. Hit the "Search" button
+    # 8. Click the "Search" button
+    page.locator("")
 
-    # 1.9. Available connections should be displayed
-    search_result_page = SearchResultPage(page)
+    # 9. Available connections should be displayed
+    page.locator("").wait_for(timeout=10000)
+    page.locator("").first.wait_for(state="")
 
-    # 2. Check the "Bus" checkbox in the "Transport" left-hand section of the results
-
-    # 3. Verify the first result is cheaper than 3 000 CZK
-
-    # (4. variation: on step 2. check the "Train" checkbox in the "Transport" left-hand section as well; on step 3.
-    # verify the results are cheaper than 1 000 CZK)
-    # 4.1 Check the "Train" checkbox in the "Transport" left-hand section as well
-
-    # 4.2 Verify the results are cheaper than 1 000 CZK
+    # (10. variation: among the results, verify that the first one is cheaper than 10 000 CZK)

@@ -1,63 +1,52 @@
-from exercises.solutions.resources.resource_06_12 import KiwiPage, SearchResultPage, PassengerDetailsPage
+from exercises.solutions.resources.resource_07_12 import KiwiPage, SearchResultPage
 
 
-# Localized currency is retained in Passenger details
-def test_localized_currency_is_retained_in_passenger_details(page):
-    # 1. Hit the 🇬🇧 CZK (regional settings) button in the navigation bar at the top of the search page
+# Searching with additional transportation options shows results cheaper than 3 000 CZK
+def test_searching_with_additional_transportation_options_shows_results_cheaper_than_3k_czk(page):
+    # 1. Steps 1.1.-1.9. from the previous scenario, but using class methods instead
     # 1.1. Open the kiwi.com website and accept cookies
     kiwi_page = KiwiPage(page)
     kiwi_page.open_kiwi_website_and_accept_cookies()
 
-    # 1.2 Open the regional settings and wait for the localization modal to be displayed
-    kiwi_page.open_regional_settings()
+    # 1.2. Clear the "from" location
+    kiwi_page.clear_the_from_field()
 
-    # 2. Set the currency in the Language and currency modal to "EUR"
-    kiwi_page.set_currency(currency_code="EUR")
+    # 1.3. Type in "Vienna" to the "from" field
+    kiwi_page.type_origin_location_into_input_field(location="Vienna")
 
-    # 3. Hit the "Save & continue" button
-    kiwi_page.save_regional_settings()
-
-    # 4. Search for connections between any two cities
-    # 4.1. Clear the "from" location (here with a stabilization to ensure the place-chip is always removed)
-    kiwi_page.clear_the_from_field(stabilized=True)
-
-    # 4.2. Type in "Brno" to the "from" field
-    kiwi_page.type_origin_location_into_input_field(location="Brno")
-
-    # 4.3. Select the "Brno, Czechia" result from the dropdown
-    kiwi_page.select_location_from_dropdown(location="Brno, Czechia")
-
-    # 4.4. Type in "Vienna" to the "to" field
-    kiwi_page.type_destination_location_into_input_field(location="Vienna")
-
-    # 4.5. Select the "Vienna, Austria" result from the dropdown
+    # 1.4. Select the "Vienna, Austria" result from the dropdown
     kiwi_page.select_location_from_dropdown(location="Vienna, Austria")
 
-    # 4.6. Uncheck the "Booking" checkbox
+    # 1.5. Type in "Brno" to the "to" field
+    kiwi_page.type_destination_location_into_input_field(location="Brno")
+
+    # 1.6. Select the "Brno, Czechia" result from the dropdown
+    kiwi_page.select_location_from_dropdown(location="Brno, Czechia")
+
+    # 1.7. Uncheck the "Booking" checkbox
     kiwi_page.uncheck_booking_checkbox()
 
-    # 4.7. Hit the "Search" button
+    # 1.8. Hit the "Search" button
     kiwi_page.hit_search_button()
 
-    # 4.8. Available connections should be displayed
+    # 1.9. Available connections should be displayed
     search_result_page = SearchResultPage(page)
 
-    # 5. Store the price value of the first result
-    first_result_without_currency_code = search_result_page.first_result_card.inner_text().split()[0]
-    first_result_value = int(first_result_without_currency_code)
+    # 2. Check the "Bus" checkbox in the "Transport" left-hand section of the results
+    search_result_page.check_a_transport_option_checkbox(option="Bus")
 
-    # 6. Hit the "Select" button of the first result
-    search_result_page.hit_select_button_of_first_result()
+    # 3. Verify the first result is cheaper than 3 000 CZK
+    first_result_with_currency_code = search_result_page.first_result_card.inner_text().split()[0]
+    first_result_value = int(first_result_with_currency_code.replace(",", ""))
+    assert first_result_value <= 3000
 
-    # 7. In the "Want to sign first?" modal hit the "Continue as a guest link"
-    search_result_page.hit_continue_as_guest_link()
+    # (4. variation: on step 2. check the "Train" checkbox in the "Transport" left-hand section as well;
+    # on step 3. verify the results are cheaper than 1 000 CZK)
 
-    # 8. Verify the "Total" ("EUR") price value corresponds with the one stored on step 5.
-    passenger_details_page = PassengerDetailsPage(page)
-    total_price_with_currency_code = passenger_details_page.reservation_bill_total.inner_text()
-    total_price_value = int(total_price_with_currency_code.split()[0])
-    assert first_result_value == total_price_value
+    # 4.1 Check the "Train" checkbox in the "Transport" left-hand section as well
+    search_result_page.check_a_transport_option_checkbox(option="Train")
 
-    # (9. variation: verify the currency code selected on step 1 is displayed next to "Total" in the reservation bill)
-    total_currency_code = passenger_details_page.total_currency_label.inner_text().split("(")[1].strip(")")
-    assert "EUR" == total_currency_code
+    # 4.2 Verify the results are cheaper than 1 000 CZK
+    first_result_with_currency_code = search_result_page.first_result_card.inner_text().split()[0]
+    first_result_value = int(first_result_with_currency_code.replace(",", ""))
+    assert first_result_value <= 1000

@@ -1,41 +1,35 @@
-from exercises.tasks.resources.resource_06_12 import KiwiPage, SearchResultPage
+from exercises.tasks.resources.resource_07_12 import KiwiPage, SearchResultPage
 
 
-# Localized currency is retained in Passenger details
-def test_localized_currency_is_retained_in_passenger_details(page):
-    # 1. Hit the 🇬🇧 CZK button in the navigation bar at the top of the search page
+# Searching with additional transportation options shows results cheaper than 3 000 CZK
+def test_searching_with_additional_transportation_options_shows_results_cheaper_than_3k_czk(page):
+    # 1. Steps 1.1.-1.9. from the previous scenario, but using class methods instead
     # 1.1. Open the kiwi.com website and accept cookies
-    pass
+    kiwi_page = KiwiPage(page)
 
-    # 1.2 Open the localization settings and wait for the localization modal to be displayed
+    # 1.2. Clear the "from" location
 
-    # 2. Set the currency in the Language and currency modal to "EUR"
+    # 1.3. Type in "Vienna" to the "from" field
 
-    # 3. Hit the Save & continue button
+    # 1.4. Select the "Vienna, Austria" result from the dropdown
 
-    # 4. Search for connections between any two cities
-    # 4.1. Clear the "from" location (here with a stabilization to ensure the place-chip is always removed)
+    # 1.5. Type in "Brno" to the "to" field
 
-    # 4.2. Type in "Brno" to the "from" field
+    # 1.6. Select the "Brno, Czechia" result from the dropdown
 
-    # 4.3. Select the "Brno, Czechia" result from the dropdown
+    # 1.7. Uncheck the "Booking" checkbox
 
-    # 4.4. Type in "Vienna" to the "to" field
+    # 1.8. Hit the "Search" button
 
-    # 4.5. Select the "Vienna, Austria" result from the dropdown
+    # 1.9. Available connections should be displayed
+    search_result_page = SearchResultPage(page)
 
-    # 4.6. Uncheck the "Booking" checkbox
+    # 2. Check the "Bus" checkbox in the "Transport" left-hand section of the results
 
-    # 4.7. Hit the "Search" button
+    # 3. Verify the first result is cheaper than 3 000 CZK
 
-    # 4.8. Available connections should be displayed
+    # (4. variation: on step 2. check the "Train" checkbox in the "Transport" left-hand section as well; on step 3.
+    # verify the results are cheaper than 1 000 CZK)
+    # 4.1 Check the "Train" checkbox in the "Transport" left-hand section as well
 
-    # 5. Store the price value of the first result
-
-    # 6. Hit the "Select" button of the first result
-
-    # 7. In the "Want to sign first?" modal hit the "Continue as a guest link"
-
-    # 8. Verify the "Total" ("EUR") price value corresponds with the one stored on step 5.
-
-    # (9. variation: verify the currency code selected on step 1 is displayed next to "Total" in the reservation bill)
+    # 4.2 Verify the results are cheaper than 1 000 CZK

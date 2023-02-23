@@ -1,45 +1,27 @@
-from exercises.tasks.resources.resource_03_04 import open_kiwi_website_and_accept_cookies
+# Popular flights - hitting the Show more button leads to an increment of currently displayed popular flight
+# tiles/cards to be displayed
+def test_show_more_button_of_popular_flights_displays_increment_of_currently_shown_popular_flight_cards(page):
+    # 1. On the Kiwi.com website get the total count of visible tiles/cards in the "Popular flights" section
+    # and store it into a variable
+    # Fill in the correct locator-methods where they are missing!
 
-
-# Interacting with the sidebar (expanding options, verifying visibility of items)
-def test_sidebar_actions_work_as_expected(page):
-    # 1. On the Kiwi.com website hit the right sidebar hamburger button
     # 1.1. Open the kiwi.com website and accept cookies
-    open_kiwi_website_and_accept_cookies(page)
-
-    # 1.2. Hit the right sidebar hamburger button
-    page.locator("[data-test=]").click()
-    page.locator("[data-test=][aria-hidden=]").wait_for(state="")
-
-    # 2. Verify that a sidebar with the "Manage your trips, set up price alerts, use Kiwi.com Credit, and get
-    # personalized support." text appears
-    current_sidebar_text = page.locator("[data-test=] [class*=]").first.inner_text()
-    assert "???" == "Manage your trips, set up price alerts, use Kiwi.com Credit, and get personalized support."
-
-    # 2.1 (Optional) Consider how you could make the above assertion fit the line length restriction of 120 characters?
-
-    # 3. Hit the "Discover" button
+    page.goto("")
     page.locator("").click()
 
-    # 4. Verify the "Discover" button expands into a dropdown/slide of items
-    assert page.locator("").is_visible()
+    # 1.2. Get the count of tiles/cards in the "Popular flights" section and store it into a variable
+    initial_card_count = page.locator("[data-test=] [class*=]").count()
 
-    # 5. Verify the "Subscribe to newsletter" button is displayed
-    assert page.locator("").is_visible()
+    # 2. Click the "Show more" button
+    page.locator("")
 
-    # 6. Verify the "Stories" button is displayed
-    assert page.locator("").is_visible()
+    # 3. Verify the count of tiles/cards from step 1. is doubled
+    current_card_count = page.locator("[data-test=] [class*=]").count()
+    assert "???" == 2 * "???"
 
-    # 7. Hit the "Subscribe to newsletter" button
-    page.locator("").click()
+    # 4. Click the "Show more" button again
+    page.locator("")
 
-    # 8. Verify the sidebar disappears
-    page.locator("[data-test=] [aria-hidden=]").wait_for(state="")
-
-    # 9. Verify a modal with the "Subscribe to the Kiwi.com newsletter" heading is displayed
-    page.locator("[class*=]").wait_for(state="")
-    assert page.locator("").is_visible()
-
-    # 10. Verify the modal can be closed by hitting the cross button in its top right corner
-    page.locator("").click()
-    page.locator("[class*=]").wait_for(state="")
+    # 5. Verify the count of tiles/cards from step 1. is tripled
+    current_card_count = page.locator("[data-test=] [class*=]").count()
+    assert "???" == 3 * "???"

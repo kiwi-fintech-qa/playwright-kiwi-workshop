@@ -1,7 +1,6 @@
 class KiwiPage:
     def __init__(self, page):
         self.page = page
-
         self.cookies_popup_button_accept = page.locator("[data-test='CookiesPopup-Accept']")
         self.kiwi_page_subtitle = page.locator("text=Book cheap flights other sites simply can’t find.")
         self.place_input_chip = page.locator("[data-test=PlacePickerInputPlace-close]")
@@ -67,11 +66,8 @@ class KiwiPage:
         self.page.goto("https://www.kiwi.com/en/")
         self.cookies_popup_button_accept.click()
 
-    def clear_the_from_field(self, stabilized: bool = False):
+    def clear_the_from_field(self):
         self.place_input_chip.click()
-        if stabilized:
-            if self.place_input_chip.is_visible():
-                self.place_input_chip.click()
         self.place_input_chip.wait_for(state="hidden")
 
     def type_origin_location_into_input_field(self, location: str = None):
@@ -190,7 +186,6 @@ class KiwiPage:
 class SearchResultPage:
     def __init__(self, page):
         self.page = page
-
         self.result_card_wrapper = page.locator("[data-test=ResultCardWrapper]").first
         self.first_result_card = page.locator("[data-test=ResultCardPrice]").first
         self.sort_by_price_button = page.locator("[data-test=SortBy-price]")
@@ -226,7 +221,6 @@ class SearchResultPage:
 class PassengerDetailsPage:
     def __init__(self, page):
         self.page = page
-
         self.reservation_bill_total = page.locator("[class*=ReservationBillTotal] [class*=Price]")
         self.total_currency_label = page.locator("[data-test=ReservationBillBoxTotal]")
         self.passenger_field_email = page.locator("[name=email]")
@@ -395,7 +389,6 @@ class PassengerDetailsPage:
 class TicketFarePage:
     def __init__(self, page):
         self.page = page
-
         self.reservation_bill_carry_on_baggage_price = page.locator(
             "[data-test=bookingBillCabinBaggage] [class*=Price]"
         )

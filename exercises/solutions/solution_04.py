@@ -1,13 +1,15 @@
-from exercises.solutions.resources.resource_03_04 import open_kiwi_website_and_accept_cookies
+from exercises.solutions.resources.resource_04_05 import open_kiwi_website_and_accept_cookies
 
 
 # Travel mode interactions are respected by the UI
 def test_travel_mode_interactions_are_respected_by_the_ui(page):
     # 1. On the Kiwi.com website hit the travel mode button (which has the "Return" value selected by default)
+    # Fill in the correct locator-methods where they are missing!
+
     # 1.1. Open the kiwi.com website and accept cookies
     open_kiwi_website_and_accept_cookies(page)
 
-    # 1.2. Hit the travel mode button
+    # 1.2. Click the travel mode button
     page.locator("[data-test=SearchFormModesPicker-active-return]").click()
 
     # 2. Verify a popup with the following options is displayed: Return, One-way, Multi-city, and Nomad
@@ -24,5 +26,5 @@ def test_travel_mode_interactions_are_respected_by_the_ui(page):
     page.locator("[data-test=ModesPopup]").wait_for(state="hidden")
     assert page.locator("[data-test=SearchFormModesPicker-active-oneWay]").is_visible()
 
-    # 5. Verify the "Return date" field is no longer displayed
+    # 5. Verify the "Return date" field is no longer visible
     assert page.locator("[data-test=SearchFormModesPicker-active-return]").is_hidden()

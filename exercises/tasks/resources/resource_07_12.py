@@ -200,7 +200,6 @@ class SearchResultPage:
 class PassengerDetailsPage:
     def __init__(self, page):
         self.page = page
-
         self.reservation_bill_total = page.locator("")
         self.total_currency_label = page.locator("")
         self.passenger_field_email = page.locator("")
@@ -343,7 +342,6 @@ class PassengerDetailsPage:
 class TicketFarePage:
     def __init__(self, page):
         self.page = page
-
         self.reservation_bill_carry_on_baggage_price = page.locator("")
         self.reservation_bill_checked_baggage_price = page.locator("")
         self.reservation_bill_passenger_price = page.locator("")
