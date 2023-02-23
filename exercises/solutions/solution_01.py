@@ -8,7 +8,9 @@ def test_navigate_to_kiwi(page):
     page.locator("[data-test='CookiesPopup-Accept']").click()
 
     # 3. Assert that the expected text is displayed
-    assert page.locator("text=Book cheap flights other sites simply can’t find.").is_visible()
+    assert page.locator(
+        "text=Book cheap flights other sites simply can’t find."
+    ).is_visible()
 
     # 4 Hit the "Explore" button!
     page.locator("[data-test=LandingSearchButton]").click()

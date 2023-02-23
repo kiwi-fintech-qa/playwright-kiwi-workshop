@@ -43,7 +43,9 @@ def test_sorting_panel_actions_can_be_used_for_sorting_the_search_results(page):
     result_values_list = []
     for i in range(3):
         nth_result_with_currency_code = (
-            page.locator("[data-test=ResultCardPrice][class*=ResultCardstyled__PriceText]")
+            page.locator(
+                "[data-test=ResultCardPrice][class*=ResultCardstyled__PriceText]"
+            )
             .nth(i)
             .inner_text()
             .split()[0]
@@ -63,7 +65,9 @@ def test_sorting_panel_actions_can_be_used_for_sorting_the_search_results(page):
     result_values_list = []
     for i in range(3):
         nth_result_with_currency_code = (
-            page.locator("[data-test=ResultCardPrice][class*=ResultCardstyled__PriceText]")
+            page.locator(
+                "[data-test=ResultCardPrice][class*=ResultCardstyled__PriceText]"
+            )
             .nth(i)
             .inner_text()
             .split()[0]
@@ -71,4 +75,6 @@ def test_sorting_panel_actions_can_be_used_for_sorting_the_search_results(page):
         nth_result_value = int(nth_result_with_currency_code.replace(",", ""))
         result_values_list.append(nth_result_value)
 
-    print(f"The cheapest of the several fastest connections costs {min(result_values_list)} CZK")
+    print(
+        f"The cheapest of the several fastest connections costs {min(result_values_list)} CZK"
+    )

@@ -13,13 +13,19 @@ def test_searching_for_connection_displays_results(page):
     page.locator("[data-test=PlacePickerInputPlace-close]").wait_for(state="hidden")
 
     # 3. Type in "Vienna" to the "from" field
-    page.locator("[data-test=PlacePickerInput-origin] [data-test=SearchField-input]").fill("Vienna")
+    page.locator(
+        "[data-test=PlacePickerInput-origin] [data-test=SearchField-input]"
+    ).fill("Vienna")
 
     # 4. Select the "Vienna, Austria" result from the dropdown
-    page.locator("[data-test=PlacePickerRow-wrapper]:has-text('Vienna, Austria')").click()
+    page.locator(
+        "[data-test=PlacePickerRow-wrapper]:has-text('Vienna, Austria')"
+    ).click()
 
     # 5. Type in "Brno" to the "to" field
-    page.locator("[data-test=PlacePickerInput-destination] [data-test=SearchField-input]").fill("Brno")
+    page.locator(
+        "[data-test=PlacePickerInput-destination] [data-test=SearchField-input]"
+    ).fill("Brno")
 
     # 6. Select the "Brno, Czechia" result from the dropdown
     page.locator("[data-test=PlacePickerRow-wrapper]:has-text('Brno, Czechia')").click()
@@ -35,6 +41,8 @@ def test_searching_for_connection_displays_results(page):
     page.locator("[data-test=ResultCardWrapper]").first.wait_for(state="visible")
 
     # (10. variation: among the results, verify that the first one is cheaper than 10 000 CZK)
-    first_result_with_currency_code = page.locator("[data-test=ResultCardPrice]").first.inner_text().split()[0]
+    first_result_with_currency_code = (
+        page.locator("[data-test=ResultCardPrice]").first.inner_text().split()[0]
+    )
     first_result_value = int(first_result_with_currency_code.replace(",", ""))
     assert first_result_value <= 10000

@@ -1,5 +1,10 @@
 import math
-from exercises.tasks.resources.resource_07_12 import KiwiPage, SearchResultPage, PassengerDetailsPage, TicketFarePage
+from exercises.tasks.resources.resource_07_12 import (
+    KiwiPage,
+    SearchResultPage,
+    PassengerDetailsPage,
+    TicketFarePage,
+)
 
 
 # Filling out paid baggage options on Passenger details is reflected by the reservation bill
@@ -68,7 +73,9 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
     total_price_value = 0
 
     total_of_items = (
-        total_carry_on_baggage_price_value + total_checked_baggage_price_value + total_passenger_price_value
+        total_carry_on_baggage_price_value
+        + total_checked_baggage_price_value
+        + total_passenger_price_value
     )
     # Proper comparison of floats has to be used here:
     # https://docs.python.org/3/library/math.html#math.isclose
@@ -78,4 +85,6 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
     # Also we can check how relatively distinct the values are:
     # With rel_tol=0.05 the values have to be 5% similar.
     # Here we decided arbitrarily that the values should have rel_tol=0.000000778, i.e., to be 0.00000778% similar.
-    assert math.isclose(total_of_items, total_price_value, rel_tol=0.000000778, abs_tol=0.01000000000022)
+    assert math.isclose(
+        total_of_items, total_price_value, rel_tol=0.000000778, abs_tol=0.01000000000022
+    )

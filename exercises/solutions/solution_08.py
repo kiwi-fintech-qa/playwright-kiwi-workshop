@@ -1,4 +1,8 @@
-from exercises.solutions.resources.resource_07_12 import KiwiPage, SearchResultPage, PassengerDetailsPage
+from exercises.solutions.resources.resource_07_12 import (
+    KiwiPage,
+    SearchResultPage,
+    PassengerDetailsPage,
+)
 
 
 # Localized currency is retained in Passenger details
@@ -44,7 +48,9 @@ def test_localized_currency_is_retained_in_passenger_details(page):
     search_result_page = SearchResultPage(page)
 
     # 5. Store the price value of the first result
-    first_result_without_currency_code = search_result_page.first_result_card.inner_text().split()[0]
+    first_result_without_currency_code = (
+        search_result_page.first_result_card.inner_text().split()[0]
+    )
     first_result_value = int(first_result_without_currency_code)
 
     # 6. Hit the "Select" button of the first result
@@ -55,10 +61,16 @@ def test_localized_currency_is_retained_in_passenger_details(page):
 
     # 8. Verify the "Total (EUR)" price value corresponds with the one stored on step 5.
     passenger_details_page = PassengerDetailsPage(page)
-    total_price_with_currency_code = passenger_details_page.reservation_bill_total.inner_text()
+    total_price_with_currency_code = (
+        passenger_details_page.reservation_bill_total.inner_text()
+    )
     total_price_value = int(total_price_with_currency_code.split()[0])
     assert first_result_value == total_price_value
 
     # (9. variation: verify the currency code selected on step 1 is displayed next to "Total" in the reservation bill)
-    total_currency_code = passenger_details_page.total_currency_label.inner_text().split("(")[1].strip(")")
+    total_currency_code = (
+        passenger_details_page.total_currency_label.inner_text()
+        .split("(")[1]
+        .strip(")")
+    )
     assert currency_code == total_currency_code

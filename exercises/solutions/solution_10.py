@@ -76,13 +76,17 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
 
     # 6. In the "Cabin or carry-on baggage" section select the "Carry-on bundle" option and store its price value
     passenger_details_page.select_cabin_baggage_bundle()
-    carry_on_baggage_price_value = passenger_details_page.get_carry_on_baggage_price_value_from_baggage_section()
+    carry_on_baggage_price_value = (
+        passenger_details_page.get_carry_on_baggage_price_value_from_baggage_section()
+    )
 
     # 7. In the "Checked baggage" section select the 1× checked bag option and store its price value
     checked_baggage_price_value = 0
     if passenger_details_page.baggage_empty_option.is_hidden():
         passenger_details_page.select_checked_baggage_once()
-        checked_baggage_price_value = passenger_details_page.get_checked_baggage_price_value_from_baggage_section()
+        checked_baggage_price_value = (
+            passenger_details_page.get_checked_baggage_price_value_from_baggage_section()
+        )
 
     # 8. In the "Travel insurance" section select the "No insurance" option
     passenger_details_page.select_no_insurance()
@@ -93,20 +97,28 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
     # 10. Verify the following items are displayed in the reservation bill and still have the same value:
     # 10.1. Cabin baggage: value stored at step 6
     ticket_fare_page = TicketFarePage(page)
-    total_carry_on_baggage_price_value = ticket_fare_page.get_carry_on_baggage_price_value_from_reservation_bill()
+    total_carry_on_baggage_price_value = (
+        ticket_fare_page.get_carry_on_baggage_price_value_from_reservation_bill()
+    )
     assert carry_on_baggage_price_value == total_carry_on_baggage_price_value
 
     # 10.2. Checked baggage: value stored at step 7
     total_checked_baggage_price_value = 0
     if checked_baggage_price_value:
-        total_checked_baggage_price_value = ticket_fare_page.get_checked_baggage_price_value_from_reservation_bill()
+        total_checked_baggage_price_value = (
+            ticket_fare_page.get_checked_baggage_price_value_from_reservation_bill()
+        )
         assert checked_baggage_price_value == total_checked_baggage_price_value
 
     # (11. variation: verify the total price corresponds with the sum of all items in the reservation bill)
-    total_passenger_price_value = ticket_fare_page.get_passenger_price_value_from_reservation_bill()
+    total_passenger_price_value = (
+        ticket_fare_page.get_passenger_price_value_from_reservation_bill()
+    )
     total_price_value = ticket_fare_page.get_total_price_value_from_reservation_bill()
     total_of_items = (
-        total_carry_on_baggage_price_value + total_checked_baggage_price_value + total_passenger_price_value
+        total_carry_on_baggage_price_value
+        + total_checked_baggage_price_value
+        + total_passenger_price_value
     )
 
     # Proper comparison of floats has to be used here:
@@ -117,4 +129,6 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
     # Also we can check how relatively distinct the values are:
     # With rel_tol=0.05 the values have to be 5% similar.
     # Here we decided arbitrarily that the values should have rel_tol=0.000000778, i.e., to be 0.00000778% similar.
-    assert math.isclose(total_of_items, total_price_value, rel_tol=0.000000778, abs_tol=0.01000000000022)
+    assert math.isclose(
+        total_of_items, total_price_value, rel_tol=0.000000778, abs_tol=0.01000000000022
+    )

@@ -1,4 +1,6 @@
-from exercises.tasks.resources.resource_04_05 import open_kiwi_website_and_accept_cookies
+from exercises.tasks.resources.resource_04_05 import (
+    open_kiwi_website_and_accept_cookies,
+)
 
 
 # Interacting with the sidebar (expanding options, verifying visibility of items)

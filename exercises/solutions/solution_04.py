@@ -1,4 +1,6 @@
-from exercises.solutions.resources.resource_04_05 import open_kiwi_website_and_accept_cookies
+from exercises.solutions.resources.resource_04_05 import (
+    open_kiwi_website_and_accept_cookies,
+)
 
 
 # Travel mode interactions are respected by the UI
@@ -14,10 +16,18 @@ def test_travel_mode_interactions_are_respected_by_the_ui(page):
 
     # 2. Verify a popup with the following options is displayed: Return, One-way, Multi-city, and Nomad
     page.locator("[data-test=ModesPopup]").wait_for(state="visible")
-    assert page.locator("[data-test=ModePopupOption-return]").is_visible()  # the Return option is visible
-    assert page.locator("[data-test=ModePopupOption-oneWay]").is_visible()  # the One-way option is visible
-    assert page.locator("[data-test=ModePopupOption-multicity]").is_visible()  # the Multi-city option is visible
-    assert page.locator("[data-test=ModePopupOption-nomad]").is_visible()  # the Nomad option is visible
+    assert page.locator(
+        "[data-test=ModePopupOption-return]"
+    ).is_visible()  # the Return option is visible
+    assert page.locator(
+        "[data-test=ModePopupOption-oneWay]"
+    ).is_visible()  # the One-way option is visible
+    assert page.locator(
+        "[data-test=ModePopupOption-multicity]"
+    ).is_visible()  # the Multi-city option is visible
+    assert page.locator(
+        "[data-test=ModePopupOption-nomad]"
+    ).is_visible()  # the Nomad option is visible
 
     # 3. Select the "One-way" option
     page.locator("[data-test=ModePopupOption-oneWay]").click()

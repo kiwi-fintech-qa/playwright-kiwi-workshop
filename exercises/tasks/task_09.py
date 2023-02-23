@@ -1,4 +1,8 @@
-from exercises.tasks.resources.resource_07_12 import KiwiPage, SearchResultPage, PassengerDetailsPage
+from exercises.tasks.resources.resource_07_12 import (
+    KiwiPage,
+    SearchResultPage,
+    PassengerDetailsPage,
+)
 
 
 # Not filling out the required fields on Passenger details doesn't allow to proceed to the Ticket fare screen

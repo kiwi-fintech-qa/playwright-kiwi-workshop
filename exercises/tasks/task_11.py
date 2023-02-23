@@ -30,12 +30,7 @@ def test_sorting_panel_actions_can_be_used_for_sorting_the_search_results(page):
     # 4. Store the price value of the first few (e.g., 3) results into a (Python) list
     result_values_list = []
     for i in range(3):
-        nth_result_with_currency_code = (
-            page.locator("")
-            .nth(i)
-            .inner_text()
-            .split()[0]
-        )
+        nth_result_with_currency_code = page.locator("").nth(i).inner_text().split()[0]
         nth_result_value = int(nth_result_with_currency_code.replace(",", ""))
         result_values_list.append(nth_result_value)
 

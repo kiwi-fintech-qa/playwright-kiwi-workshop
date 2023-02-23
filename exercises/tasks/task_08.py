@@ -1,4 +1,8 @@
-from exercises.tasks.resources.resource_07_12 import KiwiPage, SearchResultPage, PassengerDetailsPage
+from exercises.tasks.resources.resource_07_12 import (
+    KiwiPage,
+    SearchResultPage,
+    PassengerDetailsPage,
+)
 
 
 # Localized currency is retained in Passenger details

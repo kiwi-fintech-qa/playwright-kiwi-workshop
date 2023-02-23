@@ -36,7 +36,9 @@ def test_searching_with_additional_transportation_options_shows_results_cheaper_
     search_result_page.check_a_transport_option_checkbox(option="Bus")
 
     # 3. Verify the first result is cheaper than 3 000 CZK
-    first_result_with_currency_code = search_result_page.first_result_card.inner_text().split()[0]
+    first_result_with_currency_code = (
+        search_result_page.first_result_card.inner_text().split()[0]
+    )
     first_result_value = int(first_result_with_currency_code.replace(",", ""))
     assert first_result_value <= 3000
 
@@ -47,6 +49,8 @@ def test_searching_with_additional_transportation_options_shows_results_cheaper_
     search_result_page.check_a_transport_option_checkbox(option="Train")
 
     # 4.2 Verify the results are cheaper than 1 000 CZK
-    first_result_with_currency_code = search_result_page.first_result_card.inner_text().split()[0]
+    first_result_with_currency_code = (
+        search_result_page.first_result_card.inner_text().split()[0]
+    )
     first_result_value = int(first_result_with_currency_code.replace(",", ""))
     assert first_result_value <= 1000

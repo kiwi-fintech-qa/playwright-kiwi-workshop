@@ -54,7 +54,10 @@ def test_total_count_of_passengers_is_reflected_by_counter_next_to_the_passenger
     # 12. Verify the count of passengers next to the passengers icon corresponds with the sum of values from steps 6.,
     # 8., and 10.
     passenger_count = kiwi_page.get_total_passengers_count()
-    assert passenger_count == updated_adults_count + updated_children_count + updated_infants_count
+    assert (
+        passenger_count
+        == updated_adults_count + updated_children_count + updated_infants_count
+    )
 
     # (13. variation: increase the count of baggage and verify the counters correspond with the count of added pieces
     # of baggage)
