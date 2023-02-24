@@ -1,17 +1,18 @@
-from exercises.solutions.resources.resource_06_12 import (
+from exercises.solutions.resources.resource_07_12 import (
     KiwiPage,
     SearchResultPage,
     PassengerDetailsPage,
-    TicketFarePage,
 )
-import math
 
 
-# Filling out paid baggage options on Passenger details is reflected by the reservation bill
-def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_the_reservation_bill(page):
-    # 1. Search for connections between any two cities (while un-checking the Booking.com checkbox,
-    # as in previous scenarios)
-    # 1.1. Open the kiwi.com website (wait for page to load)
+# Not filling out the required fields on Passenger details doesn't allow to proceed to the Ticket fare screen
+def test_not_filling_out_required_fields_on_passenger_details_prevents_proceeding_to_ticket_fare_screen(page):
+    # 1. Search for connections between any two cities, steps 1.1.-1.9. from task 6
+
+    # Consider if the whole interaction with the initial search (steps 1.2.-1.8.) could be condensed into a single
+    # method within the KiwiPage class!
+
+    # 1.1. Open the kiwi.com website and accept cookies
     kiwi_page = KiwiPage(page)
     kiwi_page.open_kiwi_website_and_accept_cookies()
 
@@ -39,83 +40,129 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
     # 1.9. Available connections should be displayed
     search_result_page = SearchResultPage(page)
 
-    # 2. Hit the Select button of the first result
+    # 2. Hit the "Select" button of the first result
     search_result_page.hit_select_button_of_first_result()
 
-    # 3. In the "Want to sign first?" modal hit the "Continue as a guest link"
+    # 3. In the "Want to sign in first?" modal hit the "Continue as a guest" link
     search_result_page.hit_continue_as_guest_link()
 
-    # 4. Fill out the Email, Phone, Given names, Surnames and the DD and YYYY fields of Date of birth as follows:
-    # 4.1. Email: play@wrig.ht
+    # 4. In the "Cabin or carry-on" baggage section select the 1× personal item option
     passenger_details_page = PassengerDetailsPage(page)
-    passenger_details_page.fill_out_passenger_email(email="play@wrig.ht")
+    passenger_details_page.select_cabin_baggage_single_item()
 
-    # 4.2. Phone: 123123123
-    passenger_details_page.fill_out_passenger_phone(phone="123123123")
-
-    # 4.3. Given names: Play
-    passenger_details_page.fill_out_passenger_firstname(firstname="Play")
-
-    # 4.4. Surnames: Wright
-    passenger_details_page.fill_out_passenger_lastname(lastname="Wright")
-
-    # 4.5. DD: 1
-    passenger_details_page.fill_out_passenger_birthday(birthday="1")
-
-    # 4.6. YYYY: 1901
-    passenger_details_page.fill_out_passenger_birthyear(birthyear="1901")
-
-    # 5. In the following dropdowns select the following values:
-    # 5.1. Nationality: United Kingdom
-    passenger_details_page.select_passenger_nationality(nationality="gb")
-
-    # 5.2. Gender: Female
-    passenger_details_page.select_passenger_title(title="ms")
-
-    # 5.3. Month: January
-    passenger_details_page.select_passenger_birthmonth(birthmonth="01")
-
-    # 6. In the Cabin or carry-on baggage section select the Carry-on bundle option and store its price value
-    passenger_details_page.select_cabin_baggage_bundle()
-    carry_on_baggage_price_value = passenger_details_page.get_carry_on_baggage_price_value_from_baggage_section()
-
-    # 7. In the Checked baggage section select the 1× checked bag option and store its price value
-    checked_baggage_price_value = 0
+    # 5. If visible, in the "Checked baggage" section select the "No checked baggage" checkbox
     if passenger_details_page.baggage_empty_option.is_hidden():
-        passenger_details_page.select_checked_baggage_once()
-        checked_baggage_price_value = passenger_details_page.get_checked_baggage_price_value_from_baggage_section()
+        passenger_details_page.select_no_checked_baggage_checkbox()
 
-    # 8. In the Travel insurance section select the No insurance option
+    # 6. In the "Travel insurance" section select the "No insurance" option
     passenger_details_page.select_no_insurance()
 
-    # 9. Hit the Continue button and verify the Ticker fare screen is displayed
-    passenger_details_page.proceed_to_ticket_fare_page()
+    # 7. Hit the "Continue" button and verify that under the following fields the following errors are displayed:
+    passenger_details_page.hit_continue_button_and_expect_to_stay_on_passenger_details_due_to_error()
 
-    # 10. Verify the following items are displayed in the reservation bill:
-    # 10.1. Cabin baggage: value stored at step 6
-    ticket_fare_page = TicketFarePage(page)
-    total_carry_on_baggage_price_value = ticket_fare_page.get_carry_on_baggage_price_value_from_reservation_bill()
-    assert carry_on_baggage_price_value == total_carry_on_baggage_price_value
+    # 7.1. Email: Required for your tickets
+    passenger_details_page.wait_for_email_error_to_be_displayed()
 
-    # 10.2. Checked baggage: value stored at step 7
-    total_checked_baggage_price_value = 0
-    if checked_baggage_price_value:
-        total_checked_baggage_price_value = ticket_fare_page.get_checked_baggage_price_value_from_reservation_bill()
-        assert checked_baggage_price_value == total_checked_baggage_price_value
+    # 7.2. Phone: Required field
+    passenger_details_page.phone_field_error_should_be_displayed()
 
-    # (11. variation: verify the total price corresponds with the sum of all items in the reservation bill)
-    total_passenger_price_value = ticket_fare_page.get_passenger_price_value_from_reservation_bill()
-    total_price_value = ticket_fare_page.get_total_price_value_from_reservation_bill()
-    total_of_items = (
-        total_carry_on_baggage_price_value + total_checked_baggage_price_value + total_passenger_price_value
-    )
+    # 7.3. Given names: Required field
+    passenger_details_page.first_name_error_should_be_displayed()
 
-    # Proper comparison of floats has to be used here:
-    # https://docs.python.org/3/library/math.html#math.isclose
-    # The basic assertion "assert total_of_items == total_price_value" would fail because of the way floats are stored.
-    # Instead, we can check the absolute difference between the two values is very low, e.g., a bit over 0.01 CZK.
+    # 7.4. Surnames: Required field
+    passenger_details_page.last_name_error_should_be_displayed()
 
-    # Also we can check how relatively distinct the values are:
-    # With rel_tol=0.05 the values have to be 5% similar.
-    # Here we decided arbitrarily that the values should have rel_tol=0.000000778, i.e., to be 0.00000778% similar.
-    assert math.isclose(total_of_items, total_price_value, rel_tol=0.000000778, abs_tol=0.01000000000022)
+    # 7.5. Nationality: Required field
+    passenger_details_page.nationality_error_should_be_displayed()
+
+    # 7.6. Gender: Required field
+    passenger_details_page.gender_error_should_be_displayed()
+
+    # 7.7. Date of birth: Required field
+    passenger_details_page.birthdate_error_should_be_displayed()
+
+    # (8. variation: fill out "Email" and "Phone", hit "Continue", and expect Required field error to be displayed
+    # under the "Primary passenger" fields)
+    # 8.1. Email: play@wrig.ht
+    passenger_details_page.fill_out_passenger_email(email="play@wrig.ht")
+
+    # 8.2. Phone: 123123123
+    passenger_details_page.fill_out_passenger_phone(phone="123123123")
+
+    # 8.3. Hit the "Continue" button and verify that under the following fields the following errors are displayed:
+    passenger_details_page.hit_continue_button_and_expect_to_stay_on_passenger_details_due_to_error()
+
+    # 8.4. Email: No error message
+    passenger_details_page.wait_for_email_error_to_not_be_displayed()
+
+    # 8.5. Phone: No error message
+    passenger_details_page.phone_field_error_should_not_be_displayed()
+
+    # 8.6. Given names: Required field
+    passenger_details_page.first_name_error_should_be_displayed()
+
+    # 8.7. Surnames: Required field
+    passenger_details_page.last_name_error_should_be_displayed()
+
+    # 8.8. Nationality: Required field
+    passenger_details_page.nationality_error_should_be_displayed()
+
+    # 8.9. Gender: Required field
+    passenger_details_page.gender_error_should_be_displayed()
+
+    # 8.10. Date of birth: Required field
+    passenger_details_page.birthdate_error_should_be_displayed()
+
+    # (9. variation: fill out and select the "Primary passenger" fields, clear the "Contact details" fields,
+    # hit "Continue", and expect "Required for your tickets" error under the "Email" field and "Required"
+    # field error under the "Phone" field)
+    # 9.1. Email: empty
+    passenger_details_page.fill_out_passenger_email(email="")
+
+    # 9.2. Phone: empty
+    passenger_details_page.fill_out_passenger_phone(phone="")
+
+    # 9.3. Given names: Play
+    passenger_details_page.fill_out_passenger_firstname(firstname="Play")
+
+    # 9.4. Surnames: Wright
+    passenger_details_page.fill_out_passenger_lastname(lastname="Wright")
+
+    # 9.5. DD: 1
+    passenger_details_page.fill_out_passenger_birthday(birthday="1")
+
+    # 9.6. YYYY: 1901
+    passenger_details_page.fill_out_passenger_birthyear(birthyear="1901")
+
+    # 9.7. Nationality: United Kingdom
+    passenger_details_page.select_passenger_nationality(nationality="gb")
+
+    # 9.8. Gender: Female
+    passenger_details_page.select_passenger_title(title="ms")
+
+    # 9.9. Month: January
+    passenger_details_page.select_passenger_birthmonth(birthmonth="01")
+
+    # 9.10. Hit the "Continue" button and verify that under the following fields the following errors are displayed:
+    passenger_details_page.hit_continue_button_and_expect_to_stay_on_passenger_details_due_to_error()
+
+    # 9.11. Email: Required for your tickets
+    passenger_details_page.wait_for_email_error_to_be_displayed()
+
+    # 9.12. Phone: Required field
+    passenger_details_page.phone_field_error_should_be_displayed()
+
+    # 9.13. Given names: No error
+    passenger_details_page.first_name_error_should_not_be_displayed()
+
+    # 9.14. Surnames: No error
+    passenger_details_page.last_name_error_should_not_be_displayed()
+
+    # 9.15. Nationality: No error
+    passenger_details_page.nationality_error_should_not_be_displayed()
+
+    # 9.16. Gender: No error
+    passenger_details_page.gender_error_should_not_be_displayed()
+
+    # 9.17. Date of birth: No error
+    passenger_details_page.birthdate_error_should_not_be_displayed()

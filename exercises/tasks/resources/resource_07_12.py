@@ -106,11 +106,15 @@ class KiwiPage:
         return infants_count
 
     def get_count_of_cabin_bags(self) -> int:
-        cabin_bags_count = int(self.stepper_value_cabin_bags.get_attribute(name="value"))
+        cabin_bags_count = int(
+            self.stepper_value_cabin_bags.get_attribute(name="value")
+        )
         return cabin_bags_count
 
     def get_count_of_checked_bags(self) -> int:
-        checked_bags_count = int(self.stepper_value_checked_bags.get_attribute(name="value"))
+        checked_bags_count = int(
+            self.stepper_value_checked_bags.get_attribute(name="value")
+        )
         return checked_bags_count
 
     def hit_stepper_increment_button_for_adults(self):
@@ -155,7 +159,9 @@ class KiwiPage:
         return return_month_value
 
     def get_departure_field_contents_from_date_picker_modal(self) -> list[str]:
-        departure_field_contents = self.date_picker_modal_departure_field.inner_text().split()
+        departure_field_contents = (
+            self.date_picker_modal_departure_field.inner_text().split()
+        )
         return departure_field_contents
 
     def get_return_field_contents_from_date_picker_modal(self) -> list[str]:
@@ -178,7 +184,9 @@ class SearchResultPage:
         self.breadcrumbs_current_step_passenger = page.locator()
 
     def check_a_transport_option_checkbox(self, option: str = None):
-        self.page.locator(f"[class*=FilterWrapper]:has([data-test=TransportOptionCheckbox-{option.lower()}])").click()
+        self.page.locator(
+            f"[class*=FilterWrapper]:has([data-test=TransportOptionCheckbox-{option.lower()}])"
+        ).click()
 
     def sort_results_by_price(self):
         self.sort_by_price_button.click()
@@ -200,7 +208,6 @@ class SearchResultPage:
 class PassengerDetailsPage:
     def __init__(self, page):
         self.page = page
-
         self.reservation_bill_total = page.locator("")
         self.total_currency_label = page.locator("")
         self.passenger_field_email = page.locator("")
@@ -268,7 +275,9 @@ class PassengerDetailsPage:
         self.cabin_baggage_single_item_option.click()
 
     def get_carry_on_baggage_price_value_from_baggage_section(self) -> float:
-        carry_on_baggage_price_with_currency_code = self.cabin_baggage_bundle_price.inner_text()
+        carry_on_baggage_price_with_currency_code = (
+            self.cabin_baggage_bundle_price.inner_text()
+        )
         carry_on_baggage_price_value = None
         return carry_on_baggage_price_value
 
@@ -279,7 +288,9 @@ class PassengerDetailsPage:
         self.checked_baggage_no_bags_checkbox.click()
 
     def get_checked_baggage_price_value_from_baggage_section(self) -> float:
-        checked_baggage_price_with_currency_code = self.checked_baggage_once_price.inner_text()
+        checked_baggage_price_with_currency_code = (
+            self.checked_baggage_once_price.inner_text()
+        )
         checked_baggage_price_value = None
         return checked_baggage_price_value
 
@@ -343,7 +354,6 @@ class PassengerDetailsPage:
 class TicketFarePage:
     def __init__(self, page):
         self.page = page
-
         self.reservation_bill_carry_on_baggage_price = page.locator("")
         self.reservation_bill_checked_baggage_price = page.locator("")
         self.reservation_bill_passenger_price = page.locator("")
@@ -353,17 +363,23 @@ class TicketFarePage:
     # Hint: Use the built-in Python functions float(), split() and replace()
 
     def get_carry_on_baggage_price_value_from_reservation_bill(self) -> float:
-        total_carry_on_baggage_price_with_currency_code = self.reservation_bill_carry_on_baggage_price.inner_text()
+        total_carry_on_baggage_price_with_currency_code = (
+            self.reservation_bill_carry_on_baggage_price.inner_text()
+        )
         total_carry_on_baggage_price_value = None
         return total_carry_on_baggage_price_value
 
     def get_checked_baggage_price_value_from_reservation_bill(self) -> float:
-        total_checked_baggage_price_with_currency_code = self.reservation_bill_checked_baggage_price.inner_text()
+        total_checked_baggage_price_with_currency_code = (
+            self.reservation_bill_checked_baggage_price.inner_text()
+        )
         total_checked_baggage_price_value = None
         return total_checked_baggage_price_value
 
     def get_passenger_price_value_from_reservation_bill(self) -> float:
-        total_passenger_price_with_currency_code = self.reservation_bill_passenger_price.inner_text()
+        total_passenger_price_with_currency_code = (
+            self.reservation_bill_passenger_price.inner_text()
+        )
         total_passenger_price_value = None
         return total_passenger_price_value
 

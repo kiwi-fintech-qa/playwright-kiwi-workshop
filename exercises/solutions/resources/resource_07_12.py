@@ -1,24 +1,37 @@
 class KiwiPage:
     def __init__(self, page):
         self.page = page
-
-        self.cookies_popup_button_accept = page.locator("[data-test='CookiesPopup-Accept']")
-        self.kiwi_page_subtitle = page.locator("text=Book cheap flights other sites simply can’t find.")
+        self.cookies_popup_button_accept = page.locator(
+            "[data-test='CookiesPopup-Accept']"
+        )
+        self.kiwi_page_subtitle = page.locator(
+            "text=Book cheap flights other sites simply can’t find."
+        )
         self.place_input_chip = page.locator("[data-test=PlacePickerInputPlace-close]")
-        self.input_field_origin = page.locator("[data-test=PlacePickerInput-origin] [data-test=SearchField-input]")
+        self.input_field_origin = page.locator(
+            "[data-test=PlacePickerInput-origin] [data-test=SearchField-input]"
+        )
         self.input_field_destination = page.locator(
             "[data-test=PlacePickerInput-destination] [data-test=SearchField-input]"
         )
-        self.booking_checkbox = page.locator("[class*=BookingcomSwitchstyled] [class*=Checkbox]").first
-        self.regional_settings_button = page.locator("[data-test=RegionalSettingsButton]")
+        self.booking_checkbox = page.locator(
+            "[class*=BookingcomSwitchstyled] [class*=Checkbox]"
+        ).first
+        self.regional_settings_button = page.locator(
+            "[data-test=RegionalSettingsButton]"
+        )
         self.regional_settings_modal = page.locator("[data-test=RegionalSettingsModal]")
         self.currency_picker = page.locator("[data-test=CurrencySelect]")
-        self.submit_regional_settings_button = page.locator("[data-test=SubmitRegionalSettingsButton]")
+        self.submit_regional_settings_button = page.locator(
+            "[data-test=SubmitRegionalSettingsButton]"
+        )
         self.search_button = page.locator("[data-test=LandingSearchButton]")
         self.result_list_wrapper = page.locator("[data-test=ResultList-results]")
         self.passengers_and_bags_button = page.locator("[data-test=PassengersField]")
         self.passengers_and_bags_popup = page.locator("[data-test=PassengersPopover]")
-        self.passengers_and_bags_done_button = page.locator("[data-test=PassengersFieldFooter-done]")
+        self.passengers_and_bags_done_button = page.locator(
+            "[data-test=PassengersFieldFooter-done]"
+        )
         self.passenger_row_adults = page.locator(
             "[class*=Stack]:has-text('Passengers') [data-test=PassengersRow-adults]"
         )
@@ -28,8 +41,12 @@ class KiwiPage:
         self.passenger_row_infants = page.locator(
             "[class*=Stack]:has-text('Passengers') [data-test=PassengersRow-infants]"
         )
-        self.baggage_row_cabin = page.locator("[class*=Stack]:has-text('Bags') [data-test=BagsPopup-cabin]")
-        self.baggage_row_checked = page.locator("[class*=Stack]:has-text('Bags') [data-test=BagsPopup-checked]")
+        self.baggage_row_cabin = page.locator(
+            "[class*=Stack]:has-text('Bags') [data-test=BagsPopup-cabin]"
+        )
+        self.baggage_row_checked = page.locator(
+            "[class*=Stack]:has-text('Bags') [data-test=BagsPopup-checked]"
+        )
         self.stepper_value_adults = page.locator(
             "[data-test=PassengersRow-adults] [class*=StepperStateless__StyledStepperInput]"
         )
@@ -45,17 +62,35 @@ class KiwiPage:
         self.stepper_value_checked_bags = page.locator(
             "[data-test=BagsPopup-checked] [class*=StepperStateless__StyledStepperInput]"
         )
-        self.stepper_increment_adults = page.locator("[data-test=PassengersRow-adults] [aria-label=increment]")
-        self.stepper_increment_children = page.locator("[data-test=PassengersRow-children] [aria-label=increment]")
-        self.stepper_increment_infants = page.locator("[data-test=PassengersRow-infants] [aria-label=increment]")
-        self.stepper_increment_cabin_bags = page.locator("[data-test=BagsPopup-cabin] [aria-label=increment]")
-        self.stepper_increment_checked_bags = page.locator("[data-test=BagsPopup-checked] [aria-label=increment]")
+        self.stepper_increment_adults = page.locator(
+            "[data-test=PassengersRow-adults] [aria-label=increment]"
+        )
+        self.stepper_increment_children = page.locator(
+            "[data-test=PassengersRow-children] [aria-label=increment]"
+        )
+        self.stepper_increment_infants = page.locator(
+            "[data-test=PassengersRow-infants] [aria-label=increment]"
+        )
+        self.stepper_increment_cabin_bags = page.locator(
+            "[data-test=BagsPopup-cabin] [aria-label=increment]"
+        )
+        self.stepper_increment_checked_bags = page.locator(
+            "[data-test=BagsPopup-checked] [aria-label=increment]"
+        )
         self.total_passengers = page.locator("[data-test*=PassengersField-note]").first
-        self.total_bags = page.locator("[class*=PassengersAndBagsFieldstyled__PassengersFieldNote]").nth(1)
-        self.search_component_departure_field = page.locator("[data-test=SearchDateInput]:has-text('Departure')")
+        self.total_bags = page.locator(
+            "[class*=PassengersAndBagsFieldstyled__PassengersFieldNote]"
+        ).nth(1)
+        self.search_component_departure_field = page.locator(
+            "[data-test=SearchDateInput]:has-text('Departure')"
+        )
         self.date_picker_modal = page.locator("[data-test=NewDatePickerOpen]")
-        self.departure_month_button = page.locator("[data-test=DatepickerMonthButton]").nth(0)
-        self.return_month_button = page.locator("[data-test=DatepickerMonthButton]").nth(1)
+        self.departure_month_button = page.locator(
+            "[data-test=DatepickerMonthButton]"
+        ).nth(0)
+        self.return_month_button = page.locator(
+            "[data-test=DatepickerMonthButton]"
+        ).nth(1)
         self.date_picker_modal_departure_field = page.locator(
             "[class*=Inputsstyled__InputWrap]:has([data-navigation=DepartureRangeHeading]) [data-test=DateValue]"
         )
@@ -67,11 +102,8 @@ class KiwiPage:
         self.page.goto("https://www.kiwi.com/en/")
         self.cookies_popup_button_accept.click()
 
-    def clear_the_from_field(self, stabilized: bool = False):
+    def clear_the_from_field(self):
         self.place_input_chip.click()
-        if stabilized:
-            if self.place_input_chip.is_visible():
-                self.place_input_chip.click()
         self.place_input_chip.wait_for(state="hidden")
 
     def type_origin_location_into_input_field(self, location: str = None):
@@ -81,7 +113,9 @@ class KiwiPage:
         self.input_field_destination.fill(location)
 
     def select_location_from_dropdown(self, location: str = None):
-        self.page.locator(f"[data-test=PlacePickerRow-wrapper]:has-text('{location}')").click()
+        self.page.locator(
+            f"[data-test=PlacePickerRow-wrapper]:has-text('{location}')"
+        ).click()
 
     def uncheck_booking_checkbox(self):
         self.booking_checkbox.click()
@@ -130,11 +164,15 @@ class KiwiPage:
         return infants_count
 
     def get_count_of_cabin_bags(self) -> int:
-        cabin_bags_count = int(self.stepper_value_cabin_bags.get_attribute(name="value"))
+        cabin_bags_count = int(
+            self.stepper_value_cabin_bags.get_attribute(name="value")
+        )
         return cabin_bags_count
 
     def get_count_of_checked_bags(self) -> int:
-        checked_bags_count = int(self.stepper_value_checked_bags.get_attribute(name="value"))
+        checked_bags_count = int(
+            self.stepper_value_checked_bags.get_attribute(name="value")
+        )
         return checked_bags_count
 
     def hit_stepper_increment_button_for_adults(self):
@@ -179,7 +217,9 @@ class KiwiPage:
         return return_month_value
 
     def get_departure_field_contents_from_date_picker_modal(self) -> list[str]:
-        departure_field_contents = self.date_picker_modal_departure_field.inner_text().split()
+        departure_field_contents = (
+            self.date_picker_modal_departure_field.inner_text().split()
+        )
         return departure_field_contents
 
     def get_return_field_contents_from_date_picker_modal(self) -> list[str]:
@@ -190,21 +230,24 @@ class KiwiPage:
 class SearchResultPage:
     def __init__(self, page):
         self.page = page
-
         self.result_card_wrapper = page.locator("[data-test=ResultCardWrapper]").first
         self.first_result_card = page.locator("[data-test=ResultCardPrice]").first
         self.sort_by_price_button = page.locator("[data-test=SortBy-price]")
         self.sort_by_duration_button = page.locator("[data-test=SortBy-duration]")
         self.first_select_card_button = page.locator("[data-test=BookingButton]").first
         self.sign_in_overlay = page.locator("[data-test=MagicLogin]")
-        self.continue_as_guest_link = page.locator("[data-test=MagicLogin-GuestTextLink]")
+        self.continue_as_guest_link = page.locator(
+            "[data-test=MagicLogin-GuestTextLink]"
+        )
         self.reservation_content = page.locator("[data-test=Reservation-content]")
         self.breadcrumbs_current_step_passenger = page.locator(
             "[data-test=Breadcrumbs-step-PASSENGER] [aria-current=step]"
         )
 
     def check_a_transport_option_checkbox(self, option: str = None):
-        self.page.locator(f"[class*=FilterWrapper]:has([data-test=TransportOptionCheckbox-{option.lower()}])").click()
+        self.page.locator(
+            f"[class*=FilterWrapper]:has([data-test=TransportOptionCheckbox-{option.lower()}])"
+        ).click()
 
     def sort_results_by_price(self):
         self.sort_by_price_button.click()
@@ -226,8 +269,9 @@ class SearchResultPage:
 class PassengerDetailsPage:
     def __init__(self, page):
         self.page = page
-
-        self.reservation_bill_total = page.locator("[class*=ReservationBillTotal] [class*=Price]")
+        self.reservation_bill_total = page.locator(
+            "[class*=ReservationBillTotal] [class*=Price]"
+        )
         self.total_currency_label = page.locator("[data-test=ReservationBillBoxTotal]")
         self.passenger_field_email = page.locator("[name=email]")
         self.passenger_field_phone = page.locator("[name=phone]")
@@ -238,20 +282,28 @@ class PassengerDetailsPage:
         self.passenger_field_nationality = page.locator("[name=nationality]")
         self.passenger_field_title = page.locator("[name=title]")
         self.passenger_field_birthmonth = page.locator("[name=birthMonth]")
-        self.cabin_baggage_bundle_option = page.locator("[data-test=Baggage-handBag] [data-test=Baggage-Option-1]")
+        self.cabin_baggage_bundle_option = page.locator(
+            "[data-test=Baggage-handBag] [data-test=Baggage-Option-1]"
+        )
         self.cabin_baggage_bundle_price = page.locator(
             "[data-test=Baggage-handBag] [data-test=Baggage-Option-1] [data-test=Baggage-OptionItem-Price]"
         )
-        self.cabin_baggage_single_item_option = page.locator("[data-test=Baggage-handBag] [data-test=Baggage-Option-0]")
+        self.cabin_baggage_single_item_option = page.locator(
+            "[data-test=Baggage-handBag] [data-test=Baggage-Option-0]"
+        )
         self.baggage_empty_option = page.locator("[data-test=Baggage-EmptyOption]")
-        self.checked_baggage_once_option = page.locator("[data-test=Baggage-holdBag] [data-test=Baggage-Option-1]")
+        self.checked_baggage_once_option = page.locator(
+            "[data-test=Baggage-holdBag] [data-test=Baggage-Option-1]"
+        )
         self.checked_baggage_once_price = page.locator(
             "[data-test=Baggage-holdBag] [data-test=Baggage-Option-1] [data-test=Baggage-OptionItem-Price]"
         )
         self.checked_baggage_no_bags_checkbox = page.locator(
             "[class*=Checkbox]:has([data-test=Baggage-NoBagsToCheckIn])"
         )
-        self.no_insurance_option = page.locator("[data-test=ReservationPassengerInsurance-content] [type=none]")
+        self.no_insurance_option = page.locator(
+            "[data-test=ReservationPassengerInsurance-content] [type=none]"
+        )
         self.continue_button = page.locator("[data-test=StepControls-passengers-next]")
         self.previous_step_label_passenger_details = page.locator(
             "[aria-current=false] [class*=WizardStep__StyledLabel]:has-text('Passenger details')"
@@ -269,7 +321,9 @@ class PassengerDetailsPage:
         self.error_field_email = page.locator(
             "[data-test=ContactEmail] [aria-live=polite]:has-text('Required for your tickets')"
         )
-        self.error_field_phone = page.locator("[data-test=ContactPhone] [data-state=error]").first
+        self.error_field_phone = page.locator(
+            "[data-test=ContactPhone] [data-state=error]"
+        ).first
         self.error_field_firstname = page.locator(
             "[data-test=ReservationPassenger-FirstName] [aria-live=polite]:has-text('Required field')"
         )
@@ -320,8 +374,12 @@ class PassengerDetailsPage:
         self.cabin_baggage_single_item_option.click()
 
     def get_carry_on_baggage_price_value_from_baggage_section(self) -> float:
-        carry_on_baggage_price_with_currency_code = self.cabin_baggage_bundle_price.inner_text()
-        carry_on_baggage_price_value = float(carry_on_baggage_price_with_currency_code.split()[0])
+        carry_on_baggage_price_with_currency_code = (
+            self.cabin_baggage_bundle_price.inner_text()
+        )
+        carry_on_baggage_price_value = float(
+            carry_on_baggage_price_with_currency_code.split()[0]
+        )
         return carry_on_baggage_price_value
 
     def select_checked_baggage_once(self):
@@ -331,8 +389,12 @@ class PassengerDetailsPage:
         self.checked_baggage_no_bags_checkbox.click()
 
     def get_checked_baggage_price_value_from_baggage_section(self) -> float:
-        checked_baggage_price_with_currency_code = self.checked_baggage_once_price.inner_text()
-        checked_baggage_price_value = float(checked_baggage_price_with_currency_code.split()[0])
+        checked_baggage_price_with_currency_code = (
+            self.checked_baggage_once_price.inner_text()
+        )
+        checked_baggage_price_value = float(
+            checked_baggage_price_with_currency_code.split()[0]
+        )
         return checked_baggage_price_value
 
     def select_no_insurance(self):
@@ -395,7 +457,6 @@ class PassengerDetailsPage:
 class TicketFarePage:
     def __init__(self, page):
         self.page = page
-
         self.reservation_bill_carry_on_baggage_price = page.locator(
             "[data-test=bookingBillCabinBaggage] [class*=Price]"
         )
@@ -405,28 +466,40 @@ class TicketFarePage:
         self.reservation_bill_passenger_price = page.locator(
             "[data-test=ReservationBill-item-passenger] [class*=Price]"
         )
-        self.reservation_bill_total_price = page.locator("[class*=ReservationBillTotal] [class*=Price]")
+        self.reservation_bill_total_price = page.locator(
+            "[class*=ReservationBillTotal] [class*=Price]"
+        )
 
     def get_carry_on_baggage_price_value_from_reservation_bill(self) -> float:
-        total_carry_on_baggage_price_with_currency_code = self.reservation_bill_carry_on_baggage_price.inner_text()
+        total_carry_on_baggage_price_with_currency_code = (
+            self.reservation_bill_carry_on_baggage_price.inner_text()
+        )
         total_carry_on_baggage_price_value = float(
             total_carry_on_baggage_price_with_currency_code.split()[0].replace(",", "")
         )
         return total_carry_on_baggage_price_value
 
     def get_checked_baggage_price_value_from_reservation_bill(self) -> float:
-        total_checked_baggage_price_with_currency_code = self.reservation_bill_checked_baggage_price.inner_text()
+        total_checked_baggage_price_with_currency_code = (
+            self.reservation_bill_checked_baggage_price.inner_text()
+        )
         total_checked_baggage_price_value = float(
             total_checked_baggage_price_with_currency_code.split()[0].replace(",", "")
         )
         return total_checked_baggage_price_value
 
     def get_passenger_price_value_from_reservation_bill(self) -> float:
-        total_passenger_price_with_currency_code = self.reservation_bill_passenger_price.inner_text()
-        total_passenger_price_value = float(total_passenger_price_with_currency_code.split()[0].replace(",", ""))
+        total_passenger_price_with_currency_code = (
+            self.reservation_bill_passenger_price.inner_text()
+        )
+        total_passenger_price_value = float(
+            total_passenger_price_with_currency_code.split()[0].replace(",", "")
+        )
         return total_passenger_price_value
 
     def get_total_price_value_from_reservation_bill(self) -> float:
         total_price_with_currency_code = self.reservation_bill_total_price.inner_text()
-        total_price_value = float(total_price_with_currency_code.split()[0].replace(",", ""))
+        total_price_value = float(
+            total_price_with_currency_code.split()[0].replace(",", "")
+        )
         return total_price_value

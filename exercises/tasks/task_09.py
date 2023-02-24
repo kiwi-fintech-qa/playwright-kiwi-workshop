@@ -1,12 +1,18 @@
-import math
-from exercises.tasks.resources.resource_06_12 import KiwiPage, SearchResultPage
+from exercises.tasks.resources.resource_07_12 import (
+    KiwiPage,
+    SearchResultPage,
+    PassengerDetailsPage,
+)
 
 
-# Filling out paid baggage options on Passenger details is reflected by the reservation bill
-def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_the_reservation_bill(page):
-    # 1. Search for connections between any two cities (while un-checking the Booking.com checkbox,
-    # as in previous scenarios)
-    # 1.1. Open the kiwi.com website (wait for page to load)
+# Not filling out the required fields on Passenger details doesn't allow to proceed to the Ticket fare screen
+def test_not_filling_out_required_fields_on_passenger_details_prevents_proceeding_to_ticket_fare_screen(page):
+    # 1. Search for connections between any two cities, steps 1.1.-1.9. from task 6
+
+    # Consider if the whole interaction with the initial search (steps 1.2.-1.8.) could be condensed into a single
+    # method within the KiwiPage class!
+
+    # 1.1. Open the kiwi.com website and accept cookies
     pass
 
     # 1.2. Clear the "from" location
@@ -25,58 +31,87 @@ def test_filling_out_paid_baggage_options_on_passenger_details_is_reflected_by_t
 
     # 1.9. Available connections should be displayed
 
-    # 2. Hit the Select button of the first result
+    # 2. Hit the "Select" button of the first result
 
-    # 3. In the Want to sign first? modal hit the Continue as a guest link
+    # 3. In the "Want to sign in first?" modal hit the "Continue as a guest" link
 
-    # 4. Fill out the Email, Phone, Given names, Surnames and the DD and YYYY fields of Date of birth as follows:
-    # 4.1. Email: play@wrig.ht
+    # 4. In the "Cabin or carry-on" baggage section select the 1× personal item option
 
-    # 4.2. Phone: 123123123
+    # 5. If visible, in the "Checked baggage" section select the "No checked baggage" checkbox
 
-    # 4.3. Given names: Play
+    # 6. In the "Travel insurance" section select the "No insurance" option
 
-    # 4.4. Surnames: Wright
+    # 7. Hit the "Continue" button and verify that under the following fields the following errors are displayed:
 
-    # 4.5. DD: 1
+    # 7.1. Email: Required for your tickets
 
-    # 4.6. YYYY: 1901
+    # 7.2. Phone: Required field
 
-    # 5. In the following dropdowns select the following values:
-    # 5.1. Nationality: United Kingdom
+    # 7.3. Given names: Required field
 
-    # 5.2. Gender: Female
+    # 7.4. Surnames: Required field
 
-    # 5.3. Month: January
+    # 7.5. Nationality: Required field
 
-    # 6. In the Cabin or carry-on baggage section select the Carry-on bundle option and store its price value
+    # 7.6. Gender: Required field
 
-    # 7. In the Checked baggage section select the 1× checked bag option and store its price value
+    # 7.7. Date of birth: Required field
 
-    # 8. In the Travel insurance section select the No insurance option
+    # (8. variation: fill out "Email" and "Phone", hit "Continue", and expect Required field error to be displayed
+    # under the "Primary passenger" fields)
+    # 8.1. Email: play@wrig.ht
 
-    # 9. Hit the Continue button and verify the Ticker fare screen is displayed
+    # 8.2. Phone: 123123123
 
-    # 10. Verify the following items are displayed in the reservation bill:
-    # 10.1. Cabin baggage: value stored at step 6
-    total_carry_on_baggage_price_value = 0
+    # 8.3. Hit the "Continue" button and verify that under the following fields the following errors are displayed:
 
-    # 10.2. Checked baggage: value stored at step 7
-    total_checked_baggage_price_value = 0
+    # 8.4. Email: No error message
 
-    # (11. variation: verify the total price corresponds with the sum of all items in the reservation bill)
-    total_passenger_price_value = 0
-    total_price_value = 0
+    # 8.5. Phone: No error message
 
-    total_of_items = (
-        total_carry_on_baggage_price_value + total_checked_baggage_price_value + total_passenger_price_value
-    )
-    # Proper comparison of floats has to be used here:
-    # https://docs.python.org/3/library/math.html#math.isclose
-    # The basic assertion "assert total_of_items == total_price_value" would fail because of the way floats are stored.
-    # Instead, we can check the absolute difference between the two values is very low, e.g., a bit over 0.01 CZK.
+    # 8.6. Given names: Required field
 
-    # Also we can check how relatively distinct the values are:
-    # With rel_tol=0.05 the values have to be 5% similar.
-    # Here we decided arbitrarily that the values should have rel_tol=0.000000778, i.e., to be 0.00000778% similar.
-    assert math.isclose(total_of_items, total_price_value, rel_tol=0.000000778, abs_tol=0.01000000000022)
+    # 8.7. Surnames: Required field
+
+    # 8.8. Nationality: Required field
+
+    # 8.9. Gender: Required field
+
+    # 8.10. Date of birth: Required field
+
+    # (9. variation: fill out and select the "Primary passenger" fields, clear the "Contact details" fields,
+    # hit "Continue", and expect "Required for your tickets" error under the "Email" field and "Required"
+    # field error under the "Phone" field)
+    # 9.1. Email: empty
+
+    # 9.2. Phone: empty
+
+    # 9.3. Given names: Play
+
+    # 9.4. Surnames: Wright
+
+    # 9.5. DD: 1
+
+    # 9.6. YYYY: 1901
+
+    # 9.7. Nationality: United Kingdom
+
+    # 9.8. Gender: Female
+
+    # 9.9. Month: January
+
+    # 9.10. Hit the "Continue" button and verify that under the following fields the following errors are displayed:
+
+    # 9.11. Email: Required for your tickets
+
+    # 9.12. Phone: Required field
+
+    # 9.13. Given names: No error
+
+    # 9.14. Surnames: No error
+
+    # 9.15. Nationality: No error
+
+    # 9.16. Gender: No error
+
+    # 9.17. Date of birth: No error

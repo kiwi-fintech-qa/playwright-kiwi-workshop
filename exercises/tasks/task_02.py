@@ -1,27 +1,25 @@
-# Popular flights - hitting the Show more button leads to an increment of currently displayed popular flight
-# tiles/cards to be displayed
-def test_show_more_button_of_popular_flights_displays_increment_of_currently_shown_popular_flight_cards(page):
-    # 1. On the Kiwi.com website get the count of tiles/cards in the Popular flights section
-    # and store it into a variable
-    # 1.1. Open the kiwi.com website (https://www.kiwi.com/en/) and accept cookies and
-    # verify that the "Book cheap flights other sites simply can’t find." text is displayed.
+# Interacting with the regional settings and dropdown lists
+
+
+def test_regional_settings_can_be_changed(page):
+    # 1. On the Kiwi.com website and open the regional settings modal
+    # Fill in the correct locator-methods where they are missing!
+
+    # 1.1. Open the kiwi.com website and accept cookies
+    # Verify that the "Book cheap flights other sites simply can’t find." text is visible.
     page.goto("")
-    page.locator("").click()
-    assert page.locator("text=").is_visible()
+    page.locator("")
+    assert page.locator("").is_visible()
 
-    # 1.2. Get count of tiles/cards in the Popular flights section and store it into a variable
-    initial_card_count = page.locator("[data-test=] [class*=]").count()
+    # 1.2. Click open the regional settings modal for currency and language
+    page.locator("")
 
-    # 2. Hit the Show more button
-    page.locator("").click()
+    # 2. Interact with the modal
+    # 2.1. From the "Language" dropdown, choose "Dansk" (= Danish)
+    page.locator("").select_option("")
 
-    # 3. Verify twice the count of tiles/cards from step 1. is displayed
-    current_card_count = page.locator("[data-test=] [class*=]").count()
-    assert "???" == 2 * "???"
+    # 2.2. From the "Currency" dropdown, choose Danish Crown
+    page.locator("").select_option("")
 
-    # 4. Hit the Show more button again
-    page.locator("").click()
-
-    # 5. Verify thrice the count of tiles/cards from step 1. is displayed
-    current_card_count = page.locator("[data-test=] [class*=]").count()
-    assert "???" == 3 * "???"
+    # 3. Click the "Save & Continue" button
+    page.locator("")

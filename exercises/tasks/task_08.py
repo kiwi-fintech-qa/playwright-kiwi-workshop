@@ -1,20 +1,24 @@
-from exercises.tasks.resources.resource_06_12 import KiwiPage, SearchResultPage
+from exercises.tasks.resources.resource_07_12 import (
+    KiwiPage,
+    SearchResultPage,
+    PassengerDetailsPage,
+)
 
 
 # Localized currency is retained in Passenger details
 def test_localized_currency_is_retained_in_passenger_details(page):
     # 1. Hit the 🇬🇧 CZK button in the navigation bar at the top of the search page
-    # 1.1. Open the kiwi.com website (wait for page to load)
+    # 1.1. Open the kiwi.com website and accept cookies
     pass
 
     # 1.2 Open the localization settings and wait for the localization modal to be displayed
 
-    # 2. Set the currency in the Language and currency modal to EUR
+    # 2. Set the currency in the Language and currency modal to "EUR"
 
     # 3. Hit the Save & continue button
 
-    # 4. Search for connections between any two cities (while un-checking the Booking.com checkbox, as in previous scenarios)
-    # 4.1. Clear the "from" location (here with a stabilization to ensure the place-chip is always removed)
+    # 4. Search for connections between any two cities
+    # 4.1. Clear the "from" location
 
     # 4.2. Type in "Brno" to the "from" field
 
@@ -32,10 +36,10 @@ def test_localized_currency_is_retained_in_passenger_details(page):
 
     # 5. Store the price value of the first result
 
-    # 6. Hit the Select button of the first result
+    # 6. Hit the "Select" button of the first result
 
-    # 7. In the Want to sign first? modal hit the "Continue as a guest link"
+    # 7. In the "Want to sign first?" modal hit the "Continue as a guest link"
 
-    # 8. Verify the Total (EUR) price value corresponds with the one stored on step 5.
+    # 8. Verify the "Total (EUR)" price value corresponds with the one stored on step 5.
 
-    # (9. variation: verify the currency code selected on step 1 is displayed next to Total in the reservation bill)
+    # (9. variation: verify the currency code selected on step 1 is displayed next to "Total" in the reservation bill)

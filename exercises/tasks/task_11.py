@@ -1,52 +1,43 @@
-from exercises.tasks.resources.resource_06_12 import KiwiPage, SearchResultPage
+from exercises.tasks.resources.resource_07_12 import KiwiPage, SearchResultPage
 
 
-# Total count of passengers is reflected by counter next to the passengers icon
-def test_total_count_of_passengers_is_reflected_by_counter_next_to_the_passengers_icon(page):
-    # 1. On the Kiwi.com website hit the passengers and bags button
-    # 1.1. Open the kiwi.com website (wait for page to load)
-    pass
+# Sorting panel actions can be used for sorting the search results
+def test_sorting_panel_actions_can_be_used_for_sorting_the_search_results(page):
+    # 1. Steps 1.1.-1.9. from the previous task
 
-    # 1.2. Hit the passengers and bags button
+    # 1.1. Open the kiwi.com website and accept cookies
 
-    # 2. Verify a popup with the following options is displayed: Adults, Children, Infants in the Passengers section
+    # 1.2. Clear the "from" location
 
-    # 3. Verify a popup with the following options is displayed: Cabin baggage and Checked baggage in the Bags section
+    # 1.3. Type in "Brno" to the "from" field
 
-    # 4. Store the values of the count of adults, children and infants into variables
+    # 1.4. Select the "Brno, Czechia" result from the dropdown
 
-    # 5. Hit twice the + button next to the Adults option
+    # 1.5. Type in "Vienna" to the "to" field
 
-    # 6. Verify the count of adults has increased by 2 (compare with value from step 4.)
+    # 1.6. Select the "Vienna, Austria" result from the dropdown
 
-    # 7. Hit thrice the + button next to the Children option
+    # 1.7. Uncheck the "Booking" checkbox
 
-    # 8. Verify the count of adults has increased by 3 (compare with value from step 4.)
+    # 1.8. Hit the "Search" button
 
-    # 9. Hit once the + button next to the Infants option
+    # 1.9. Available connections should be displayed
 
-    # 10. Verify the count of adults has increased by 1 (compare with value from step 4.)
+    # 2. Check the "Train" checkbox in the "Transport" left-hand section of the results
 
-    # 11. Hit the Done button
+    # 3. Select the "Cheapest" sorting option from the sorting panel
 
-    # 12. Verify the count of passengers next to the passengers icon corresponds with the sum of values from steps 6.,
-    # 8., and 10.
+    # 4. Store the price value of the first few (e.g., 3) results into a (Python) list
+    result_values_list = []
+    for i in range(3):
+        nth_result_with_currency_code = page.locator("").nth(i).inner_text().split()[0]
+        nth_result_value = int(nth_result_with_currency_code.replace(",", ""))
+        result_values_list.append(nth_result_value)
 
-    # (13. variation: increase the count of baggage and verify the counters correspond with the count of added pieces
-    # of baggage)
-    # 13.1. Hit the passengers and bags button
+    # 5. Verify the first result is either the cheapest of the stored values, or the same as the rest of them
 
-    # 13.2. Store the values of the count of cabin and checked baggage pieces into variables
+    # (6. variation: on step 3. select the "Fastest" sorting option; on step 5. identify the cheapest of the stored
+    # results [i.e., identify the cheapest of the several fastest connections)
+    # 6.1. Select the "Fastest" sorting option
 
-    # 13.3. Hit thrice the + button next to the Cabin baggage option
-
-    # 13.4. Verify the count of adults has increased by 3 (compare with value from step 13.2.)
-
-    # 13.5. Hit twice the + button next to the Checked baggage option
-
-    # 13.6. Verify the count of adults has increased by 2 (compare with value from step 13.2.)
-
-    # 13.7. Hit the Done button
-
-    # 13.8. Verify the count of bags next to the baggage icon corresponds with the sum of values from steps
-    # 13.4. and 13.6.
+    # 6.2. Identify the cheapest of the several fastest connections
