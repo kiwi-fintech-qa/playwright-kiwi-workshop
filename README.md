@@ -39,3 +39,5 @@
 
 
 6. Run the command `playwright install` and wait for Playwright to install the browsers.  
+
+test
